@@ -1,3 +1,57 @@
 <resources>
+    <array name="gioi_tinh">
+        <item>Nam</item>
+        <item>Nữ</item>
+    </array>
+
+    <string name="title_home">Trang Chủ</string>
+    <string name="title_follow">Theo dõi ĐH</string>
+    <string name="title_cart">Giỏ hàng</string>
+    <string name="title_history">Lịch sử MH</string>
+    <string name="title_profile">Thông tin</string>
+
+    <array name="vanchuyen">
+        <item>Giao nhanh 30.000 VNĐ</item>
+        <item>Giao tiêu chuẩn 15.000 VNĐ</item>
+    </array>
+
+    <array name="ptthanhtoan">
+        <item>Trực tiếp</item>
+        <item>Online</item>
+    </array>
+
+    <array name="sanpham">
+        <item>Sách</item>
+        <item>Văn phòng phẩm</item>
+    </array>
     <string name="app_name">NhaSachOnlineDiDong2</string>
+    <string name="tvtrove"><![CDATA[<]]></string>
+    <string name="tvgiohang">Giỏ Hàng</string>
+    <string name="tvtongtienthanhtoan">Tổng tiền thanh toán:</string>
+    <string name="btnmuahang">MUA HÀNG</string>
+    <string name="tvgia">Giá:</string>
+    <string name="tvkhuyenmai">Khuyến mãi:</string>
+    <string name="tvtongtien">Tổng tiền:</string>
+    <string name="tvmadonhang">Mã đơn hàng:</string>
+    <string name="tvhoten">Họ tên:</string>
+    <string name="tvsodienthoai">Số điện thoại:</string>
+    <string name="tvhinhthucgiao">Hình thức giao:</string>
+    <string name="tvmagiamgia">Mã giảm giá:</string>
+    <string name="btnchonma">Chọn mã</string>
+    <string name="tvphuongthucthanhtoan">Phương thức thanh toán:</string>
+    <string name="tvtongtienhang">Tổng tiền hàng:</string>
+    <string name="tvphivanchuyen">Phí vận chuyển:</string>
+    <string name="tvgiamgia">Giảm giá:</string>
+    <string name="btnbochon">Bỏ chọn</string>
+    <string name="btnchonhet">Chọn hết</string>
+    <string name="tvthanhtoan">Thanh Toán</string>
+    <string name="tvtong">Tổng:</string>
+    <string name="tvtruoc"><![CDATA[<-]]></string>
+    <string name="tvsau"><![CDATA[->]]></string>
+    <string name="giovao">Giờ vào:</string>
+    <string name="giora">Giờ ra:</string>
+    <string name="sodondanhan">Số đơn đã nhận:</string>
+    <string name="sodondagiao">Số đơn đã giao:</string>
+    <string name="sodondahuy">Số đơn đã hủy:</string>
+
 </resources>

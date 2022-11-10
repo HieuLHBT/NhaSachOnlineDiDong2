@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "919962826484",
+    "firebase_url": "https://nhasachonlinedidong2-75a7a-default-rtdb.firebaseio.com",
+    "project_id": "nhasachonlinedidong2-75a7a",
+    "storage_bucket": "nhasachonlinedidong2-75a7a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:919962826484:android:1f73a321179af38f39d0a1",
+        "android_client_info": {
+          "package_name": "com.example.nhasachonlinedidong2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "919962826484-0gif1lr16cmdskecib41dfimdtncflj1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBwwO-06tNjhIznLNYttneJlmDii6gRvgo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "919962826484-0gif1lr16cmdskecib41dfimdtncflj1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
