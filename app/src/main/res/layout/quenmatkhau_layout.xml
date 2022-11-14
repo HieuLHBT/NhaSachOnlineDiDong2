@@ -14,15 +14,15 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.7">
+        android:layout_weight="0.9">
         <TextView
             android:gravity="center_horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Quên mật khẩu"
-            android:textSize="40dp"
+            android:textSize="@dimen/tieude"
             android:textStyle="bold"
-            android:textColor="@color/design_default_color_error"
+            android:textColor="@color/red"
             />
     </LinearLayout>
     <LinearLayout
@@ -31,23 +31,24 @@
         android:layout_height="0dp"
         android:layout_weight="0.6">
         <TextView
-            android:layout_marginLeft="10dp"
-            android:layout_width="wrap_content"
+            android:layout_marginLeft="@dimen/marginleft"
+            android:layout_width="0dp"
+            android:layout_weight="3"
             android:layout_height="wrap_content"
             android:text="Tài khoản"
+            android:gravity="center"
             android:textColor="@color/black"
             android:textSize="20dp"
             />
         <EditText
             android:id="@+id/layoutQMK_edtNhapTaiKhoan"
-            android:layout_marginLeft="20dp"
+
             android:background="@drawable/border"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:paddingStart="12dp"
-            android:paddingEnd="12dp"
-            android:drawablePadding="12dp"
-            android:textSize="20dp"
+            android:layout_width="0dp"
+            android:layout_weight="9"
+            android:layout_height="match_parent"
+
+            android:textSize="@dimen/textsize"
             android:hint="Nhập tài khoản"
             />
     </LinearLayout>
@@ -58,22 +59,22 @@
         android:layout_weight="0.6">
         <TextView
             android:layout_marginLeft="10dp"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textSize="20dp"
+            android:textSize="@dimen/textsize"
+            android:gravity="center"
             android:textColor="@color/black"
+            android:layout_weight="3"
             android:text="Email"
             />
         <EditText
             android:id="@+id/layoutQMK_edtNhapEmail"
-            android:layout_marginLeft="57dp"
+
             android:background="@drawable/border"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:paddingStart="12dp"
-            android:paddingEnd="12dp"
-            android:drawablePadding="12dp"
-            android:textSize="20dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="9"
+            android:textSize="@dimen/textsize"
             android:hint="Nhập email"
             />
     </LinearLayout>
@@ -81,23 +82,28 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1.5"
-        android:gravity="center">
+        android:layout_weight="0.8"
+        android:gravity="center"
+        android:weightSum="12"
+        android:layout_marginTop="@dimen/margintop"
+        >
         <Button
             android:id="@+id/layoutQMK_btnLayLaiMK"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="5"
+            android:layout_height="match_parent"
             android:textStyle="bold"
-            android:textSize="15dp"
+            android:textSize="@dimen/textsizelight"
             android:text="Lấy lại mật khẩu"
             />
         <Button
             android:id="@+id/layoutQMK_btnQuayLai"
-            android:layout_marginLeft="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/marginleft"
+            android:layout_width="0dp"
+            android:layout_weight="4"
+            android:layout_height="match_parent"
             android:textStyle="bold"
-            android:textSize="15dp"
+            android:textSize="@dimen/textsizelight"
             android:text="Quay lại"
             />
     </LinearLayout>

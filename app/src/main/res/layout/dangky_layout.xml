@@ -8,7 +8,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".activity.DangKyActivity">
     <LinearLayout
-        android:paddingTop="15dp"
+        android:paddingTop="@dimen/margintop"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -18,18 +18,19 @@
             android:id="@+id/layoutDK_btnBack"
             android:layout_weight="2"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             style="?android:attr/borderlessButtonStyle"
             android:textColor="@color/black"
             android:src="@drawable/ic_baseline_arrow_back_ios_24"
             />
         <TextView
-            android:layout_marginLeft="60dp"
-            android:layout_weight="8"
+            
+            android:layout_weight="6"
+            android:gravity="center"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:text="Đăng ký"
-            android:textSize="40dp"
+            android:textSize="@dimen/tieude"
             android:textStyle="bold"
             android:textColor="@color/design_default_color_error"
             />
@@ -38,20 +39,25 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.6">
+        android:layout_weight="0.7"
+        android:weightSum="12"
+        >
         <TextView
-            android:layout_marginLeft="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/marginleft"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:text="Tài khoản"
+            android:layout_weight="3"
+            android:gravity="center"
             android:textColor="@color/black"
-            android:textSize="20dp"
+            android:textSize="@dimen/textsize"
             />
         <EditText
             android:id="@+id/layoutDK_edtNhapTaiKhoan"
-            android:layout_marginLeft="20dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/marginleft"
+            android:layout_width="0dp"
+            android:layout_weight="9"
+            android:layout_height="match_parent"
             android:hint="Nhập tài khoản"
             />
     </LinearLayout>
@@ -59,20 +65,23 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.6">
+        android:layout_weight="0.7">
         <TextView
-            android:layout_marginLeft="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/marginleft"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:gravity="center"
             android:text="Email"
             android:textColor="@color/black"
-            android:textSize="20dp"
+            android:textSize="@dimen/textsize"
             />
         <EditText
             android:id="@+id/layoutDK_edtEmail"
-            android:layout_marginLeft="20dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/marginleft"
+            android:layout_width="0dp"
+            android:layout_weight="9"
+            android:layout_height="match_parent"
             android:inputType="textEmailAddress"
             android:hint="Nhập email"
             />
@@ -82,20 +91,22 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.6">
+        android:layout_weight="0.7">
         <TextView
-            android:layout_marginLeft="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
+            android:layout_marginStart="@dimen/marginleft"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:textSize="@dimen/textsize"
             android:textColor="@color/black"
             android:text="Mật khẩu"
             />
         <EditText
             android:id="@+id/layoutDK_edtNhapMatKhau"
-            android:layout_marginLeft="20dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/marginleft"
+            android:layout_width="0dp"
+            android:layout_weight="9"
+            android:layout_height="match_parent"
             android:inputType="textPassword"
             android:hint="Nhập mật khẩu"
             />
@@ -104,21 +115,24 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.6">
+        android:layout_weight="0.7">
         <TextView
 
-            android:layout_marginLeft="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20dp"
+            android:layout_marginStart="@dimen/marginleft"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:gravity="center"
+            android:textSize="@dimen/textsize"
             android:textColor="@color/black"
             android:text="Nhập lại mật khẩu"
             />
         <EditText
             android:id="@+id/layoutDK_edtNhapLaiMatKhau"
-            android:layout_marginLeft="20dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/marginleft"
+            android:layout_width="0dp"
+            android:layout_weight="9"
+            android:layout_height="match_parent"
             android:inputType="textPassword"
             android:hint="Nhập lại mật khẩu"
             />
@@ -127,20 +141,25 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.6">
+        android:layout_weight="0.7"
+        
+        >
         <TextView
-            android:layout_marginLeft="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/marginleft"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
             android:text="Họ tên"
+            android:gravity="center"
             android:textColor="@color/black"
-            android:textSize="20dp"
+            android:textSize="@dimen/textsize"
             />
         <EditText
             android:id="@+id/layoutDK_edtHoTen"
-            android:layout_marginLeft="20dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/marginleft"
+            android:layout_width="0dp"
+            android:layout_weight="9"
+            android:layout_height="match_parent"
             android:hint="Nhập họ và tên"
             />
     </LinearLayout>
@@ -148,20 +167,23 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.6">
+        android:layout_weight="0.7">
         <TextView
-            android:layout_marginLeft="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/marginleft"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:gravity="center"
             android:text="Ngày sinh"
             android:textColor="@color/black"
-            android:textSize="20dp"
+            android:textSize="@dimen/textsize"
             />
         <EditText
             android:id="@+id/layoutDK_edtNgaySinh"
-            android:layout_marginLeft="20dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/marginleft"
+            android:layout_width="0dp"
+            android:layout_weight="9"
+            android:layout_height="match_parent"
             android:inputType="date"
             android:hint="Nhập ngày thánh năm"
             />
@@ -170,23 +192,29 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.6">
+        android:layout_weight="0.7"
+        android:weightSum="12"
+        >
         <TextView
             android:layout_marginTop="5dp"
-            android:layout_marginLeft="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/marginleft"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:gravity="center"
             android:text="Giới tính"
             android:textColor="@color/black"
-            android:textSize="20dp"
+            android:textSize="@dimen/textsize"
             />
         <Spinner
             android:id="@+id/layoutDK_spGioiTinh"
             android:layout_marginTop="5dp"
-            android:paddingLeft="20dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:scrollbarSize="20dp"
+            android:paddingLeft="@dimen/paddingtieude"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_marginStart="@dimen/marginleft"
+            android:layout_height="match_parent"
+            android:scrollbarSize="@dimen/scrollbar_size"
             android:entries="@array/gioi_tinh"
             />
     </LinearLayout>
@@ -194,20 +222,23 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.6">
+        android:layout_weight="0.7">
         <TextView
-            android:layout_marginLeft="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/marginleft"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:gravity="center"
             android:text="Số điện thoại"
             android:textColor="@color/black"
-            android:textSize="20dp"
+            android:textSize="@dimen/textsize"
             />
         <EditText
             android:id="@+id/layoutDK_edtSDT"
-            android:layout_marginLeft="20dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/marginleft"
+            android:layout_width="0dp"
+            android:layout_weight="8"
+            android:layout_height="match_parent"
             android:inputType="number"
             android:hint="Nhập số điện thoại"
             />
@@ -216,20 +247,23 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.6">
+        android:layout_weight="0.7">
         <TextView
-            android:layout_marginLeft="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/marginleft"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:gravity="center"
             android:text="Địa chỉ"
             android:textColor="@color/black"
-            android:textSize="20dp"
+            android:textSize="@dimen/textsize"
             />
         <EditText
             android:id="@+id/layoutDK_edtDiaChi"
-            android:layout_marginLeft="20dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/marginleft"
+            android:layout_width="0dp"
+            android:layout_weight="9"
+            android:layout_height="match_parent"
             android:hint="Nhập địa chỉ"
             />
     </LinearLayout>
@@ -244,7 +278,7 @@
             android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="60dp"
-            android:textSize="20dp"
+            android:textSize="@dimen/textsize"
             android:textStyle="bold"
             android:text="Tạo tài khoản"/>
     </LinearLayout>

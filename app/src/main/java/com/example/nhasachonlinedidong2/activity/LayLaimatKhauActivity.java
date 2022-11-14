@@ -1,17 +1,14 @@
 package com.example.nhasachonlinedidong2.activity;
 
-import static android.content.ContentValues.TAG;
-
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -26,8 +23,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class QuenMatKhauActivity extends AppCompatActivity {
-
+public class LayLaimatKhauActivity extends AppCompatActivity {
     EditText
             layoutQMK_edtNhapTaiKhoan,
             layoutQMK_edtNhapEmail;
@@ -39,51 +35,35 @@ public class QuenMatKhauActivity extends AppCompatActivity {
             account;
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
-        {
-            super.onCreate(savedInstanceState);
-            setContentView(R.layout.quenmatkhau_layout);
-            setControl();
-            setEvent();
-
-
-
-
-
-        }
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.quenmatkhau_layout);
+        setControl();
+        setEvent();
     }
 
-    public void sendEmailReset(String account, String email){
+    public void sendEmailReset(String account, String email) {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference nguoiDungDatabase = firebaseDatabase.getReference("NGUOIDUNG").child("khachhang");
-
-        nguoiDungDatabase.addValueEventListener(new ValueEventListener() {
+        nguoiDungDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                     KhachHang khachHang = dataSnapshot.getValue(KhachHang.class);
-                    if (khachHang.getTaiKhoan().equals(account)){
-                        if (khachHang.getEmail().equals(email)){
-                            //gui email doi mat khau
-                            FirebaseAuth auth = FirebaseAuth.getInstance();
-                            auth.sendPasswordResetEmail(email)
-                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-                                            if (task.isSuccessful()) {
-                                                Log.d(TAG, "Email sent to account: " + account + "email: " + email);
-                                            }
-                                        }
-                                    });
-                            break;
-                        }
-                        //Thong bao sai email
-                        warningToUser();
+                    if (khachHang.getTaiKhoan().equals(account) && khachHang.getEmail().equals(email)){
+                        //dung tai khoan, gui email xac nhan
+                        FirebaseAuth auth = FirebaseAuth.getInstance();
+                       auth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
+                           @Override
+                           public void onComplete(@NonNull Task<Void> task) {
+                               if(task.isSuccessful()){
+                                   Log.d("Gui email", "Gui email thanh cong");
+                               }
+                           }
+                       });
                     }
-                    //Thong bao sai tai khoan
-                    warningToUser();
                 }
+
             }
 
             @Override
@@ -91,10 +71,13 @@ public class QuenMatKhauActivity extends AppCompatActivity {
 
             }
         });
+
     }
 
-    protected void warningToUser(){
-        AlertDialog alertDialog = new AlertDialog.Builder(QuenMatKhauActivity.this).create();
+
+
+    protected void warningToUser() {
+        AlertDialog alertDialog = new AlertDialog.Builder(LayLaimatKhauActivity.this).create();
         alertDialog.setTitle("LỖI NHẬP");
         alertDialog.setMessage("Tài khoản của bạn không tồn tại hoặc email nhập sai");
         alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "CANCEL", new DialogInterface.OnClickListener() {
@@ -106,20 +89,20 @@ public class QuenMatKhauActivity extends AppCompatActivity {
         alertDialog.show();
     }
 
-    private boolean checkFillOrNot(){
+    private boolean checkFillOrNot() {
         return (!layoutQMK_edtNhapTaiKhoan.getText().toString().isEmpty() &&
-        !layoutQMK_edtNhapEmail.getText().toString().isEmpty());
+                !layoutQMK_edtNhapEmail.getText().toString().isEmpty());
     }
 
     private void setEvent() {
         layoutQMK_btnLayLaiMK.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                if (checkFillOrNot()){
-                    sendEmailReset(account,email);
+            public void onClick(View v) {
+                if (checkFillOrNot()) {
+                    sendEmailReset(account, email);
 
-                }else {
-                    AlertDialog alertDialog = new AlertDialog.Builder(QuenMatKhauActivity.this).create();
+                } else {
+                    AlertDialog alertDialog = new AlertDialog.Builder(LayLaimatKhauActivity.this).create();
                     alertDialog.setTitle("LỖI NHẬP");
                     alertDialog.setMessage("Bạn cần nhập đầy đủ thông tin trước");
                     alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "CANCEL", new DialogInterface.OnClickListener() {
@@ -130,8 +113,6 @@ public class QuenMatKhauActivity extends AppCompatActivity {
                     });
                     alertDialog.show();
                 }
-
-//
             }
         });
 
@@ -150,4 +131,5 @@ public class QuenMatKhauActivity extends AppCompatActivity {
         layoutQMK_btnLayLaiMK = findViewById(R.id.layoutQMK_btnLayLaiMK);
         layoutQMK_btnQuayLai = findViewById(R.id.layoutQMK_btnQuayLai);
     }
+
 }

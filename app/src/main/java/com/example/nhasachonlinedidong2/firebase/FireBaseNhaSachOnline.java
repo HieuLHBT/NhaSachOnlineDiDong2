@@ -1965,5 +1965,4 @@ public class FireBaseNhaSachOnline {
         nguoiDungDatabase.child("VANPHONGPHAM").child(maVanPhongPHam).child("giaTien").setValue(giaTien);
         nguoiDungDatabase.child("VANPHONGPHAM").child(maVanPhongPHam).child("soLongKho").setValue(soLuongKho);
     }
-
 }

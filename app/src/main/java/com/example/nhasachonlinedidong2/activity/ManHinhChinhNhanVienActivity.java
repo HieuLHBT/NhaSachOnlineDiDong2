@@ -27,7 +27,7 @@ import java.util.Date;
 public class ManHinhChinhNhanVienActivity extends AppCompatActivity {
     private SharePreferences sharePreferences = new SharePreferences();
     private FireBaseNhaSachOnline fireBase = new FireBaseNhaSachOnline();
-    private String maNhanVien = "nv1";
+    private String maNhanVien;
     private String ngay;
     private String thoiGian;
 
@@ -49,6 +49,9 @@ public class ManHinhChinhNhanVienActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.manhinhchinh_nhanvien_layout);
+
+        //Minh: Bắt intent được truyền tới từ DangNhapActivity
+        maNhanVien = getIntent().getStringExtra("KEY_maNhanVien");
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.layoutMHCNV_NV_rvManHinhChinhNhanVien);
 
