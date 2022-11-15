@@ -2,12 +2,14 @@ package com.example.nhasachonlinedidong2.activity;
 
 import static android.content.ContentValues.TAG;
 
+import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
@@ -31,6 +33,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -40,11 +43,12 @@ public class DangKyActivity extends AppCompatActivity {
     private ArrayList<com.example.nhasachonlinedidong2.data_model.KhachHang> khachHangsModel = new ArrayList<>();
 
 
-    Button
+    private Button
             layoutDK_btnTaoTaiKhoan;
-    ImageButton
+    private ImageButton
             layoutDK_btnBack;
-    EditText layoutDK_edtNhapTaiKhoan,
+    private EditText
+            layoutDK_edtNhapTaiKhoan,
             layoutDK_edtEmail,
             layoutDK_edtNhapMatKhau,
             layoutDK_edtNhapLaiMatKhau,
@@ -52,12 +56,12 @@ public class DangKyActivity extends AppCompatActivity {
             layoutDK_edtNgaySinh,
             layoutDK_edtSDT,
             layoutDK_edtDiaChi;
-    Spinner
-            layoutDK_spGioiTinh;
-    String
-            email,
-            account;
-
+    FireBaseNhaSachOnline
+            fireBaseNhaSachOnline = new FireBaseNhaSachOnline();
+    private int
+            mYear,
+            mMonth,
+            mDay;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -65,9 +69,8 @@ public class DangKyActivity extends AppCompatActivity {
         setContentView(R.layout.dangky_layout);
         setControl();
         setEvent();
-        account = layoutDK_edtNhapTaiKhoan.getText().toString();
-        email = layoutDK_edtEmail.getText().toString();
-    }
+
+        }
 
     private void setEvent() {
 
@@ -75,49 +78,14 @@ public class DangKyActivity extends AppCompatActivity {
         layoutDK_btnTaoTaiKhoan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (checkFillorNot()) {
-                    if (passwordValidate()) {
-                        if (emailValidate()) {
-                            checkAccountIstExist(account);
-                        } else {
-                            //canh bao email khong hop le
-                            AlertDialog alertDialog = new AlertDialog.Builder(DangKyActivity.this).create();
-                            alertDialog.setTitle("LỖI ĐĂNG Ký");
-                            alertDialog.setMessage("Email bạn muốn đăng ký không hợp lệ!");
-                            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "CANCEL", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.dismiss();
-                                }
-                            });
-                            alertDialog.show();
-                        }
-                    } else {
-                        //Canh mat khau khong trung khop
-                        AlertDialog alertDialog = new AlertDialog.Builder(DangKyActivity.this).create();
-                        alertDialog.setTitle("LỖI ĐĂNG Ký");
-                        alertDialog.setMessage("Mật khẩu và xác nhận mật khẩu không giống nhau");
-                        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "CANCEL", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        });
-                        alertDialog.show();
-                    }
-
-                } else {
-                    //Canh bao nhap thieu thong tin
-                    AlertDialog alertDialog = new AlertDialog.Builder(DangKyActivity.this).create();
-                    alertDialog.setTitle("LỖI ĐĂNG Ký");
-                    alertDialog.setMessage("Bạn chưa nhập đầy đủ thông tin");
-                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "CANCEL", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    });
-                    alertDialog.show();
+                if (validateRegister()){
+                    String _taiKhoan= layoutDK_edtNhapTaiKhoan.getText().toString().toLowerCase();
+                    String _matKhau= layoutDK_edtNhapMatKhau.getText().toString();
+                    String _diaChi= layoutDK_edtDiaChi.getText().toString();
+                    String _email= layoutDK_edtEmail.getText().toString();
+                    String _sdt= layoutDK_edtSDT.getText().toString();
+                    String _tenKhachHang= layoutDK_edtHoTen.getText().toString();
+                    fireBaseNhaSachOnline.dangKy(DangKyActivity.this,_taiKhoan,_matKhau,_diaChi,_email,_sdt,_tenKhachHang);
                 }
             }
         });
@@ -127,6 +95,31 @@ public class DangKyActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+
+        layoutDK_edtNgaySinh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Get Current Date
+                final Calendar c = Calendar.getInstance();
+                mYear = c.get(Calendar.YEAR);
+                mMonth = c.get(Calendar.MONTH);
+                mDay = c.get(Calendar.DAY_OF_MONTH);
+
+
+                DatePickerDialog datePickerDialog = new DatePickerDialog(DangKyActivity.this,
+                        new DatePickerDialog.OnDateSetListener() {
+
+                            @Override
+                            public void onDateSet(DatePicker view, int year,
+                                                  int monthOfYear, int dayOfMonth) {
+
+                                layoutDK_edtNgaySinh.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+
+                            }
+                        }, mYear, mMonth, mDay);
+                datePickerDialog.show();
             }
         });
     }
@@ -142,110 +135,66 @@ public class DangKyActivity extends AppCompatActivity {
         layoutDK_edtNgaySinh = findViewById(R.id.layoutDK_edtNgaySinh);
         layoutDK_edtSDT = findViewById(R.id.layoutDK_edtSDT);
         layoutDK_edtDiaChi = findViewById(R.id.layoutDK_edtDiaChi);
-        layoutDK_spGioiTinh = findViewById(R.id.layoutDK_spGioiTinh);
+
     }
 
     //Minh
-    protected boolean checkFillorNot() {
-        //kiem tra du lieu nhap vao phai khac null
-        if (!layoutDK_edtNhapTaiKhoan.getText().toString().isEmpty()
-                && !layoutDK_edtNhapMatKhau.getText().toString().isEmpty()
-                && !layoutDK_edtNhapLaiMatKhau.getText().toString().isEmpty()
-                && !layoutDK_edtEmail.getText().toString().isEmpty()
-                && !layoutDK_edtHoTen.getText().toString().isEmpty()
-                && !layoutDK_edtNgaySinh.getText().toString().isEmpty()
-                && !layoutDK_edtSDT.getText().toString().isEmpty()
-                && !layoutDK_edtDiaChi.getText().toString().isEmpty()) {
-            return true;
-        } else {
-            return false;
+    protected boolean validateRegister() {
+
+        //Tu 6 den 20 ky tu khong khoang trang va ky tu dac biet
+        Pattern patternAccount = Pattern.compile("^[A-Za-z][A-Za-z0-9]{5,20}$");
+        Matcher matcherAccount = patternAccount.matcher(layoutDK_edtNhapTaiKhoan.getText().toString());
+
+        //email regex
+        Pattern patternEmail = Pattern.compile("^[\\w-.]+@([\\w-]+\\.)+[\\w-]{2,4}$");
+        Matcher matcherEmail = patternEmail.matcher(layoutDK_edtEmail.getText().toString());
+
+        //More than 8 char, required at least: 1 char, 1 number, 1 special char.
+        Pattern patternPassword = Pattern.compile("^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,}$");
+        Matcher matcherPassword = patternPassword.matcher(layoutDK_edtNhapMatKhau.getText().toString());
+
+        //Ten tieng viet hoac tieng anh, yeu cau viet hoa dau tu
+        Pattern patternName = Pattern.compile("^[A-ZÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸĐ][a-zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]*(?:[ ][A-ZÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸĐ][a-zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]*)*$");
+        Matcher matcherName = patternName.matcher(layoutDK_edtHoTen.getText().toString());
+
+        //So dien thoai Viet Nam
+        Pattern patternPhone = Pattern.compile("(84|0[3|5|7|8|9])+([0-9]{8})\\b");
+        Matcher matcherPhone = patternPhone.matcher(layoutDK_edtSDT.getText().toString());
+
+        boolean boolAccount = matcherAccount.find();
+        boolean boolEmail = matcherEmail.find();
+        boolean boolPassword = matcherPassword.find();
+        boolean boolRePassword = layoutDK_edtNhapMatKhau.getText().toString().equals(layoutDK_edtNhapLaiMatKhau.getText().toString());
+        boolean boolName = matcherName.find();
+        boolean boolBirth = !layoutDK_edtNgaySinh.getText().toString().isEmpty();
+        boolean boolPhone = matcherPhone.find();
+        boolean boolAddress = !layoutDK_edtDiaChi.getText().toString().isEmpty();
+
+        if (!boolAccount) {
+            layoutDK_edtNhapTaiKhoan.setError("Tên đăng nhập từ 6 đến 20 ký tự, không khoảng trắng và ký tự đặc biệt");
         }
+        if (!boolEmail) {
+            layoutDK_edtEmail.setError("Vui lòng nhập email hợp lệ");
+        }
+        if (!boolPassword) {
+            layoutDK_edtNhapMatKhau.setError("Mật khẩu cần ít nhất 8 ký tự, một chữ cái, một chữ số và một ký tự đặc biệt");
+        }
+        if (!boolRePassword) {
+            layoutDK_edtNhapLaiMatKhau.setError("Mật khẩu và xác nhận mật khẩu không giống nhau");
+        }
+        if (!boolName) {
+            layoutDK_edtHoTen.setError("Tên Tiếng Việt hoặc Tiếng Anh, viết hoa đầu từ");
+        }
+        if (!boolPhone) {
+            layoutDK_edtSDT.setError("Số điện thoại bạn nhập không hợp lệ");
+        }
+        if (!boolBirth) {
+            layoutDK_edtNgaySinh.setError("Không được bỏ trống hoặc ngày sinh không hợp lệ");
+        }
+        if (!boolAddress) {
+            layoutDK_edtDiaChi.setError("Không được bỏ trống ");
+        }
+        return boolAccount && boolEmail && boolPassword && boolRePassword && boolName && boolBirth && boolPhone && boolAddress;
     }
-
-    //Minh
-    protected boolean passwordValidate() {
-        String pass = layoutDK_edtNhapMatKhau.getText().toString();
-        String rePass = layoutDK_edtNhapLaiMatKhau.getText().toString();
-        return pass.equals(rePass);
-    }
-
-    public void checkAccountIstExist(String account) {
-
-        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference nguoiDungDatabase = firebaseDatabase.getReference("NGUOIDUNG").child("khachhang");
-        nguoiDungDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                int counter = (int)snapshot.getChildrenCount() + 1;
-                int isActivated = 0;
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
-                    KhachHang khachHang = dataSnapshot.getValue(KhachHang.class);
-                    if(khachHang.getTaiKhoan().equals(account.toLowerCase())){
-                        AlertDialog alertDialog = new AlertDialog.Builder(DangKyActivity.this).create();
-                        alertDialog.setTitle("Lỗi");
-                        alertDialog.setMessage("tên tài khoản đã tồn tại");
-                        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "CANCEL", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        });
-                        alertDialog.show();
-                        isActivated = 1;
-                        break;
-                    }
-                }
-                if (isActivated == 0)
-                {
-                    addUser(counter);
-                }
-
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    }
-
-    protected boolean emailValidate() {
-        Pattern pattern = Pattern.compile("^[\\w-.]+@([\\w-]+\\.)+[\\w-]{2,4}$");
-        Matcher matcher = pattern.matcher(layoutDK_edtEmail.getText().toString());
-
-        return matcher.find();
-    }
-
-    protected void addUser(int counter){
-        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference nguoiDungDatabase = firebaseDatabase.getReference("NGUOIDUNG").child("khachhang");
-        nguoiDungDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                KhachHang khachHangPUSH = new KhachHang();
-                khachHangPUSH.setMaKhachHang("kh" + counter);
-                khachHangPUSH.setTaiKhoan(layoutDK_edtNhapTaiKhoan.getText().toString().toLowerCase());
-                khachHangPUSH.setMatKhau(layoutDK_edtNhapMatKhau.getText().toString());
-                khachHangPUSH.setDiaChi(layoutDK_edtDiaChi.getText().toString());
-                khachHangPUSH.setEmail(layoutDK_edtEmail.getText().toString());
-                khachHangPUSH.setSoDienThoai(layoutDK_edtSDT.getText().toString());
-                khachHangPUSH.setTenKhachHang(layoutDK_edtHoTen.getText().toString());
-                khachHangPUSH.setNguoiDung("khachhang");
-                khachHangPUSH.setNganHang("");
-                khachHangPUSH.setSoTaiKhoan("");
-                nguoiDungDatabase.child(khachHangPUSH.getMaKhachHang()).setValue(khachHangPUSH);
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    }
-
-
-
 
 }

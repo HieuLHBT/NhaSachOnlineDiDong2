@@ -18,4 +18,6 @@
     <dimen name="scrollbar_size">20dp</dimen>
     <dimen name="weight_dangKy">0.7</dimen>
     <dimen name="textsizelight">15sp</dimen>
+    <dimen name="layoutDN_marginButton">20dp</dimen>
+    <dimen name="minh_text_title">40sp</dimen>
 </resources>

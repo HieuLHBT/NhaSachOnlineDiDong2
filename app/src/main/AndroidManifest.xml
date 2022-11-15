@@ -81,6 +81,7 @@
         <activity android:name=".activity.ManHinhChinhNhanVienActivity"/>
         <activity android:name=".activity.DangKyActivity"/>
         <activity android:name=".activity.LayLaimatKhauActivity"/>
+        <activity android:name=".activity.ManHinhQuanLyNhanVienActivity"/>
     </application>
 
 </manifest>

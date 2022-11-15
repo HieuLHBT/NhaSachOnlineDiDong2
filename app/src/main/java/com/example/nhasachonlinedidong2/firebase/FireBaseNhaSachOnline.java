@@ -1,17 +1,23 @@
 package com.example.nhasachonlinedidong2.firebase;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 
 import com.example.nhasachonlinedidong2.activity.BangChamCongActivity;
 import com.example.nhasachonlinedidong2.activity.ChiTietGiaoHangActivity;
 import com.example.nhasachonlinedidong2.activity.ChiTietSanPhamActivity;
+import com.example.nhasachonlinedidong2.activity.DangNhapActivity;
 import com.example.nhasachonlinedidong2.activity.GioHangActivity;
 import com.example.nhasachonlinedidong2.activity.LichLamViecActivity;
+import com.example.nhasachonlinedidong2.activity.ManHinhChinhKhachHangActivity;
+import com.example.nhasachonlinedidong2.activity.ManHinhChinhNhanVienActivity;
+import com.example.nhasachonlinedidong2.activity.ManHinhQuanLyNhanVienActivity;
 import com.example.nhasachonlinedidong2.activity.SuaNhanVienActivity;
 import com.example.nhasachonlinedidong2.activity.ThanhToanActivity;
 import com.example.nhasachonlinedidong2.activity.ThongTinGiaoHangNVActivity;
@@ -35,6 +41,7 @@ import com.example.nhasachonlinedidong2.data_model.GioHang;
 import com.example.nhasachonlinedidong2.data_model.KhachHang;
 import com.example.nhasachonlinedidong2.data_model.NhanVien;
 import com.example.nhasachonlinedidong2.data_model.PhanPhoi;
+import com.example.nhasachonlinedidong2.data_model.QuanLy;
 import com.example.nhasachonlinedidong2.data_model.Sach;
 import com.example.nhasachonlinedidong2.data_model.TrangThaiDonHang;
 import com.example.nhasachonlinedidong2.data_model.VanPhongPham;
@@ -98,8 +105,7 @@ public class FireBaseNhaSachOnline {
                                         Integer.valueOf(sach.getKhuyenMai()),
                                         Integer.valueOf(gioHang.getSoLuong()),
                                         sach.getHinhSach()));
-                            }
-                            else if (gioHang.getMaSanPham().contains("vpp")) {
+                            } else if (gioHang.getMaSanPham().contains("vpp")) {
                                 VanPhongPham vanPhongPham = snapshot.child("VANPHONGPHAM").child(gioHang.getMaSanPham()).getValue(VanPhongPham.class);
                                 gioHangItem.add(new com.example.nhasachonlinedidong2.item.GioHang(
                                         vanPhongPham.getMaVanPhongPham(),
@@ -1102,7 +1108,6 @@ public class FireBaseNhaSachOnline {
     }
 
 
-
     ///////////////////////////////////////////////////////
 
     //Tin
@@ -1176,7 +1181,7 @@ public class FireBaseNhaSachOnline {
     }
 
     //Quan ly don hang
-    public void hienThiItemQuanLyDonHang(String maDonHang, ArrayList<ItemQuanLyDonHangNV> itemQuanLyDonHangNVS, QuanLyDonHangNVRecyclerViewAdapter adapter, Context context){
+    public void hienThiItemQuanLyDonHang(String maDonHang, ArrayList<ItemQuanLyDonHangNV> itemQuanLyDonHangNVS, QuanLyDonHangNVRecyclerViewAdapter adapter, Context context) {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference trangThaiDonHangDatabase = firebaseDatabase.getReference("TRANGTHAIDONHANG");
         trangThaiDonHangDatabase.child(maDonHang).addValueEventListener(new ValueEventListener() {
@@ -1480,7 +1485,7 @@ public class FireBaseNhaSachOnline {
         });
     }*/
 
-    public void hienThiManHinhChinhNhanVien(String maNhanVien, ArrayList<ItemManHinhChinhNhanVien> itemManHinhChinhNhanViens, ManHinhChinhNhanVienRecyclerViewAdapter adapter, Context context){
+    public void hienThiManHinhChinhNhanVien(String maNhanVien, ArrayList<ItemManHinhChinhNhanVien> itemManHinhChinhNhanViens, ManHinhChinhNhanVienRecyclerViewAdapter adapter, Context context) {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference manHinhChinhNhanVien = firebaseDatabase.getReference("NGUOIDUNG");
         manHinhChinhNhanVien.child("nhanvien").child(maNhanVien).addValueEventListener(new ValueEventListener() {
@@ -1935,9 +1940,10 @@ public class FireBaseNhaSachOnline {
         gioHangDatabase.child("SACH").child(maSanPham).removeValue();
         gioHangDatabase.child("VANPHONGPHAM").child(maSanPham).removeValue();
     }
+
     //THEM SACH
-    public void themSanPham_Sach(String maSach, String hinhSach, String tenSach,String theLoai, String tacGia, String nhaXuatBan
-            , String ngayXuatBan, String giaTien, String soLuongKho){
+    public void themSanPham_Sach(String maSach, String hinhSach, String tenSach, String theLoai, String tacGia, String nhaXuatBan
+            , String ngayXuatBan, String giaTien, String soLuongKho) {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference nguoiDungDatabase = firebaseDatabase.getReference("SANPHAM");
         nguoiDungDatabase.child("SACH").child(maSach).child("maSach").setValue(maSach);
@@ -1950,10 +1956,11 @@ public class FireBaseNhaSachOnline {
         nguoiDungDatabase.child("SACH").child(maSach).child("giaTien").setValue(giaTien);
         nguoiDungDatabase.child("SACH").child(maSach).child("soLongKho").setValue(soLuongKho);
     }
+
     // THÊM VPPP
     public void themSanPham_vpp(String maVanPhongPHam, String hinhVanPhongPham, String tenVanPhongPham
-            ,String nhaPhanPhoi, String xuatXu, String donVi
-            , String giaTien, String soLuongKho){
+            , String nhaPhanPhoi, String xuatXu, String donVi
+            , String giaTien, String soLuongKho) {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference nguoiDungDatabase = firebaseDatabase.getReference("SANPHAM");
         nguoiDungDatabase.child("VANPHONGPHAM").child(maVanPhongPHam).child("maVanPhongPHam").setValue(maVanPhongPHam);
@@ -1964,5 +1971,188 @@ public class FireBaseNhaSachOnline {
         nguoiDungDatabase.child("VANPHONGPHAM").child(maVanPhongPHam).child("nhaXuatBan").setValue(donVi);
         nguoiDungDatabase.child("VANPHONGPHAM").child(maVanPhongPHam).child("giaTien").setValue(giaTien);
         nguoiDungDatabase.child("VANPHONGPHAM").child(maVanPhongPHam).child("soLongKho").setValue(soLuongKho);
+    }
+
+
+    //Minh Firebase
+    //DangNhap
+    public void dangNhap(Context context, String type, String _taiKhoan, String _matKhau, boolean checkBox) {
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference nguoiDungDatabase = firebaseDatabase.getReference("NGUOIDUNG");
+
+        if (type.equals("khachhang")) {
+            nguoiDungDatabase.child("khachhang").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                        KhachHang khachHang = dataSnapshot.getValue(KhachHang.class);
+                        if (khachHang.getTaiKhoan().equals(_taiKhoan) && khachHang.getMatKhau().equals(_matKhau)) {
+                            //Khop mat khau va tai khoan, chuen snag man hinh chinh
+                            Intent intent = new Intent(context, ManHinhChinhKhachHangActivity.class);
+                            intent.putExtra("KEY_maKhachHang", khachHang.getMaKhachHang());
+                            context.startActivity(intent);
+
+                            if (checkBox == true) {
+                                //goi ham luu thong tin dang nhap
+                                SharePreferences sharePreferences = new SharePreferences();
+                                sharePreferences.saveLoginInfo(context, _taiKhoan, _matKhau, checkBox);
+                            }
+                            return;
+                        }
+                    }
+                    AlertDialog alertDialog = new AlertDialog.Builder(context).create();
+                    alertDialog.setTitle("LỖI ĐĂNG NHẬP");
+                    alertDialog.setMessage("Không tìm thấy tài khoản! Hoặc sai mật khẩu");
+                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "CANCEL", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+                    alertDialog.show();
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        }
+        //neu nguoi dung chon "nhan vien"
+        if (type.equals("nhanvien")) {
+            nguoiDungDatabase.child("nhanvien").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                        NhanVien nhanVien = dataSnapshot.getValue(NhanVien.class);
+                        if (nhanVien.getTaiKhoan().equals(_taiKhoan) && nhanVien.getMatKhau().equals(_matKhau)) {
+                            //Khop mat khau va tai khoan, chuen snag man hinh chinh
+                            Intent intent = new Intent(context, ManHinhChinhNhanVienActivity.class);
+                            intent.putExtra("KEY_maNhanVien", nhanVien.getMaNhanVien());
+                            context.startActivity(intent);
+
+                            if (checkBox == true) {
+                                //goi ham luu thong tin dang nhap
+                                SharePreferences sharePreferences = new SharePreferences();
+                                sharePreferences.saveLoginInfo(context, _taiKhoan, _matKhau, checkBox);
+                            }
+                            return;
+                        }
+                    }
+                    AlertDialog alertDialog = new AlertDialog.Builder(context).create();
+                    alertDialog.setTitle("LỖI ĐĂNG NHẬP");
+                    alertDialog.setMessage("Không tìm thấy tài khoản! Hoặc sai mật khẩu");
+                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "CANCEL", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+                    alertDialog.show();
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        }
+        if (type.equals("quanly")) {
+            nguoiDungDatabase.child("quanly").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                        QuanLy quanLy = dataSnapshot.getValue(QuanLy.class);
+                        if (quanLy.getTaiKhoan().equals(_taiKhoan) && quanLy.getMatKhau().equals(_matKhau)) {
+                            //Khop mat khau va tai khoan, chuen snag man hinh chinh
+                            Intent intent = new Intent(context, ManHinhQuanLyNhanVienActivity.class);
+                            intent.putExtra("KEY_maQuanly", quanLy.getMaQuanLy());
+                            context.startActivity(intent);
+
+                            if (checkBox == true) {
+                                //goi ham luu thong tin dang nhap
+                                SharePreferences sharePreferences = new SharePreferences();
+                                sharePreferences.saveLoginInfo(context, _taiKhoan, _matKhau, checkBox);
+                            }
+                            return;
+                        }
+                    }
+                    AlertDialog alertDialog = new AlertDialog.Builder(context).create();
+                    alertDialog.setTitle("LỖI ĐĂNG NHẬP");
+                    alertDialog.setMessage("Không tìm thấy tài khoản! Hoặc sai mật khẩu");
+                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "CANCEL", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+                    alertDialog.show();
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        }
+
+    }
+
+    //Dang ky
+    public void dangKy(Context context,String _taikhoan, String _matKhau, String _diaChi, String _email, String _sdt, String _tenKhachHang) {
+
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference nguoiDungDatabase = firebaseDatabase.getReference("NGUOIDUNG").child("khachhang");
+        nguoiDungDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                int count = (int)snapshot.getChildrenCount() + 1;
+                for (DataSnapshot dataSnapshot :snapshot.getChildren()){
+                    KhachHang khachHang = dataSnapshot.getValue(KhachHang.class);
+                    if(khachHang.getTaiKhoan().equals(_taikhoan)){
+                        //thong bao loi da ton tai
+                        AlertDialog alertDialog = new AlertDialog.Builder(context).create();
+                        alertDialog.setTitle("LỖI ĐĂNG Ký");
+                        alertDialog.setMessage("Tài khoản này đã tồn tại, vui lòng chọn một tên tài khoản khác");
+                        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "CANCEL", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                        alertDialog.show();
+                        return;
+                    }
+                }
+                //Tao tai khoan
+                KhachHang khachHangPUSH = new KhachHang();
+                khachHangPUSH.setMaKhachHang("kh" + count);
+                khachHangPUSH.setTaiKhoan(_taikhoan);
+                khachHangPUSH.setMatKhau(_matKhau);
+                khachHangPUSH.setDiaChi(_diaChi);
+                khachHangPUSH.setEmail(_email);
+                khachHangPUSH.setSoDienThoai(_sdt);
+                khachHangPUSH.setTenKhachHang(_tenKhachHang);
+                khachHangPUSH.setNguoiDung("khachhang");
+                khachHangPUSH.setNganHang("");
+                khachHangPUSH.setSoTaiKhoan("");
+                nguoiDungDatabase.child(khachHangPUSH.getMaKhachHang()).setValue(khachHangPUSH);
+                AlertDialog alertDialog = new AlertDialog.Builder(context).create();
+                alertDialog.setTitle("Chào mừng" + khachHangPUSH.getTenKhachHang());
+                alertDialog.setMessage("Bạn đã đăng ký thành công");
+                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "CANCEL", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                alertDialog.show();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 }

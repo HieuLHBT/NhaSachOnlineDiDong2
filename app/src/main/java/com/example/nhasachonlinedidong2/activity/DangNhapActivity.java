@@ -2,6 +2,7 @@ package com.example.nhasachonlinedidong2.activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,25 +23,37 @@ import com.example.nhasachonlinedidong2.activity.ManHinhChinhNhanVienActivity;
 import com.example.nhasachonlinedidong2.activity.QuenMatKhauActivity;
 import com.example.nhasachonlinedidong2.data_model.KhachHang;
 import com.example.nhasachonlinedidong2.data_model.NhanVien;
+import com.example.nhasachonlinedidong2.firebase.FireBaseNhaSachOnline;
+import com.example.nhasachonlinedidong2.tools.SharePreferences;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class DangNhapActivity extends AppCompatActivity {
-    Button
-            layoutDN_btnDangNhap,
-            layoutDN_btnDangKy,
-            layoutDN_btnQuenMatKhau;
-    RadioButton
-            layoutDN_rdbNhanVien,
-            layoutDN_rdbKhachHang;
-    EditText
-            layoutDN_edtTaiKhoan,
-            layoutDN_edtNhapMatKhau;
-    CheckBox
-            layoutDN_cbNhoMatKHau;
+    private Button
+                    layoutDN_btnDangNhap,
+                    layoutDN_btnDangKy,
+                    layoutDN_btnQuenMatKhau;
+    private RadioButton
+                    layoutDN_rdbNhanVien,
+                    layoutDN_rdbQuanly,
+                    layoutDN_rdbKhachHang;
+    private EditText
+                    layoutDN_edtTaiKhoan,
+                    layoutDN_edtNhapMatKhau;
+    private CheckBox
+                    layoutDN_cbNhoMatKHau;
+    private String
+                    type;
+    private Boolean
+                    rememberMe;
+    private FireBaseNhaSachOnline
+                    fireBaseNhaSachOnline = new FireBaseNhaSachOnline();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,6 +61,15 @@ public class DangNhapActivity extends AppCompatActivity {
         setContentView(R.layout.dangnhap_layout);
         setControl();
         setEvent();
+
+        rememberMe = layoutDN_cbNhoMatKHau.isChecked();
+        //load saved info
+        SharedPreferences sharedPreferences = this.getSharedPreferences("loginInfo", this.MODE_PRIVATE);
+        layoutDN_edtTaiKhoan.setText(sharedPreferences.getString("account", ""));
+        layoutDN_edtNhapMatKhau.setText(sharedPreferences.getString("matkhau", ""));
+        layoutDN_cbNhoMatKHau.setChecked(sharedPreferences.getBoolean("checkbox", false));
+
+
     }
 
     private void setControl() {
@@ -55,6 +78,7 @@ public class DangNhapActivity extends AppCompatActivity {
         layoutDN_btnQuenMatKhau = findViewById(R.id.layoutDN_btnQuenMatKhau);
         layoutDN_rdbNhanVien = findViewById(R.id.layoutDN_rdbNhanVien);
         layoutDN_rdbKhachHang = findViewById(R.id.layoutDN_rdbKhachHang);
+        layoutDN_rdbQuanly = findViewById(R.id.layoutDN_rdbQuanLi);
         layoutDN_edtTaiKhoan = findViewById(R.id.layoutDN_edtTaiKhoan);
         layoutDN_edtNhapMatKhau = findViewById(R.id.layoutDN_edtNhapMatKhau);
         layoutDN_cbNhoMatKHau = findViewById(R.id.layoutDN_cbNhoMatKHau);
@@ -67,7 +91,13 @@ public class DangNhapActivity extends AppCompatActivity {
         layoutDN_btnDangNhap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dangNhap();
+
+                if (validateLogin()) {
+                    String _taikhoan = layoutDN_edtTaiKhoan.getText().toString().toLowerCase();
+                    String _matkhau =layoutDN_edtNhapMatKhau.getText().toString();
+                    boolean checkBox = layoutDN_cbNhoMatKHau.isChecked();
+                    fireBaseNhaSachOnline.dangNhap(DangNhapActivity.this,reTurnType(),_taikhoan,_matkhau,checkBox);
+                }
             }
         });
 
@@ -89,107 +119,30 @@ public class DangNhapActivity extends AppCompatActivity {
     }
 
     //Đăng nhập
-    protected void dangNhap() {
-        final String _taiKhoan = layoutDN_edtTaiKhoan.getText().toString();
-        final String _matKhau = layoutDN_edtNhapMatKhau.getText().toString();
-        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference nguoiDungDatabase = firebaseDatabase.getReference();
-
-        if (layoutDN_rdbNhanVien.isChecked()) {
-            nguoiDungDatabase.child("NGUOIDUNG").child("nhanvien").addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                        NhanVien nhanVien = dataSnapshot.getValue(NhanVien.class);
-                        if (nhanVien.getTaiKhoan().equals(_taiKhoan)) {
-                            if (nhanVien.getMatKhau().equals(_matKhau)) {
-                                //Mo man hinh chinh nhan vien, gui intent
-                                Intent intent = new Intent(DangNhapActivity.this, ManHinhChinhNhanVienActivity.class);
-                                intent.putExtra("KEY_maNhanVien", nhanVien.getMaNhanVien());
-                                startActivity(intent);
-                            } else {
-                                //Thong bao sai mat khau
-                                AlertDialog alertDialog = new AlertDialog.Builder(DangNhapActivity.this).create();
-                                alertDialog.setTitle("LỖI ĐĂNG NHẬP");
-                                alertDialog.setMessage("Bạn đã nhập sai mật khẩu!");
-                                alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "CANCEL", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        dialog.dismiss();
-                                    }
-                                });
-                                alertDialog.show();
-                                break;
-                            }
-                        } else {
-                            //Thong bao khong tim thay tai khoan
-                            AlertDialog alertDialog = new AlertDialog.Builder(DangNhapActivity.this).create();
-                            alertDialog.setTitle("LỖI ĐĂNG NHẬP");
-                            alertDialog.setMessage("Không tìm thấy tài khoản!");
-                            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "CANCEL", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.dismiss();
-
-                                }
-                            });
-                            alertDialog.show();
-                            break;
-                        }
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
-            });
-        }else {
-            nguoiDungDatabase.child("NGUOIDUNG").child("khachhang").addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                        KhachHang khachHang = dataSnapshot.getValue(KhachHang.class);
-                        if (khachHang.getTaiKhoan().equals(_taiKhoan)) {
-                            if (khachHang.getMatKhau().equals(_matKhau)) {
-                                //Mo man hinh chinh nhan vien, gui intent
-                                Intent intent = new Intent(DangNhapActivity.this, ManHinhChinhKhachHangActivity.class);
-                                intent.putExtra("KEY_maKhachHang", khachHang.getMaKhachHang());
-                                startActivity(intent);
-                            }
-                            //Thong bao sai mat khau
-                            AlertDialog alertDialog = new AlertDialog.Builder(DangNhapActivity.this).create();
-                            alertDialog.setTitle("LỖI ĐĂNG NHẬP");
-                            alertDialog.setMessage("Bạn đã nhập sai mật khẩu!");
-                            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "CANCEL", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.dismiss();
-                                }
-                            });
-                            alertDialog.show();
-                        }
-                        //Thong bao khong tim thay tai khoan
-                        AlertDialog alertDialog = new AlertDialog.Builder(DangNhapActivity.this).create();
-                        alertDialog.setTitle("LỖI ĐĂNG NHẬP");
-                        alertDialog.setMessage("Không tìm thấy tài khoản!");
-                        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "CANCEL", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        });
-                        alertDialog.show();
-                    }
-                }
-
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
-            });
-
+    //Tu 6 den 20 ky tu khong khoang trang va ky tu dac biet
+//    Pattern pattern = Pattern.compile("^[A-Za-z][A-Za-z0-9]{5,19}$");
+//    Matcher matcher = pattern.matcher(layoutDN_edtTaiKhoan.getText().toString());
+    public boolean validateLogin() {
+        boolean valAccount = !layoutDN_edtTaiKhoan.getText().toString().isEmpty();
+        boolean valPass = !layoutDN_edtNhapMatKhau.getText().toString().isEmpty();
+        if (!valAccount) {
+            layoutDN_edtTaiKhoan.setError("Ban phai dien tai khoan");
         }
+        if (!valPass) {
+            layoutDN_edtNhapMatKhau.setError("Ban phai dien mat khau");
+        }
+        return valAccount && valPass;
     }
+
+    public String reTurnType() {
+        if (layoutDN_rdbQuanly.isChecked()) {
+            return "quanly";
+        } else if (layoutDN_rdbNhanVien.isChecked()) {
+            return "nhanvien";
+        }
+        return "khachhang";
+
+    }
+
 }
 

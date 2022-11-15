@@ -37,4 +37,24 @@ public class SharePreferences {
         SharedPreferences sharedPreferences = context.getSharedPreferences("dulieu", context.MODE_PRIVATE);
         return sharedPreferences.getString("maNguoiDung", null);
     }
+
+    //Minh
+    //Luu thong tin dang nhap
+    public void saveLoginInfo(Context context,String taikhoan, String matKhau, boolean checkBox){
+        SharedPreferences sharedPreferences = context.getSharedPreferences("loginInfo", context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("account",taikhoan);
+        editor.putString("matkhau",matKhau);
+        editor.putBoolean("checkbox",checkBox);
+        editor.commit();
+    }
+
+    public SharedPreferences getLoginInfo (Context context){
+        SharedPreferences sharedPreferences = context.getSharedPreferences("loginInfo", context.MODE_PRIVATE);
+        sharedPreferences.getString("account","");
+        sharedPreferences.getString("matkhau","");
+        sharedPreferences.getBoolean("checkbox",false);
+
+        return sharedPreferences;
+    }
 }
