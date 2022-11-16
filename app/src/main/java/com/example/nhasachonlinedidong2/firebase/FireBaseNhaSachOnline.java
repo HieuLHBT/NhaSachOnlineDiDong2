@@ -1,5 +1,6 @@
 package com.example.nhasachonlinedidong2.firebase;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -14,6 +15,7 @@ import com.example.nhasachonlinedidong2.activity.ChiTietGiaoHangActivity;
 import com.example.nhasachonlinedidong2.activity.ChiTietSanPhamActivity;
 import com.example.nhasachonlinedidong2.activity.DangNhapActivity;
 import com.example.nhasachonlinedidong2.activity.GioHangActivity;
+import com.example.nhasachonlinedidong2.activity.LayLaimatKhauActivity;
 import com.example.nhasachonlinedidong2.activity.LichLamViecActivity;
 import com.example.nhasachonlinedidong2.activity.ManHinhChinhKhachHangActivity;
 import com.example.nhasachonlinedidong2.activity.ManHinhChinhNhanVienActivity;
@@ -62,6 +64,9 @@ import com.example.nhasachonlinedidong2.item.ThanhToan;
 import com.example.nhasachonlinedidong2.tools.SharePreferences;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -73,6 +78,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Random;
 
 public class FireBaseNhaSachOnline {
     private SharePreferences sharePreferences = new SharePreferences();
@@ -2099,17 +2105,17 @@ public class FireBaseNhaSachOnline {
     }
 
     //Dang ky
-    public void dangKy(Context context,String _taikhoan, String _matKhau, String _diaChi, String _email, String _sdt, String _tenKhachHang) {
+    public void dangKy(Context context, String _taikhoan, String _matKhau, String _diaChi, String _email, String _sdt, String _tenKhachHang) {
 
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference nguoiDungDatabase = firebaseDatabase.getReference("NGUOIDUNG").child("khachhang");
         nguoiDungDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                int count = (int)snapshot.getChildrenCount() + 1;
-                for (DataSnapshot dataSnapshot :snapshot.getChildren()){
+                int count = (int) snapshot.getChildrenCount() + 1;
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     KhachHang khachHang = dataSnapshot.getValue(KhachHang.class);
-                    if(khachHang.getTaiKhoan().equals(_taikhoan)){
+                    if (khachHang.getTaiKhoan().equalsIgnoreCase(_taikhoan) || khachHang.getEmail().equalsIgnoreCase(_email)) {
                         //thong bao loi da ton tai
                         AlertDialog alertDialog = new AlertDialog.Builder(context).create();
                         alertDialog.setTitle("LỖI ĐĂNG Ký");
@@ -2130,7 +2136,7 @@ public class FireBaseNhaSachOnline {
                 khachHangPUSH.setTaiKhoan(_taikhoan);
                 khachHangPUSH.setMatKhau(_matKhau);
                 khachHangPUSH.setDiaChi(_diaChi);
-                khachHangPUSH.setEmail(_email);
+                khachHangPUSH.setEmail(_email.toLowerCase());
                 khachHangPUSH.setSoDienThoai(_sdt);
                 khachHangPUSH.setTenKhachHang(_tenKhachHang);
                 khachHangPUSH.setNguoiDung("khachhang");
@@ -2155,4 +2161,59 @@ public class FireBaseNhaSachOnline {
             }
         });
     }
+
+    public void sendEmailResetPassword(Activity activity, Context context, String email, String taikhoan, String phone) {
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference nguoiDungDatabase = firebaseDatabase.getReference("NGUOIDUNG");
+        nguoiDungDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.child("khachhang").getChildren()) {
+                    KhachHang khachHang = dataSnapshot.getValue(KhachHang.class);
+
+                    if (khachHang.getTaiKhoan().equalsIgnoreCase(taikhoan)
+                            && khachHang.getEmail().equalsIgnoreCase(email)
+                            && khachHang.getSoDienThoai().equalsIgnoreCase(phone)) {
+                        Random ran = new Random();
+                        int x = ran.nextInt(899999) + 100000;
+                        String message = "" + x;
+
+                        nguoiDungDatabase.child("khachhang").child(khachHang.getMaKhachHang()).child("matKhau").setValue(message);
+                        ((LayLaimatKhauActivity) activity).sendSMS_By_smsManager(phone, "NHA SACH ONLINE GUI BAN MAT KHAU MOI: " + message);
+                        //show dialog
+                        AlertDialog alertDialogT = new AlertDialog.Builder(context).create();
+                        alertDialogT.setTitle("Thông báo");
+                        alertDialogT.setMessage("Chúng tôi đã gửi tin nhắn chứa mật khẩu mới về số: " + khachHang.getSoDienThoai() + "");
+                        alertDialogT.setButton(AlertDialog.BUTTON_NEUTRAL, "CANCEL", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                        Log.d("Test", "RESET PASSWORD SUCCESSFUL");
+                        alertDialogT.show();
+                        return;
+                    }
+                }
+                //show dialog
+                AlertDialog alertDialogW = new AlertDialog.Builder(context).create();
+                alertDialogW.setTitle("Có gì đó không đúng");
+                alertDialogW.setMessage("Không tìm thấy thông tin của bạn, vui lòng kiểm tra lại dữ liệu nhập");
+                alertDialogW.setButton(AlertDialog.BUTTON_NEUTRAL, "CANCEL", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                alertDialogW.show();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+    }
 }
+

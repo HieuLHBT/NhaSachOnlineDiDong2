@@ -4,13 +4,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="10">
+
     <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="3">
-    </LinearLayout>
-    <LinearLayout
+
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -76,6 +72,34 @@
             android:layout_weight="9"
             android:textSize="@dimen/textsize"
             android:hint="Nhập email"
+
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.7">
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/textthu"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:layout_weight="3"
+            android:text="Số điện thoại"
+            />
+        <EditText
+            android:id="@+id/layoutQMK_edtNhapSDT"
+
+            android:background="@drawable/border"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="9"
+            android:textSize="@dimen/textsize"
+            android:hint="Số điện thoại bạn đã đăng ký"
+
             />
     </LinearLayout>
     <LinearLayout
