@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.SEND_SMS"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.NhaSachOnline"
+        tools:targetApi="31">
+
+        <activity
+            android:name=".activity.DangNhapActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.media.action.IMAGE_CAPTURE" />
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <!--        Hiếu        -->
+        <!--        <activity-->
+        <!--            android:name=".activity.GioHangActivity"-->
+        <!--            android:exported="true"></activity>-->
+        <activity
+            android:name=".activity.ThanhToanActivity"
+            android:exported="true"></activity>
+        <!--        <activity-->
+        <!--            android:name=".activity.MaGiamGiaActivity"-->
+        <!--            android:exported="true"></activity>-->
+        <!--        <activity-->
+        <!--            android:name=".activity.LichLamViecActivity"-->
+        <!--            android:exported="true"></activity>-->
+        <!--        <activity-->
+        <!--            android:name=".activity.BangChamCongActivity"-->
+        <!--            android:exported="true"></activity>-->
+        <activity
+            android:name=".activity.ChiTietDonDaNhanActivity"
+            android:exported="true"></activity>
+        <activity
+            android:name=".activity.ChiTietDonDaGiaoActivity"
+            android:exported="true"></activity>
+        <activity
+            android:name=".activity.ChiTietDonDaHuyActivity"
+            android:exported="true"></activity>
+        <activity
+            android:name=".activity.BangLuongActivity"
+            android:exported="true"></activity>
+        <!--        <activity-->
+        <!--            android:name=".activity.PhanHoiYKienKhachHangActivity"-->
+        <!--            android:exported="true"></activity>-->
+        <activity
+            android:name=".activity.TraLoiBinhLuanActivity"
+            android:exported="true"></activity>
+        <activity
+            android:name=".activity.ManHinhChinhQuanLyActivity"
+            android:exported="true"></activity>
+        <!--        <activity-->
+        <!--            android:name=".activity.TheoDoiDonHangActivity"-->
+        <!--            android:exported="true"></activity>-->
+        <activity
+            android:name=".activity.ChiTietTheoDoiDonHangActivity"
+            android:exported="true"></activity>
+        <activity
+            android:name=".activity.QuenMatKhauActivity"
+            android:exported="true"></activity>
+        <activity
+            android:name=".activity.QuenMatKhauCapLaiMatKhauActivity"
+            android:exported="true"></activity>
+        <activity
+            android:name=".activity.QuenMatKhauXacNhanOTPActivity"
+            android:exported="true"></activity>
+
+        <!--        Tin        -->
+        <activity
+            android:name=".activity.ChiTietSanPhamActivity"
+            android:exported="true"></activity>
+        <activity
+            android:name=".activity.QuanLyDonHangNVActivity"
+            android:exported="true"></activity>
+        <activity
+            android:name=".activity.QuanLySanPhamNVActivity"
+            android:exported="true"></activity>
+        <activity
+            android:name=".activity.ThongTinGiaoHangNVActivity"
+            android:exported="true"></activity>
+        <activity
+            android:name=".activity.ChiTietDonHangNVActivity"
+            android:exported="true"></activity>
+
+        <!--        Tho        -->
+        <activity
+            android:name=".activity.ThemNhanVienActivity"
+            android:exported="true"></activity>
+        <activity
+            android:name=".activity.ThongTinKhachHangActivity"
+            android:exported="true"></activity>
+        <activity
+            android:name=".activity.ThanhToanOnlineActivity"
+            android:exported="true"></activity>
+    </application>
+
+</manifest>

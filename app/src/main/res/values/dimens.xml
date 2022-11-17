@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="card_view_corner">2dp</dimen>
+    <dimen name="card_elvation">2dp</dimen>
+    <dimen name="tieude">40dp</dimen>
+    <dimen name="tieudesize">35sp</dimen>
+    <dimen name="textsize">20sp</dimen>
+    <dimen name="btnmuahang">10dp</dimen>
+    <dimen name="imgbtn">15dp</dimen>
+    <dimen name="le">5dp</dimen>
+    <dimen name="spinner">15sp</dimen>
+    <dimen name="textthu">16sp</dimen>
+    <dimen name="marginbot">20dp</dimen>
+    <dimen name="marginleft">10dp</dimen>
+    <dimen name="paddingtieude">20dp</dimen>
+    <dimen name="marginQuenMatKhau">250dp</dimen>
+    <dimen name="margintop">10dp</dimen>
+    <dimen name="margintop_short">5dp</dimen>
+    <dimen name="scrollbar_size">20dp</dimen>
+    <dimen name="weight_dangKy">0.7</dimen>
+    <dimen name="textsizelight">15sp</dimen>
+    <dimen name="layoutDN_marginButton">20dp</dimen>
+    <dimen name="minh_text_title">40sp</dimen>
+
+</resources>
