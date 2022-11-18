@@ -17,7 +17,6 @@ import com.example.nhasachonlinedidong2.firebase.FireBaseNhaSachOnline;
 import com.example.nhasachonlinedidong2.tools.SharePreferences;
 
 public class ThayDoiThongTinKhachHangActivity extends AppCompatActivity {
-
     private FireBaseNhaSachOnline fireBase = new FireBaseNhaSachOnline();
     private SharePreferences sharePreferences = new SharePreferences();
     private String maKhachHang = "kh1";
@@ -31,7 +30,8 @@ public class ThayDoiThongTinKhachHangActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.thaydoithongtin_layout);
-        maKhachHang = "kh1";
+
+        maKhachHang = sharePreferences.layMa(this);
 
         // Ánh xạ
         layoutCSTTKH_edtHoTen = findViewById(R.id.layoutCSTTKH_edtHoTen);
@@ -50,8 +50,6 @@ public class ThayDoiThongTinKhachHangActivity extends AppCompatActivity {
                 finish();
             }
         });
-
-        fireBase.thayDoiThongTinKhachHang(maKhachHang, khachHang,ThayDoiThongTinKhachHangActivity.this);
 
         layoutCSTTKH_btnLuu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,6 +100,13 @@ public class ThayDoiThongTinKhachHangActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        fireBase.thayDoiThongTinKhachHang(maKhachHang, khachHang,ThayDoiThongTinKhachHangActivity.this);
+    }
+
     public void thongTinKhachHang(){
         layoutCSTTKH_edtHoTen.setText(khachHang.getTenKhachHang());
         layoutCSTTKH_edtEmail.setText(khachHang.getEmail());

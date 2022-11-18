@@ -39,6 +39,13 @@ public class SharePreferences {
         return sharedPreferences.getString("maNguoiDung", null);
     }
 
+    public void dangXuat(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("dulieu", context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.remove("maNguoiDung");
+        editor.commit();
+    }
+
     public void saveLoginInfo(Context context, String taikhoan, String matKhau, boolean checkBox) {
         SharedPreferences sharedPreferences = context.getSharedPreferences("loginInfo", context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();

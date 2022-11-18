@@ -42,14 +42,12 @@ public class LichSuMuaHangDonHangRecyclerViewAdapter extends RecyclerView.Adapte
     public void onBindViewHolder(@NonNull LichSuMuaHangDonHangRecyclerViewAdapter.MyViewHolder holder, int position) {
         DecimalFormat formatter = new DecimalFormat("#,###,###");
         final int pos = position;
-        LichSuMuaHang_DonHang lichSuMuaHang_donHang = lichSuMuaHang_donHangs.get(pos);
-        holder.itemLSMH_txtNgayGiao.setText(lichSuMuaHang_donHang.getNgayMuaHang());
-        holder.itemLSMH_txtThangGiao.setText(lichSuMuaHang_donHang.getThangMuaHang());
-        holder.itemLSMH_txtNamGiao.setText(lichSuMuaHang_donHang.getNamMuaHang());
-        holder.itemLSMH_txtTrangThai.setText(lichSuMuaHang_donHang.getTrangThai());
-        holder.itemLSMH_txtTongTien.setText(formatter.format(lichSuMuaHang_donHang.getTongTien()));
+        LichSuMuaHang_DonHang lichSuMuaHang = lichSuMuaHang_donHangs.get(pos);
+        holder.itemLSMH_tvNgayGiaoHang.setText(lichSuMuaHang.getNgayGiaoHang());
+        holder.itemLSMH_tvTrangThai.setText(lichSuMuaHang.getTrangThai());
+        holder.itemLSMH_tvTongTien.setText(formatter.format(lichSuMuaHang.getTongTien()) + " VNĐ");
 
-        adapter = new LichSuMuaHangSanPhamRecyclerViewAdapter(this.context, R.layout.lichsumuahang_sanpham_item, lichSuMuaHang_donHang.getSanPham());
+        adapter = new LichSuMuaHangSanPhamRecyclerViewAdapter(this.context, R.layout.lichsumuahang_sanpham_item, lichSuMuaHang.getLichSuMuaHang_sanPhams());
         LinearLayoutManager layoutManager = new LinearLayoutManager(this.context);
         layoutManager.setOrientation(RecyclerView.HORIZONTAL);
         holder.lichSuMuaHangSanPhamRecyclerViewAdapter.setLayoutManager(layoutManager);
@@ -76,35 +74,24 @@ public class LichSuMuaHangDonHangRecyclerViewAdapter extends RecyclerView.Adapte
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        TextView itemLSMH_txtNgayGiao;
-        TextView itemLSMH_txtThangGiao;
-        TextView itemLSMH_txtNamGiao;
-        TextView itemLSMH_txtTrangThai;
-        TextView itemLSMH_txtTongTien;
-        LinearLayout itemLSMH_DonHang_llCardView;
+        TextView itemLSMH_tvNgayGiaoHang;
+        TextView itemLSMH_tvTrangThai;
+        TextView itemLSMH_tvTongTien;
         Button itemLSMH_btnDanhGia;
         Button itemLSMH_btnMuaLai;
-        CardView itemLSMH_DonHang;
-
         RecyclerView lichSuMuaHangSanPhamRecyclerViewAdapter;
         View.OnClickListener onClickListener;
 
         public MyViewHolder(@NonNull View itemView){
             super(itemView);
-            itemLSMH_txtNgayGiao = itemView.findViewById(R.id.itemLSMH_txtNgayGiao);
-            itemLSMH_txtThangGiao = itemView.findViewById(R.id.itemLSMH_txtThangGiao);
-            itemLSMH_txtNamGiao = itemView.findViewById(R.id.itemLSMH_txtNamGiao);
-            itemLSMH_txtTrangThai = itemView.findViewById(R.id.itemLSMH_txtTrangThai);
-            itemLSMH_txtTongTien = itemView.findViewById(R.id.itemLSMH_txtTongTien);
+            itemLSMH_tvNgayGiaoHang = itemView.findViewById(R.id.itemLSMH_tvNgayGiaoHang);
+            itemLSMH_tvTrangThai = itemView.findViewById(R.id.itemLSMH_tvTrangThai);
+            itemLSMH_tvTongTien = itemView.findViewById(R.id.itemLSMH_tvTongTien);
             itemLSMH_btnDanhGia = itemView.findViewById(R.id.itemLSMH_btnDanhGia);
             itemLSMH_btnMuaLai = itemView.findViewById(R.id.itemLSMH_btnMuaLai);
-            itemLSMH_DonHang_llCardView = itemView.findViewById(R.id.layoutLSMH_rvLichSuMuahang);
-            itemLSMH_DonHang = itemView.findViewById(R.id.itemLSMH_DonHang);
-
             lichSuMuaHangSanPhamRecyclerViewAdapter = itemView.findViewById(R.id.layoutLSMH_SanPham_rvLichSuMuaHang);
 
             // Set event processing
-            itemLSMH_DonHang.setOnClickListener(this);
             itemLSMH_btnDanhGia.setOnClickListener(this);
             itemLSMH_btnMuaLai.setOnClickListener(this);
         }

@@ -1,100 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/itemLSMH_SanPham"
     android:layout_width="match_parent"
-    android:layout_height="140dp"
+    android:layout_height="130dp"
     android:orientation="horizontal"
     card_view:cardCornerRadius="10dp"
     card_view:cardElevation="7dp"
     card_view:cardUseCompatPadding="true">
 
     <LinearLayout
-        android:id="@+id/itemLSMH_SanPham_llCardView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
         android:orientation="horizontal">
 
-        <LinearLayout
+        <ImageView
+            android:id="@+id/itemLSMHSP_imgHinhSanPham"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:src="@drawable/anhdemo" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
             android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/itemLSMHSP_tvTenSanPham"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center|left"
+                android:textColor="@color/black"
+                android:inputType="text"
+                android:maxLines="1"
+                android:textSize="@dimen/textsize" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:orientation="horizontal">
-                <ImageView
-                    android:id="@+id/itemLSMH_imgHinhSanPham"
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"
+                    android:gravity="center|left"
+                    android:text="@string/tvgia"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/textsize" />
+
+                <TextView
+                    android:id="@+id/itemLSMHSP_tvGiaSanPham"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center|left"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/textsize" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.6"
+                    android:gravity="center|left"
+                    android:text="@string/tvtong"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/textsize" />
+
+                <TextView
+                    android:id="@+id/itemLSMHSP_tvTongTien"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1.5"
+                    android:gravity="center"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/textsize" />
+
+                <TextView
+                    android:id="@+id/itemLSMHSP_tvSoLuong"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:padding="5dp"
-                    android:src="@drawable/anhdemo" />
+                    android:gravity="center"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/textsize" />
 
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="2.5"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/itemLSMH_txtTenSanPham"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1.5"
-                        android:gravity="center|left"
-                        android:text="Truyện Conan tập 1"
-                        android:textColor="@color/black"
-                        android:textSize="20dp"
-                        android:paddingTop="10dp"/>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1.3"
-                        android:gravity="center|left"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="0.4"
-                            android:text="Giá: "
-                            android:textColor="@color/black"
-                            android:textSize="20dp"
-                            android:paddingTop="6dp"/>
-
-                        <TextView
-                            android:id="@+id/itemLSMH_txtGiaTien"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="0.55"
-                            android:text="20.000"
-                            android:textColor="@color/black"
-                            android:textSize="20dp"
-                            android:paddingTop="6dp"/>
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1.1"
-                            android:text="VNĐ"
-                            android:textColor="@color/black"
-                            android:textSize="20dp"
-                            android:paddingTop="6dp"/>
-
-                    </LinearLayout>
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1.3"/>
-
-                </LinearLayout>
             </LinearLayout>
+
         </LinearLayout>
 
     </LinearLayout>
