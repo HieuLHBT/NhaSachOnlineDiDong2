@@ -20,8 +20,8 @@ public class ThongTinGiaoHangNVActivity extends AppCompatActivity {
     private SharePreferences sharePreferences = new SharePreferences();
     private FireBaseNhaSachOnline fireBase = new FireBaseNhaSachOnline();
 
-    private String maDonHang = "dh2";
-    private String maKhachHang = "kh1";
+    private String maDonHang;
+    private String maKhachHang;
 
 
     private DonHang donHang = new DonHang();
@@ -43,8 +43,8 @@ public class ThongTinGiaoHangNVActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.thongtingiaohang_nv_layout);
 
-        sharePreferences.themMaDonHang(this, maDonHang);
-        maDonHang = sharePreferences.layMaDonHang(this);
+        maDonHang = getIntent().getStringExtra("maDonHang");
+        maKhachHang = "kh1";
 
         layoutTTGH_NV_txtTinhTrang = findViewById(R.id.layoutTTGH_NV_txtTinhTrang);
         layoutTTGH_NV_txtMaDonHang = findViewById(R.id.layoutTTGH_NV_txtMaDonHang);
@@ -57,7 +57,7 @@ public class ThongTinGiaoHangNVActivity extends AppCompatActivity {
 
         //Gan du lieu
         fireBase.hienThiKhachHang_TTGH(maKhachHang, khachHang, this);
-        fireBase.hienThiDonHang_TTGH(maDonHang, donHang, this);
+        fireBase.hienThiDonHang_TTGH(maDonHang, maKhachHang, donHang, this);
         fireBase.hienThiTinhTrang_TTGH(maDonHang, trangThaiDonHang, this);
 
         layoutCTDH_NV_btnDinhViDonHang.setOnClickListener(new View.OnClickListener() {
@@ -83,7 +83,7 @@ public class ThongTinGiaoHangNVActivity extends AppCompatActivity {
     }
 
     public void hienThiDonHang(){
-        layoutTTGH_NV_txtDiaChiNhanHang.setText("  " + donHang.getDiaChiGiao());
+        layoutTTGH_NV_txtDiaChiNhanHang.setText("   " + donHang.getDiaChiGiao());
         layoutTTGH_NV_txtMaDonHang.setText(maDonHang);
     }
 

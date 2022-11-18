@@ -3,6 +3,7 @@ package com.example.nhasachonlinedidong2.data_model;
 public class KhachHang {
     private String nguoiDung;
     private String maKhachHang;
+
     private String diaChi;
     private String email;
     private String matKhau;

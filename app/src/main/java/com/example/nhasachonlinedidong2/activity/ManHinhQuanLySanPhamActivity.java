@@ -5,13 +5,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.view.View;
-import android.widget.ImageButton;
+import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -37,6 +39,9 @@ public class ManHinhQuanLySanPhamActivity extends AppCompatActivity {
     public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
         super.onCreate(savedInstanceState, persistentState);
         setContentView(R.layout.manhinh_quanly_sanpham_layout);
+        //search
+        timkiemSP = findViewById(R.id.layoutMHQLSP_swTimKiem);
+        timKiem();
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.layoutMHQLSP_rvDanhSachSanPham);
         adapter = new SanPhamRecyclerViewAdapter(this,R.layout.manhinh_quanly_sanpham_item, sanPhams);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -80,7 +85,7 @@ public class ManHinhQuanLySanPhamActivity extends AppCompatActivity {
         adapter.setOnItemClickListener(new SanPhamRecyclerViewAdapter.OnItemClickListener() {
             @Override
             public void onItemClickListener(int position, View view) {
-                ImageButton item_btnTroVe = view.findViewById(R.id.layoutMHQLSP_btnBack);
+                Button item_btnTroVe = view.findViewById(R.id.layoutMHQLSP_btnBack);
                 item_btnTroVe.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -88,14 +93,52 @@ public class ManHinhQuanLySanPhamActivity extends AppCompatActivity {
                     }
                 });
 
-                ImageButton itemMHQLSP_btnThem = view.findViewById(R.id.itemMHQLSP_btnThem);
+                Button itemMHQLSP_btnThem = view.findViewById(R.id.itemMHQLSP_btnThem);
                 itemMHQLSP_btnThem.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent1 = new Intent(ManHinhQuanLySanPhamActivity.this, ThemNhanVienActivity.class);
+                        Intent intent1 = new Intent(ManHinhQuanLySanPhamActivity.this, ThemSanPhamSachActivity.class);
                         startActivity(intent1);
                     }
                 });
+                CardView itemMHQLSP = view.findViewById(R.id.itemMHQLSP);
+                itemMHQLSP.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(ManHinhQuanLySanPhamActivity.this, SuaSanPhamSachActivity.class);
+                        ManHinhQuanLySanPhamActivity.this.startActivity(intent);
+                    }
+                });
+            }
+        });
+    }
+    public void filterList(String newText) {
+        ArrayList<ItemSanPham> fiIteredList = new ArrayList<>();
+        for(ItemSanPham sanPham : sanPhams){
+            if(sanPham.getTenSanPham().toLowerCase().contains(newText.toLowerCase()) || sanPham.getMaSanPham().toLowerCase().contains(newText.toLowerCase())){
+                fiIteredList.add(sanPham);
+            }
+        }
+
+        if(fiIteredList.isEmpty()){
+            Toast.makeText(this,"Không có dữ liệu",Toast.LENGTH_SHORT).show();
+        }else {
+            adapter.setFilteredList1(fiIteredList);
+        }
+    }
+
+    public void timKiem(){
+        timkiemSP.clearFocus();
+        timkiemSP.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filterList(newText);
+                return true;
             }
         });
     }

@@ -23,10 +23,14 @@ public class SanPhamRecyclerViewAdapter extends RecyclerView.Adapter<SanPhamRecy
     private ArrayList<ItemSanPham> sanPhams;
     private SanPhamRecyclerViewAdapter.OnItemClickListener onItemClickListener;
 
-    public SanPhamRecyclerViewAdapter(Activity context, int resource, ArrayList<ItemSanPham> nhanViens) {
+    public SanPhamRecyclerViewAdapter(Activity context, int resource, ArrayList<ItemSanPham> sanPhams) {
         this.context = context;
         this.resource = resource;
         this.sanPhams = sanPhams;
+    }
+    public void setFilteredList1(ArrayList<ItemSanPham> filteredList1){
+        this.sanPhams = filteredList1;
+        notifyDataSetChanged();
     }
     @NonNull
     @Override

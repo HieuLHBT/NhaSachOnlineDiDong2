@@ -24,7 +24,7 @@
         <item>Sách</item>
         <item>Văn phòng phẩm</item>
     </array>
-    <string name="app_name">NhaSachOnlineDiDong2</string>
+    <string name="app_name">NhaSachOnline</string>
     <string name="tvtrove"><![CDATA[<]]></string>
     <string name="tvgiohang">Giỏ Hàng</string>
     <string name="tvtongtienthanhtoan">Tổng tiền thanh toán:</string>
@@ -53,5 +53,6 @@
     <string name="sodondanhan">Số đơn đã nhận:</string>
     <string name="sodondagiao">Số đơn đã giao:</string>
     <string name="sodondahuy">Số đơn đã hủy:</string>
+    <string name="menu">≡</string>
 
 </resources>

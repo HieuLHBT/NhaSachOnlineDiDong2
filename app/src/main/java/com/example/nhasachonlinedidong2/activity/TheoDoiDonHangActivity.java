@@ -1,10 +1,14 @@
 package com.example.nhasachonlinedidong2.activity;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.Toast;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -12,7 +16,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.nhasachonlinedidong2.R;
 import com.example.nhasachonlinedidong2.adapters.TheoDoiDonHangRecyclerViewAdapter;
-import com.example.nhasachonlinedidong2.data_model.DonHang;
 import com.example.nhasachonlinedidong2.firebase.FireBaseNhaSachOnline;
 import com.example.nhasachonlinedidong2.item.TheoDoiDonHang;
 import com.example.nhasachonlinedidong2.tools.SharePreferences;
@@ -20,52 +23,129 @@ import com.example.nhasachonlinedidong2.tools.SharePreferences;
 import java.util.ArrayList;
 
 public class TheoDoiDonHangActivity extends AppCompatActivity {
-    private String maKhachHang;
-    private SharePreferences sharePreferences = new SharePreferences();
-    private FireBaseNhaSachOnline fireBase = new FireBaseNhaSachOnline();
+    private Spinner layoutTDDH_spnTrangThai;
+    private TextView layoutTDDH_btnTroVe;
 
-    private int selectedRow = -1;
+    private SharePreferences sharePreferences = new SharePreferences();
+    private FireBaseNhaSachOnline fireBaseNhaSachOnline = new FireBaseNhaSachOnline();
+
+    private String maKhachHang;
 
     private ArrayList<TheoDoiDonHang> theoDoiDonHangs = new ArrayList<>();
-    private ArrayList<DonHang> donHangsModel = new ArrayList<>();
+    private ArrayList<TheoDoiDonHang> donHangCanXacNhan = new ArrayList<>();
+    private ArrayList<TheoDoiDonHang> donHangHoanTien = new ArrayList<>();
+    private ArrayList<TheoDoiDonHang> tatCa = new ArrayList<>();
     private TheoDoiDonHangRecyclerViewAdapter adapter;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.theodoidonhang_layout);
 
-        maKhachHang = sharePreferences.getKhachHang(this);
+        maKhachHang = sharePreferences.layMa(this);
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.layoutTDDH_rvTheoDoiDonHang);
+        layoutTDDH_spnTrangThai = findViewById(R.id.layoutTDDH_spnTrangThai);
+        layoutTDDH_btnTroVe = findViewById(R.id.layoutTDDH_btnTroVe);
 
-      /*  theoDoiDonHangs.add(new TheoDoiDonHang("DH01", "Nguyen Van Tho", "30/09/2022", "11/10/2022", 130000, "Đang chờ xác nhận"));
-        theoDoiDonHangs.add(new TheoDoiDonHang("DH02", "Tran Bao Tin", "27/09/2022", "14/10/2022", 120000, "Đang chờ xác nhận"));
-        theoDoiDonHangs.add(new TheoDoiDonHang("DH03", "Nguyen Van Tho", "29/09/2022", "15/10/2022", 150000, "Đã xác nhận"));
-      */
+        ArrayList<String> trangThai = new ArrayList<>();
+        trangThai.add("Tất cả đơn hàng");
+        trangThai.add("Đơn hàng cần xác nhận");
+        trangThai.add("Đơn hàng hoàn tiền");
+
+        ArrayAdapter arrayAdapter = new ArrayAdapter(this, R.layout.theodoidonhang_spinner, trangThai);
+        layoutTDDH_spnTrangThai.setAdapter(arrayAdapter);
+
         adapter = new TheoDoiDonHangRecyclerViewAdapter(this, R.layout.theodoidonhang_item, theoDoiDonHangs);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
-        //fireBase.hienThiTheoDoiDonHang(maKhachHang,theoDoiDonHangs, adapter, this);
 
         adapter.setOnItemClickListener(new TheoDoiDonHangRecyclerViewAdapter.OnItemClickListener() {
             @Override
             public void onItemClickListener(int position, View view) {
-                Button itemTDDH_btnXemChiTiet = view.findViewById(R.id.itemTDDH_btnXemChiTiet);
-
-                itemTDDH_btnXemChiTiet.setOnClickListener(new View.OnClickListener() {
+                Button itemTDDH_btnChiTiet = view.findViewById(R.id.itemTDDH_btnChiTiet);
+                itemTDDH_btnChiTiet.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(getApplicationContext(), "Chuyển sang màn hình Xem Chi Tiết!", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(TheoDoiDonHangActivity.this, ChiTietTheoDoiDonHangActivity.class);
+                        intent.putExtra("maDonHang", theoDoiDonHangs.get(position).getMaDonHang());
+                        startActivity(intent);
                     }
                 });
             }
         });
-        recyclerView.setAdapter(adapter);
-//        fireBase.hienThiTheoDoiDonHang(maKhachHang, theoDoiDonHangs, adapter, this);
+
+        layoutTDDH_spnTrangThai.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                switch (position) {
+                    case 0:
+                        theoDoiDonHangs.clear();
+                        theoDoiDonHangs.addAll(tatCa);
+                        adapter.notifyDataSetChanged();
+                        break;
+                    case 1:
+                        theoDoiDonHangs.clear();
+                        theoDoiDonHangs.addAll(donHangCanXacNhan);
+                        adapter.notifyDataSetChanged();
+                        break;
+                    case 2:
+                        theoDoiDonHangs.clear();
+                        theoDoiDonHangs.addAll(donHangHoanTien);
+                        adapter.notifyDataSetChanged();
+                        break;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
+        layoutTDDH_btnTroVe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        fireBaseNhaSachOnline.hienThiTheoDoiDonHang(maKhachHang, theoDoiDonHangs, adapter, this);
+    }
+
+    public void donHangCanXacNhan() {
+        tatCa.clear();
+        donHangCanXacNhan.clear();
+        donHangHoanTien.clear();
+        for (TheoDoiDonHang theoDoiDonHang : theoDoiDonHangs) {
+            if (theoDoiDonHang.getTrangThaiChuyenTienKH().equalsIgnoreCase("Đang xử lý") && theoDoiDonHang.getHinhThucThanhToan().equalsIgnoreCase("Online")) {
+                donHangCanXacNhan.add(theoDoiDonHang);
+            } else if (!theoDoiDonHang.getTrangThaiNhanTienKH().equalsIgnoreCase("") && !theoDoiDonHang.getTrangThaiTraTienQL().equalsIgnoreCase("") && !theoDoiDonHang.getTrangThai().equalsIgnoreCase("Hủy")) {
+                donHangHoanTien.add(theoDoiDonHang);
+            } else {
+                tatCa.add(theoDoiDonHang);
+            }
+        }
+        if (donHangCanXacNhan.size() != 0) {
+            layoutTDDH_spnTrangThai.setSelection(1);
+            theoDoiDonHangs.clear();
+            theoDoiDonHangs.addAll(donHangCanXacNhan);
+            adapter.notifyDataSetChanged();
+        } else if (donHangHoanTien.size() != 0) {
+            layoutTDDH_spnTrangThai.setSelection(2);
+            theoDoiDonHangs.clear();
+            theoDoiDonHangs.addAll(donHangHoanTien);
+            adapter.notifyDataSetChanged();
+        } else {
+            layoutTDDH_spnTrangThai.setSelection(0);
+            theoDoiDonHangs.clear();
+            theoDoiDonHangs.addAll(tatCa);
+            adapter.notifyDataSetChanged();
+        }
     }
 }

@@ -1,47 +1,26 @@
 package com.example.nhasachonlinedidong2.activity;
 
-import static android.content.ContentValues.TAG;
-
-import android.app.DatePickerDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.Spinner;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.nhasachonlinedidong2.R;
 import com.example.nhasachonlinedidong2.data_model.KhachHang;
 import com.example.nhasachonlinedidong2.firebase.FireBaseNhaSachOnline;
-import com.example.nhasachonlinedidong2.item.ItemKhachHang;
 import com.example.nhasachonlinedidong2.tools.SharePreferences;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class DangKyActivity extends AppCompatActivity {
     private SharePreferences sharePreferences = new SharePreferences();
     private ArrayList<com.example.nhasachonlinedidong2.data_model.KhachHang> khachHangsModel = new ArrayList<>();
-
 
     private Button
             layoutDK_btnTaoTaiKhoan;
@@ -53,15 +32,10 @@ public class DangKyActivity extends AppCompatActivity {
             layoutDK_edtNhapMatKhau,
             layoutDK_edtNhapLaiMatKhau,
             layoutDK_edtHoTen,
-            layoutDK_edtNgaySinh,
             layoutDK_edtSDT,
             layoutDK_edtDiaChi;
     FireBaseNhaSachOnline
             fireBaseNhaSachOnline = new FireBaseNhaSachOnline();
-    private int
-            mYear,
-            mMonth,
-            mDay;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -70,22 +44,25 @@ public class DangKyActivity extends AppCompatActivity {
         setControl();
         setEvent();
 
-        }
+    }
 
     private void setEvent() {
-
         //BTN tao tai khoan - dang ky
         layoutDK_btnTaoTaiKhoan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (validateRegister()){
-                    String _taiKhoan= layoutDK_edtNhapTaiKhoan.getText().toString().toLowerCase();
-                    String _matKhau= layoutDK_edtNhapMatKhau.getText().toString();
-                    String _diaChi= layoutDK_edtDiaChi.getText().toString();
-                    String _email= layoutDK_edtEmail.getText().toString();
-                    String _sdt= layoutDK_edtSDT.getText().toString();
-                    String _tenKhachHang= layoutDK_edtHoTen.getText().toString();
-                    fireBaseNhaSachOnline.dangKy(DangKyActivity.this,_taiKhoan,_matKhau,_diaChi,_email,_sdt,_tenKhachHang);
+                if (validateRegister()) {
+                    KhachHang khachHang = new KhachHang("khachhang",
+                            "",
+                            layoutDK_edtDiaChi.getText().toString(),
+                            layoutDK_edtEmail.getText().toString(),
+                            layoutDK_edtNhapMatKhau.getText().toString(),
+                            "",
+                            layoutDK_edtSDT.getText().toString(),
+                            "",
+                            layoutDK_edtNhapTaiKhoan.getText().toString(),
+                            layoutDK_edtHoTen.getText().toString());
+                    fireBaseNhaSachOnline.dangKy(DangKyActivity.this, khachHang);
                 }
             }
         });
@@ -98,30 +75,6 @@ public class DangKyActivity extends AppCompatActivity {
             }
         });
 
-        layoutDK_edtNgaySinh.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Get Current Date
-                final Calendar c = Calendar.getInstance();
-                mYear = c.get(Calendar.YEAR);
-                mMonth = c.get(Calendar.MONTH);
-                mDay = c.get(Calendar.DAY_OF_MONTH);
-
-
-                DatePickerDialog datePickerDialog = new DatePickerDialog(DangKyActivity.this,
-                        new DatePickerDialog.OnDateSetListener() {
-
-                            @Override
-                            public void onDateSet(DatePicker view, int year,
-                                                  int monthOfYear, int dayOfMonth) {
-
-                                layoutDK_edtNgaySinh.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
-
-                            }
-                        }, mYear, mMonth, mDay);
-                datePickerDialog.show();
-            }
-        });
     }
 
     private void setControl() {
@@ -132,10 +85,8 @@ public class DangKyActivity extends AppCompatActivity {
         layoutDK_edtNhapMatKhau = findViewById(R.id.layoutDK_edtNhapMatKhau);
         layoutDK_edtNhapLaiMatKhau = findViewById(R.id.layoutDK_edtNhapLaiMatKhau);
         layoutDK_edtHoTen = findViewById(R.id.layoutDK_edtHoTen);
-        layoutDK_edtNgaySinh = findViewById(R.id.layoutDK_edtNgaySinh);
         layoutDK_edtSDT = findViewById(R.id.layoutDK_edtSDT);
         layoutDK_edtDiaChi = findViewById(R.id.layoutDK_edtDiaChi);
-
     }
 
     //Minh
@@ -166,7 +117,6 @@ public class DangKyActivity extends AppCompatActivity {
         boolean boolPassword = matcherPassword.find();
         boolean boolRePassword = layoutDK_edtNhapMatKhau.getText().toString().equals(layoutDK_edtNhapLaiMatKhau.getText().toString());
         boolean boolName = matcherName.find();
-        boolean boolBirth = !layoutDK_edtNgaySinh.getText().toString().isEmpty();
         boolean boolPhone = matcherPhone.find();
         boolean boolAddress = !layoutDK_edtDiaChi.getText().toString().isEmpty();
 
@@ -188,13 +138,10 @@ public class DangKyActivity extends AppCompatActivity {
         if (!boolPhone) {
             layoutDK_edtSDT.setError("Số điện thoại bạn nhập không hợp lệ");
         }
-        if (!boolBirth) {
-            layoutDK_edtNgaySinh.setError("Không được bỏ trống hoặc ngày sinh không hợp lệ");
-        }
         if (!boolAddress) {
             layoutDK_edtDiaChi.setError("Không được bỏ trống ");
         }
-        return boolAccount && boolEmail && boolPassword && boolRePassword && boolName && boolBirth && boolPhone && boolAddress;
+        return boolAccount && boolEmail && boolPassword && boolRePassword && boolName && boolPhone && boolAddress;
     }
 
 }

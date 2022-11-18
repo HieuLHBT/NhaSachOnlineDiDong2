@@ -1,59 +1,40 @@
 package com.example.nhasachonlinedidong2.activity;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
-import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.nhasachonlinedidong2.R;
-import com.example.nhasachonlinedidong2.activity.DangKyActivity;
-import com.example.nhasachonlinedidong2.activity.ManHinhChinhNhanVienActivity;
-import com.example.nhasachonlinedidong2.activity.QuenMatKhauActivity;
-import com.example.nhasachonlinedidong2.data_model.KhachHang;
-import com.example.nhasachonlinedidong2.data_model.NhanVien;
 import com.example.nhasachonlinedidong2.firebase.FireBaseNhaSachOnline;
-import com.example.nhasachonlinedidong2.tools.SharePreferences;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class DangNhapActivity extends AppCompatActivity {
     private Button
-                    layoutDN_btnDangNhap,
-                    layoutDN_btnDangKy,
-                    layoutDN_btnQuenMatKhau;
+            layoutDN_btnDangNhap,
+            layoutDN_btnDangKy,
+            layoutDN_btnQuenMatKhau;
     private RadioButton
-                    layoutDN_rdbNhanVien,
-                    layoutDN_rdbQuanly,
-                    layoutDN_rdbKhachHang;
+            layoutDN_rdbNhanVien,
+            layoutDN_rdbQuanly,
+            layoutDN_rdbKhachHang;
     private EditText
-                    layoutDN_edtTaiKhoan,
-                    layoutDN_edtNhapMatKhau;
+            layoutDN_edtTaiKhoan,
+            layoutDN_edtNhapMatKhau;
     private CheckBox
-                    layoutDN_cbNhoMatKHau;
+            layoutDN_cbNhoMatKHau;
     private String
-                    type;
+            type;
     private Boolean
-                    rememberMe;
+            rememberMe;
     private FireBaseNhaSachOnline
-                    fireBaseNhaSachOnline = new FireBaseNhaSachOnline();
+            fireBaseNhaSachOnline = new FireBaseNhaSachOnline();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -91,12 +72,11 @@ public class DangNhapActivity extends AppCompatActivity {
         layoutDN_btnDangNhap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 if (validateLogin()) {
-                    String _taikhoan = layoutDN_edtTaiKhoan.getText().toString().toLowerCase();
-                    String _matkhau =layoutDN_edtNhapMatKhau.getText().toString();
+                    String _taikhoan = layoutDN_edtTaiKhoan.getText().toString();
+                    String _matkhau = layoutDN_edtNhapMatKhau.getText().toString();
                     boolean checkBox = layoutDN_cbNhoMatKHau.isChecked();
-                    fireBaseNhaSachOnline.dangNhap(DangNhapActivity.this,reTurnType(),_taikhoan,_matkhau,checkBox);
+                    fireBaseNhaSachOnline.dangNhap(DangNhapActivity.this, reTurnType(), _taikhoan, _matkhau, checkBox);
                 }
             }
         });
@@ -113,7 +93,7 @@ public class DangNhapActivity extends AppCompatActivity {
         layoutDN_btnQuenMatKhau.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(DangNhapActivity.this, LayLaimatKhauActivity.class));
+                startActivity(new Intent(DangNhapActivity.this, QuenMatKhauActivity.class));
             }
         });
     }

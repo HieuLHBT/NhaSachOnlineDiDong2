@@ -2,134 +2,113 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:weightSum="10">
+    android:layout_marginTop="150dp"
+    android:layout_marginBottom="250dp"
+    android:orientation="vertical">
 
-    <LinearLayout
-
-        android:orientation="horizontal"
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.9">
-        <TextView
-            android:gravity="center_horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Quên mật khẩu"
-            android:textSize="@dimen/tieude"
-            android:textStyle="bold"
-            android:textColor="@color/red"
-            />
-    </LinearLayout>
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.6">
-        <TextView
-            android:layout_marginLeft="@dimen/marginleft"
-            android:layout_width="0dp"
-            android:layout_weight="3"
-            android:layout_height="wrap_content"
-            android:text="Tài khoản"
-            android:gravity="center"
-            android:textColor="@color/black"
-            android:textSize="20dp"
-            />
-        <EditText
-            android:id="@+id/layoutQMK_edtNhapTaiKhoan"
-
-            android:background="@drawable/border"
-            android:layout_width="0dp"
-            android:layout_weight="9"
-            android:layout_height="match_parent"
-
-            android:textSize="@dimen/textsize"
-            android:hint="Nhập tài khoản"
-            />
-    </LinearLayout>
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.6">
-        <TextView
-            android:layout_marginLeft="10dp"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/textsize"
-            android:gravity="center"
-            android:textColor="@color/black"
-            android:layout_weight="3"
-            android:text="Email"
-            />
-        <EditText
-            android:id="@+id/layoutQMK_edtNhapEmail"
-
-            android:background="@drawable/border"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="9"
-            android:textSize="@dimen/textsize"
-            android:hint="Nhập email"
-
-            />
-    </LinearLayout>
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.7">
-        <TextView
-            android:layout_marginLeft="10dp"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/textthu"
-            android:gravity="center"
-            android:textColor="@color/black"
-            android:layout_weight="3"
-            android:text="Số điện thoại"
-            />
-        <EditText
-            android:id="@+id/layoutQMK_edtNhapSDT"
-
-            android:background="@drawable/border"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="9"
-            android:textSize="@dimen/textsize"
-            android:hint="Số điện thoại bạn đã đăng ký"
-
-            />
-    </LinearLayout>
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.8"
+        android:layout_weight="2"
         android:gravity="center"
-        android:weightSum="12"
-        android:layout_marginTop="@dimen/margintop"
-        >
-        <Button
-            android:id="@+id/layoutQMK_btnLayLaiMK"
-            android:layout_width="0dp"
-            android:layout_weight="5"
-            android:layout_height="match_parent"
-            android:textStyle="bold"
-            android:textSize="@dimen/textsizelight"
-            android:text="Lấy lại mật khẩu"
-            />
-        <Button
-            android:id="@+id/layoutQMK_btnQuayLai"
+        android:text="Quên mật khẩu"
+        android:textColor="@color/red"
+        android:textSize="@dimen/tieude"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:layout_marginLeft="@dimen/marginleft"
-            android:layout_width="0dp"
-            android:layout_weight="4"
-            android:layout_height="match_parent"
-            android:textStyle="bold"
-            android:textSize="@dimen/textsizelight"
-            android:text="Quay lại"
-            />
+            android:layout_marginRight="@dimen/marginleft"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Tài khoản"
+                android:textColor="@color/black"
+                android:textSize="@dimen/textsize" />
+
+            <EditText
+                android:id="@+id/layoutQMK_edtNhapTaiKhoan"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/le"
+                android:layout_weight="2"
+                android:background="@drawable/border"
+                android:hint="Nhập tài khoản"
+                android:textSize="@dimen/textsize" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="@dimen/marginleft"
+            android:layout_marginRight="@dimen/marginleft"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Số điện thoại"
+                android:textColor="@color/black"
+                android:textSize="@dimen/textsize" />
+
+            <EditText
+                android:id="@+id/layoutQMK_edtNhapSDT"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/le"
+                android:layout_weight="2"
+                android:background="@drawable/border"
+                android:hint="Số điện thoại đã đăng ký"
+                android:textSize="@dimen/textsize" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="@dimen/marginleft"
+            android:layout_marginRight="@dimen/marginleft"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/layoutQMK_btnLayLaiMK"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/le"
+                android:layout_weight="1"
+                android:text="Lấy lại mật khẩu"
+                android:textSize="@dimen/textsizelight"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/layoutQMK_btnQuayLai"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/le"
+                android:layout_weight="1"
+                android:text="Quay lại"
+                android:textSize="@dimen/textsizelight"
+                android:textStyle="bold" />
+        </LinearLayout>
+
     </LinearLayout>
 
 

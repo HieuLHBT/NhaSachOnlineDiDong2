@@ -3,133 +3,136 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:weightSum="10">
+    >
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="2">
+        android:layout_weight="1">
         <ImageButton
-            android:layout_marginTop="40dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             style="?android:attr/borderlessButtonStyle"
-            android:textSize="20dp"
-            android:textColor="@color/black"
             android:src="@drawable/ic_baseline_arrow_back_ios_24"
             />
-    </LinearLayout>
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.8">
         <TextView
-            android:layout_marginTop="20dp"
-            android:gravity="center_horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_weight="7"
+            android:layout_height="match_parent"
             android:text="Đổi mật khẩu:"
-            android:textSize="40dp"
+
+            android:textSize="@dimen/minh_text_title"
             android:textStyle="bold"
             android:textColor="@color/design_default_color_error"
             />
     </LinearLayout>
+
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="4"
-        android:padding="30dp"
-        android:weightSum="9">
+        android:layout_weight="7"
+        android:padding="@dimen/paddingtieude"
+        >
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="3">
+            android:layout_weight="1">
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Mật khẩu cũ:"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:text="Mật khẩu hiện tại:"
                 android:textColor="@color/black"
-                android:textSize="20dp"
+                android:textSize="@dimen/textsize"
+                android:gravity="center|start"
+
                 />
             <EditText
+                android:id="@+id/layoutTDMK_edMatKhauHienTai"
                 android:background="@drawable/border"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:paddingStart="12dp"
-                android:paddingEnd="12dp"
-                android:drawablePadding="12dp"
-                android:textSize="20dp"
+                android:layout_height="0dp"
+                android:padding="@dimen/paddingtieude"
+                android:layout_weight="1"
+                android:textSize="@dimen/textsize"
                 android:inputType="textPassword"
-                android:hint="Mật khẩu cũ"
+                android:hint="Mật khẩu hiện tại"
                 />
         </LinearLayout>
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="3">
+
+            android:layout_weight="1">
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
                 android:text="Mật Khẩu Mới:"
                 android:textColor="@color/black"
-                android:textSize="20dp"
+                android:gravity="center|start"
+                android:textSize="@dimen/textsize"
+                android:layout_weight="1"
                 />
             <EditText
+                android:id="@+id/layoutTDMK_edMatKhauMoi"
                 android:background="@drawable/border"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:paddingStart="12dp"
-                android:paddingEnd="12dp"
-                android:drawablePadding="12dp"
-                android:textSize="20dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:textSize="@dimen/textsize"
                 android:inputType="textPassword"
-                android:hint="Mật Khẩu Mới"
+                android:padding="@dimen/paddingtieude"
+                android:hint="Mật khẩu mới"
                 />
         </LinearLayout>
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="3">
+            android:layout_weight="1">
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Mật Khẩu Mới:"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="Xác nhận mật khẩu mới:"
                 android:textColor="@color/black"
-                android:textSize="20dp"
+                android:textSize="@dimen/textsize"
+                android:gravity="center|start"
                 />
             <EditText
+                android:id="@+id/layoutTDMK_edXacNhanMatKhauMoi"
                 android:background="@drawable/border"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:paddingStart="12dp"
-                android:paddingEnd="12dp"
-                android:drawablePadding="12dp"
-                android:textSize="20dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:textSize="@dimen/textsize"
                 android:inputType="textPassword"
-                android:hint="Mật Khẩu Mới"
+                android:padding="@dimen/paddingtieude"
+                android:hint="Xác nhận mật khẩu mới"
                 />
         </LinearLayout>
     </LinearLayout>
+
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="3.2"
-        >
+        android:layout_weight="1"
+        android:layout_margin="@dimen/textsizelight"
+        android:orientation="horizontal">
         <Button
-
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/layoutTDMK_btnDoiMatKhau"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:layout_marginLeft="80dp"
-            android:textSize="25dp"
-            android:textStyle="bold"
-            android:text="Đổi mật khẩu"/>
+            android:text="Đổi mật khẩu"
+            android:textSize="@dimen/textsize"
+            android:textStyle="bold" />
     </LinearLayout>
 
 

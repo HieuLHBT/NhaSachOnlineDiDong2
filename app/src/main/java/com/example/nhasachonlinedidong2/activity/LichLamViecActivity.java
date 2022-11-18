@@ -149,19 +149,22 @@ public class LichLamViecActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (ngayDangChon != "" && viTriNgayDangChon != -1) {
-                    if (!trangThaiDangChon.equalsIgnoreCase("Đăng ký")) {
-                        AlertDialog.Builder b = new AlertDialog.Builder(LichLamViecActivity.this);
-                        b.setTitle("CẢNH BÁO!");
-                        b.setMessage("Vui lòng chỉ chọn ngày có trạng thái ngày đăng ký!");
-                        b.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                dialogInterface.cancel();
-                            }
-                        });
-                        AlertDialog al = b.create();
-                        al.show();
-                    } else {
+                    DateTimeFormatter fm = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                    String ChuoiNgayHienTai = duLieuNgayHienTai.format(fm);
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                    Date ngayHienTai = null;
+                    try {
+                        ngayHienTai = sdf.parse(ChuoiNgayHienTai);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    Date ngayDangChonHienTai = null;
+                    try {
+                        ngayDangChonHienTai = sdf.parse(ngayDangChon);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    if (trangThaiDangChon.equalsIgnoreCase("Đăng ký") && ngayHienTai.compareTo(ngayDangChonHienTai) <= 0) {
                         AlertDialog.Builder b = new AlertDialog.Builder(LichLamViecActivity.this);
                         b.setTitle("XÁC NHẬN ĐĂNG KÝ CA LÀM VIỆC");
                         String[] ca = {"Làm ca 1", "Làm ca 2", "Làm cả ngày"};
@@ -182,6 +185,18 @@ public class LichLamViecActivity extends AppCompatActivity {
                             }
                         });
                         b.setNegativeButton("Không đồng ý", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.cancel();
+                            }
+                        });
+                        AlertDialog al = b.create();
+                        al.show();
+                    } else {
+                        AlertDialog.Builder b = new AlertDialog.Builder(LichLamViecActivity.this);
+                        b.setTitle("CẢNH BÁO!");
+                        b.setMessage("Không được đăng ký những ngày trước, vui lòng chỉ đăng ký ngày hiện tại hoặc ngày sau có trạng thái đăng ký!");
+                        b.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 dialogInterface.cancel();
@@ -371,16 +386,12 @@ public class LichLamViecActivity extends AppCompatActivity {
         int tongNgayTrongThang = thangNam.lengthOfMonth();
         LocalDate ngayDauTienTrongThang = duLieuNgay.withDayOfMonth(1);
         int ngayTrongTuan = ngayDauTienTrongThang.getDayOfWeek().getValue() - 1;
-        int thu7 = 6;
         int chuNhat = 7;
         for (int i = 1; i <= 42; i++) {
             if (i <= ngayTrongTuan || i > tongNgayTrongThang + ngayTrongTuan) {
                 danhSachNgay.add(new LichLamViec(""));
             } else {
-                if (thu7 == i) {
-                    thu7 += 7;
-                    danhSachNgay.add(new LichLamViec(String.valueOf(i - ngayTrongTuan)));
-                } else if (chuNhat == i) {
+                if (chuNhat == i) {
                     chuNhat += 7;
                     danhSachNgay.add(new LichLamViec(String.valueOf(i - ngayTrongTuan)));
                 } else {
