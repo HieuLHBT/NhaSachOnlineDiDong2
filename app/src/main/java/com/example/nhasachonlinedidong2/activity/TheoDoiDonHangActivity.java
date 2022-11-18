@@ -8,6 +8,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -23,6 +24,7 @@ import java.util.ArrayList;
 
 public class TheoDoiDonHangActivity extends AppCompatActivity {
     private Spinner layoutTDDH_spnTrangThai;
+    private TextView layoutTDDH_btnTroVe;
 
     private SharePreferences sharePreferences = new SharePreferences();
     private FireBaseNhaSachOnline fireBaseNhaSachOnline = new FireBaseNhaSachOnline();
@@ -40,10 +42,11 @@ public class TheoDoiDonHangActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.theodoidonhang_layout);
 
-        maKhachHang = "kh1";
+        maKhachHang = sharePreferences.layMa(this);
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.layoutTDDH_rvTheoDoiDonHang);
         layoutTDDH_spnTrangThai = findViewById(R.id.layoutTDDH_spnTrangThai);
+        layoutTDDH_btnTroVe = findViewById(R.id.layoutTDDH_btnTroVe);
 
         ArrayList<String> trangThai = new ArrayList<>();
         trangThai.add("Tất cả đơn hàng");
@@ -98,6 +101,13 @@ public class TheoDoiDonHangActivity extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
+        layoutTDDH_btnTroVe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }

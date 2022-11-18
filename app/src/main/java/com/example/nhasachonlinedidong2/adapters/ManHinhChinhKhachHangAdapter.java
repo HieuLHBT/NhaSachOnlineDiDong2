@@ -46,7 +46,7 @@ public class ManHinhChinhKhachHangAdapter extends RecyclerView.Adapter<ManHinhCh
         this.sanPhams = sanPhams;
     }
 
-    public void setFilteredList(ArrayList<ItemSanPham> filteredList){
+    public void setFilteredList(ArrayList<ItemSanPham> filteredList) {
         this.sanPhams = filteredList;
         notifyDataSetChanged();
     }
@@ -67,7 +67,7 @@ public class ManHinhChinhKhachHangAdapter extends RecyclerView.Adapter<ManHinhCh
         holder.itemMHCKH_tvTenSanPham.setText(sanpham.getTenSanPham());
         holder.itemMHCKH_tvGia.setText(formatter.format(sanpham.getGiaSanPham()) + " VNĐ");
         holder.itemMHCKH_edtSoLuong.setText(sanpham.getSoLuong() + "");
-        holder.itemMHCKH_tvSoLuongDanhGia.setText( " ");
+        holder.itemMHCKH_tvSoLuongBinhLuan.setText(sanpham.getSoLuongBinhLuan() + "");
 
         holder.itemMHCKH_edtSoLuong.addTextChangedListener(new TextWatcher() {
             @Override
@@ -101,11 +101,11 @@ public class ManHinhChinhKhachHangAdapter extends RecyclerView.Adapter<ManHinhCh
             }
         });
 
-        if(sanpham.getMaSanPham().contains("s")){
+        if (sanpham.getMaSanPham().contains("s")) {
             holder.itemMHCKH_tvTacGia.setVisibility(View.VISIBLE);
             holder.itemMHCKH_tvXuatXu.setVisibility(View.GONE);
             holder.itemMHCKH_tvDuLieu.setText(sanpham.getTacGia());
-        }else if(sanpham.getMaSanPham().contains("vpp")){
+        } else if (sanpham.getMaSanPham().contains("vpp")) {
             holder.itemMHCKH_tvTacGia.setVisibility(View.GONE);
             holder.itemMHCKH_tvXuatXu.setVisibility(View.VISIBLE);
             holder.itemMHCKH_tvDuLieu.setText(sanpham.getXuatXu());
@@ -120,7 +120,7 @@ public class ManHinhChinhKhachHangAdapter extends RecyclerView.Adapter<ManHinhCh
                 file = File.createTempFile(sanpham.getHinhSanPham().substring(0,sanpham.getHinhSanPham().length()-4), "jpg");
             }
             final File fileHinh = file;
-            ((StorageReference) storageReference).getFile(fileHinh).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+            storageReference.getFile(fileHinh).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
                     holder.itemMHCKH_imgHinhSanPham.setImageBitmap(BitmapFactory.decodeFile(fileHinh.getAbsolutePath()));
@@ -133,6 +133,52 @@ public class ManHinhChinhKhachHangAdapter extends RecyclerView.Adapter<ManHinhCh
             });
         } catch (IOException e) {
             e.printStackTrace();
+        }
+
+        switch (sanpham.getTrungBinhDanhGia()){
+            case 0:
+                holder.itemMHCKH_img1Sao.setImageResource(R.drawable.ic_baseline_star_outline_24);
+                holder.itemMHCKH_img2Sao.setImageResource(R.drawable.ic_baseline_star_outline_24);
+                holder.itemMHCKH_img3Sao.setImageResource(R.drawable.ic_baseline_star_outline_24);
+                holder.itemMHCKH_img4Sao.setImageResource(R.drawable.ic_baseline_star_outline_24);
+                holder.itemMHCKH_img5Sao.setImageResource(R.drawable.ic_baseline_star_outline_24);
+                break;
+            case 1:
+                holder.itemMHCKH_img1Sao.setImageResource(R.drawable.ic_baseline_star_24);
+                holder.itemMHCKH_img2Sao.setImageResource(R.drawable.ic_baseline_star_outline_24);
+                holder.itemMHCKH_img3Sao.setImageResource(R.drawable.ic_baseline_star_outline_24);
+                holder.itemMHCKH_img4Sao.setImageResource(R.drawable.ic_baseline_star_outline_24);
+                holder.itemMHCKH_img5Sao.setImageResource(R.drawable.ic_baseline_star_outline_24);
+                break;
+
+            case 2:
+                holder.itemMHCKH_img1Sao.setImageResource(R.drawable.ic_baseline_star_24);
+                holder.itemMHCKH_img2Sao.setImageResource(R.drawable.ic_baseline_star_24);
+                holder.itemMHCKH_img3Sao.setImageResource(R.drawable.ic_baseline_star_outline_24);
+                holder.itemMHCKH_img4Sao.setImageResource(R.drawable.ic_baseline_star_outline_24);
+                holder.itemMHCKH_img5Sao.setImageResource(R.drawable.ic_baseline_star_outline_24);
+                break;
+            case 3:
+                holder.itemMHCKH_img1Sao.setImageResource(R.drawable.ic_baseline_star_24);
+                holder.itemMHCKH_img2Sao.setImageResource(R.drawable.ic_baseline_star_24);
+                holder.itemMHCKH_img3Sao.setImageResource(R.drawable.ic_baseline_star_24);
+                holder.itemMHCKH_img4Sao.setImageResource(R.drawable.ic_baseline_star_outline_24);
+                holder.itemMHCKH_img5Sao.setImageResource(R.drawable.ic_baseline_star_outline_24);
+                break;
+            case 4:
+                holder.itemMHCKH_img1Sao.setImageResource(R.drawable.ic_baseline_star_24);
+                holder.itemMHCKH_img2Sao.setImageResource(R.drawable.ic_baseline_star_24);
+                holder.itemMHCKH_img3Sao.setImageResource(R.drawable.ic_baseline_star_24);
+                holder.itemMHCKH_img4Sao.setImageResource(R.drawable.ic_baseline_star_24);
+                holder.itemMHCKH_img5Sao.setImageResource(R.drawable.ic_baseline_star_outline_24);
+                break;
+            case 5:
+                holder.itemMHCKH_img1Sao.setImageResource(R.drawable.ic_baseline_star_24);
+                holder.itemMHCKH_img2Sao.setImageResource(R.drawable.ic_baseline_star_24);
+                holder.itemMHCKH_img3Sao.setImageResource(R.drawable.ic_baseline_star_24);
+                holder.itemMHCKH_img4Sao.setImageResource(R.drawable.ic_baseline_star_24);
+                holder.itemMHCKH_img5Sao.setImageResource(R.drawable.ic_baseline_star_24);
+                break;
         }
 
         // Event processing
@@ -163,7 +209,7 @@ public class ManHinhChinhKhachHangAdapter extends RecyclerView.Adapter<ManHinhCh
         TextView itemMHCKH_tvXuatXu;
         TextView itemMHCKH_tvDuLieu;
         TextView itemMHCKH_tvGia;
-        TextView itemMHCKH_tvSoLuongDanhGia;
+        TextView itemMHCKH_tvSoLuongBinhLuan;
         EditText itemMHCKH_edtSoLuong;
         ImageView itemMHCKH_imgHinhSanPham;
         ImageView itemMHCKH_img1Sao;
@@ -177,14 +223,14 @@ public class ManHinhChinhKhachHangAdapter extends RecyclerView.Adapter<ManHinhCh
         LinearLayout itemMHCKH_llCardView;
         CardView itemMHCKH;
 
-        public MyViewHolder(@NonNull View itemView){
+        public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             itemMHCKH_tvTenSanPham = itemView.findViewById(R.id.itemMHCKH_tvTenSanPham);
             itemMHCKH_tvTacGia = itemView.findViewById(R.id.itemMHCKH_tvTacGia);
             itemMHCKH_tvXuatXu = itemView.findViewById(R.id.itemMHCKH_tvXuatXu);
             itemMHCKH_tvDuLieu = itemView.findViewById(R.id.itemMHCKH_tvDL);
             itemMHCKH_tvGia = itemView.findViewById(R.id.itemMHCKH_tvGiaTien);
-            itemMHCKH_tvSoLuongDanhGia = itemView.findViewById(R.id.itemMHCKH_tvSLDanhGia);
+            itemMHCKH_tvSoLuongBinhLuan = itemView.findViewById(R.id.itemMHCKH_tvSoLuongBinhLuan);
             itemMHCKH_edtSoLuong = itemView.findViewById(R.id.itemMHCKH_edtSoLuong);
             itemMHCKH_imgHinhSanPham = itemView.findViewById(R.id.itemMHCKH_imgAnhSanPham);
             itemMHCKH_img1Sao = itemView.findViewById(R.id.itemMHCKH_img1Sao);
@@ -200,7 +246,7 @@ public class ManHinhChinhKhachHangAdapter extends RecyclerView.Adapter<ManHinhCh
             // Set event processing
             itemMHCKH_btnThemVaoGioHang.setOnClickListener(this);
             //  itemMHCKH_btnLogout.setOnClickListener(this);
-            itemMHCKH_tvTenSanPham.setOnClickListener(this);
+            itemMHCKH_imgHinhSanPham.setOnClickListener(this);
         }
 
         public void onClick(View view) {

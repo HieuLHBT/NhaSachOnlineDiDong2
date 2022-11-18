@@ -17,11 +17,11 @@ import com.example.nhasachonlinedidong2.tools.SharePreferences;
 public class ThongTinKhachHangActivity extends AppCompatActivity {
     private FireBaseNhaSachOnline fireBase = new FireBaseNhaSachOnline();
     private SharePreferences sharePreferences = new SharePreferences();
-    private String maKhachHang = "kh1";
+    private String maKhachHang;
     private KhachHang khachHang = new KhachHang();
 
     TextView layoutTTKH_tvHoTen, layoutTTKH_tvEmail, layoutTTKH_tvSoDienThoai, layoutTTKH_tvTenNganHang,
-            layoutTTKH_tvSTKNganHang,layoutTTKH_tvDiaChi;
+            layoutTTKH_tvSTKNganHang,layoutTTKH_tvDiaChi, layoutTTKH_btnTroVe;
     Button layoutTTKH_btnDoiMatKhau, layoutTTKH_btnThayDoiThongTin;
 
     public ThongTinKhachHangActivity() {
@@ -31,7 +31,7 @@ public class ThongTinKhachHangActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.thongtincanhan_layout);
-        maKhachHang = "kh1";
+        maKhachHang = sharePreferences.layMa(this);
 
         // Ánh xạ
         layoutTTKH_tvHoTen = findViewById(R.id.layoutTTKH_tvHoTen);
@@ -42,6 +42,7 @@ public class ThongTinKhachHangActivity extends AppCompatActivity {
         layoutTTKH_tvDiaChi = findViewById(R.id.layoutTTKH_tvDiaChi);
         layoutTTKH_btnDoiMatKhau = findViewById(R.id.layoutTTKH_btnDoiMatKhau);
         layoutTTKH_btnThayDoiThongTin = findViewById(R.id.layoutTTKH_btnThayDoiThongTin);
+        layoutTTKH_btnTroVe = findViewById(R.id.layoutTTKH_btnTroVe);
 
         //Hiển thị dữ liệu
 
@@ -53,8 +54,28 @@ public class ThongTinKhachHangActivity extends AppCompatActivity {
                 ThongTinKhachHangActivity.this.startActivity(intent);
             }
         });
-        fireBase.hienThiThongTinKhachHang(maKhachHang, khachHang,this);
 
+        layoutTTKH_btnDoiMatKhau.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ThongTinKhachHangActivity.this, DoiMatKhauActivity.class);
+                intent.putExtra(maKhachHang ,khachHang.getMaKhachHang());
+                ThongTinKhachHangActivity.this.startActivity(intent);
+            }
+        });
+
+        layoutTTKH_btnTroVe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        fireBase.hienThiThongTinKhachHang(maKhachHang, khachHang,this);
     }
 
     public void thongTinCaNhan(){

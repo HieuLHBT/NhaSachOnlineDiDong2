@@ -2,7 +2,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/layoutManHinhChinhKhachHang"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -11,98 +10,89 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.15"
-        android:orientation="vertical">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textColor="#13EA0C"
-            android:textStyle="bold"
-            android:textSize="30sp"
-            android:text="Nhà Sách Online "
-            />
+        android:layout_weight="1"
+        android:orientation="horizontal">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="6"
+            android:gravity="center"
+            android:paddingLeft="70dp"
+            android:text="Nhà Sách Online"
+            android:textColor="@color/design_default_color_error"
+            android:textSize="@dimen/tieudesize"
+            android:textStyle="bold" />
+
+        <ImageButton
+            android:id="@+id/layoutMHCKH_btnLogout"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="right"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="left"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                android:textSize="24sp"
-                android:text="Xin chao,"
-                />
-            <TextView
-                android:id="@+id/layoutMHCKH_tvTenKH"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="left"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                android:textSize="24sp"
-                android:text=" Truong Dinh Tho "
-                />
-            <ImageButton
-                android:id="@+id/layoutMHCKH_btnLogout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:src="@drawable/ic_baseline_logout_24"
-                />
-        </LinearLayout>
+            android:background="@color/white"
+            android:src="@drawable/ic_baseline_logout_24" />
+
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.2"
+        android:layout_weight="0.6"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="right|center"
+            android:text="Xin chào, "
+            android:textColor="@color/black"
+            android:textSize="@dimen/tvsoluong"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/layoutMHCKH_tvTenKhachHang"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.4"
+            android:gravity="left|center"
+            android:text="Truong Dinh Tho "
+            android:textColor="@color/black"
+            android:textSize="@dimen/tvsoluong"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.5"
         android:orientation="vertical">
 
         <androidx.appcompat.widget.SearchView
             android:id="@+id/layoutMHCKH_swTimKiem"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+            android:layout_height="0dp"
+            android:layout_margin="@dimen/le"
+            android:layout_weight="1"
             android:background="@drawable/search_view_bg"
             app:iconifiedByDefault="false"
             app:queryHint="Nhập tên sản phẩm " />
 
-        <LinearLayout
+        <Spinner
+            android:id="@+id/layoutMHCKH_spnSanPham"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="horizontal"
-            android:padding="10dp">
+            android:layout_height="0dp"
+            android:layout_margin="@dimen/le"
+            android:layout_weight="1" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginTop="5dp"
-                android:text="Tất cả sản phẩm"
-                android:textColor="@color/red"
-                android:textSize="20dp"
-                android:textStyle="bold" />
-
-            <Spinner
-                android:id="@+id/layoutMHCKH_spSanPham"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
-                android:layout_weight="1" />
-        </LinearLayout>
     </LinearLayout>
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.8">
+        android:layout_weight="8">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/layoutMHCKH_rvDanhSach"
@@ -117,11 +107,13 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.1">
+        android:layout_weight="1">
+
         <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/layoutMHCKH_bottomnav"
+            android:id="@+id/layoutMHCKH_botNAV"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
             android:layout_gravity="bottom"
             android:layout_marginTop="5dp"
             android:background="@color/white"
@@ -129,10 +121,9 @@
             app:backgroundTint="@color/darker_gray"
             app:itemIconTint="@drawable/selector"
             app:itemTextColor="@drawable/selector"
-            app:menu="@menu/bottom_nav_menu"
-            android:layout_alignParentBottom="true"/>
-    </LinearLayout>
+            app:menu="@menu/bottom_nav_menu" />
 
+    </LinearLayout>
 
 
 </LinearLayout>

@@ -57,7 +57,7 @@ public class ThanhToanActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.thanhtoan_layout);
         maDonHang = sharePreferences.layMaDonHang(this);
-        maKhachHang = "kh1";
+        maKhachHang = sharePreferences.layMa(this);
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.layoutTT_rvDanhSach);
         layoutTT_tvMaDonHang = findViewById(R.id.layoutTT_tvMaDonHang);
