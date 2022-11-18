@@ -43,15 +43,8 @@ public class DoiMatKhauActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(validate()){
                     //get current userID
-
-
-
                     String oldPass = layoutTDMK_edMatKhauHienTai.getText().toString();
                     String newPass = layoutTDMK_edMatKhauMoi.getText().toString();
-
-                    Log.d("Test", "" + maKhachHang);
-                    Log.d("Test", "" +  layoutTDMK_edMatKhauHienTai.getText().toString());
-                    Log.d("Test", "" + layoutTDMK_edMatKhauMoi.getText().toString());
                     fireBaseNhaSachOnline.doiMatkhau(DoiMatKhauActivity.this,oldPass,newPass, maKhachHang);
                 }
             }
