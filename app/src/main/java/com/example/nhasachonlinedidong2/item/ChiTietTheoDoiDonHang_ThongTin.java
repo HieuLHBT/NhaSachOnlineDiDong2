@@ -10,11 +10,10 @@ public class ChiTietTheoDoiDonHang_ThongTin {
     private String hinhThucGiao;
     private Integer giamGia;
     private Integer tongTienThanhToan;
-    private String trangThaiChuyenTienKH;
-    private String trangThaiNhanTienQL;
-    private String trangThaiTraTienQL;
-    private String trangThaiNhanTienKH;
     private String trangThaiDon;
+    private String trangThaiDuyetNV;
+    private String trangThaiGiaoHangKH;
+    private String trangThaiGiaoHangNV;
 
     public String getTenNhanVienGiaoHang() {
         return tenNhanVienGiaoHang;
@@ -52,24 +51,20 @@ public class ChiTietTheoDoiDonHang_ThongTin {
         return tongTienThanhToan;
     }
 
-    public String getTrangThaiChuyenTienKH() {
-        return trangThaiChuyenTienKH;
-    }
-
-    public String getTrangThaiNhanTienQL() {
-        return trangThaiNhanTienQL;
-    }
-
-    public String getTrangThaiTraTienQL() {
-        return trangThaiTraTienQL;
-    }
-
-    public String getTrangThaiNhanTienKH() {
-        return trangThaiNhanTienKH;
-    }
-
     public String getTrangThaiDon() {
         return trangThaiDon;
+    }
+
+    public String getTrangThaiDuyetNV() {
+        return trangThaiDuyetNV;
+    }
+
+    public String getTrangThaiGiaoHangKH() {
+        return trangThaiGiaoHangKH;
+    }
+
+    public String getTrangThaiGiaoHangNV() {
+        return trangThaiGiaoHangNV;
     }
 
     public void setTenNhanVienGiaoHang(String tenNhanVienGiaoHang) {
@@ -108,30 +103,26 @@ public class ChiTietTheoDoiDonHang_ThongTin {
         this.tongTienThanhToan = tongTienThanhToan;
     }
 
-    public void setTrangThaiChuyenTienKH(String trangThaiChuyenTienKH) {
-        this.trangThaiChuyenTienKH = trangThaiChuyenTienKH;
-    }
-
-    public void setTrangThaiNhanTienQL(String trangThaiNhanTienQL) {
-        this.trangThaiNhanTienQL = trangThaiNhanTienQL;
-    }
-
-    public void setTrangThaiTraTienQL(String trangThaiTraTienQL) {
-        this.trangThaiTraTienQL = trangThaiTraTienQL;
-    }
-
-    public void setTrangThaiNhanTienKH(String trangThaiNhanTienKH) {
-        this.trangThaiNhanTienKH = trangThaiNhanTienKH;
-    }
-
     public void setTrangThaiDon(String trangThaiDon) {
         this.trangThaiDon = trangThaiDon;
+    }
+
+    public void setTrangThaiDuyetNV(String trangThaiDuyetNV) {
+        this.trangThaiDuyetNV = trangThaiDuyetNV;
+    }
+
+    public void setTrangThaiGiaoHangKH(String trangThaiGiaoHangKH) {
+        this.trangThaiGiaoHangKH = trangThaiGiaoHangKH;
+    }
+
+    public void setTrangThaiGiaoHangNV(String trangThaiGiaoHangNV) {
+        this.trangThaiGiaoHangNV = trangThaiGiaoHangNV;
     }
 
     public ChiTietTheoDoiDonHang_ThongTin() {
     }
 
-    public ChiTietTheoDoiDonHang_ThongTin(String tenNhanVienGiaoHang, String thoiGianLap, String thoiGianGiao, String phuongThucThanhToan, Integer tongTienHang, Integer phiVanChuyen, String hinhThucGiao, Integer giamGia, Integer tongTienThanhToan, String trangThaiChuyenTienKH, String trangThaiNhanTienQL, String trangThaiTraTienQL, String trangThaiNhanTienKH, String trangThaiDon) {
+    public ChiTietTheoDoiDonHang_ThongTin(String tenNhanVienGiaoHang, String thoiGianLap, String thoiGianGiao, String phuongThucThanhToan, Integer tongTienHang, Integer phiVanChuyen, String hinhThucGiao, Integer giamGia, Integer tongTienThanhToan, String trangThaiDon, String trangThaiDuyetNV, String trangThaiGiaoHangKH, String trangThaiGiaoHangNV) {
         this.tenNhanVienGiaoHang = tenNhanVienGiaoHang;
         this.thoiGianLap = thoiGianLap;
         this.thoiGianGiao = thoiGianGiao;
@@ -141,10 +132,9 @@ public class ChiTietTheoDoiDonHang_ThongTin {
         this.hinhThucGiao = hinhThucGiao;
         this.giamGia = giamGia;
         this.tongTienThanhToan = tongTienThanhToan;
-        this.trangThaiChuyenTienKH = trangThaiChuyenTienKH;
-        this.trangThaiNhanTienQL = trangThaiNhanTienQL;
-        this.trangThaiTraTienQL = trangThaiTraTienQL;
-        this.trangThaiNhanTienKH = trangThaiNhanTienKH;
         this.trangThaiDon = trangThaiDon;
+        this.trangThaiDuyetNV = trangThaiDuyetNV;
+        this.trangThaiGiaoHangKH = trangThaiGiaoHangKH;
+        this.trangThaiGiaoHangNV = trangThaiGiaoHangNV;
     }
 }

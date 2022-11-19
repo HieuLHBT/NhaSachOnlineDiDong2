@@ -10,72 +10,57 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.9"
+        android:layout_weight="1"
         android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/layoutQLSP_NV_btnTroVe"
+        <TextView
+            android:id="@+id/layoutDMSP_btnTroVe"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.16"
-            android:backgroundTint="#FFFFFF"
+            android:layout_weight="1"
+            android:gravity="center"
             android:text="@string/tvtrove"
-            android:textColor="@color/black"
-            android:textSize="38dp"
-            android:textStyle="bold"/>
+            android:textSize="@dimen/tieudesize"
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:layout_weight="6"
             android:gravity="center"
+            android:paddingRight="@dimen/tieude"
             android:text="Quản Lý Sản Phẩm"
             android:textColor="@color/design_default_color_error"
-            android:textSize="38sp"
+            android:textSize="@dimen/tieudesize"
             android:textStyle="bold" />
+
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1.9"
+        android:layout_weight="1.5"
         android:orientation="vertical">
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="horizontal"
-            android:padding="10dp">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.6"
-                android:gravity="center"
-                android:text="Sản phẩm"
-                android:textColor="@color/black"
-                android:textSize="19dp"
-                android:textStyle="bold" />
-
-            <Spinner
-                android:id="@+id/layoutQLSP_NV_spnSanPham"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.8" />
-
-        </LinearLayout>
 
         <androidx.appcompat.widget.SearchView
-            android:id="@+id/layoutQLSP_NV_svTimKiem"
+            android:id="@+id/layoutDMSP_swTimKiem"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+            android:layout_height="0dp"
+            android:layout_margin="@dimen/le"
+            android:layout_weight="1"
             android:background="@drawable/search_view_bg"
             app:iconifiedByDefault="false"
-            app:queryHint="Nhập tên sản phẩm" />
+            app:queryHint="Nhập tên sản phẩm " />
 
+        <Spinner
+            android:id="@+id/layoutDMSP_spnSanPham"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="@dimen/le"
+            android:layout_weight="1" />
 
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -83,7 +68,7 @@
         android:orientation="horizontal">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/layoutQLSP_NV_rvQuanLySanPhamNhanVien"
+            android:id="@+id/layoutDMSP_rvSanPham"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout"
@@ -92,4 +77,5 @@
             app:layout_constraintTop_toTopOf="parent" />
 
     </LinearLayout>
+
 </LinearLayout>

@@ -25,14 +25,14 @@ import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-public class NhanVienRecyclerViewAdapter extends RecyclerView.Adapter<NhanVienRecyclerViewAdapter.MyViewHolder> {
+public class QuanLyNhanVienRecyclerViewAdapter extends RecyclerView.Adapter<QuanLyNhanVienRecyclerViewAdapter.MyViewHolder> {
 
     private Activity context;
     private int resource;
     private ArrayList<ItemNhanVien> nhanViens;
     private OnItemClickListener onItemClickListener;
 
-    public NhanVienRecyclerViewAdapter(Activity context, int resource, ArrayList<ItemNhanVien> nhanViens) {
+    public QuanLyNhanVienRecyclerViewAdapter(Activity context, int resource, ArrayList<ItemNhanVien> nhanViens) {
         this.context = context;
         this.resource = resource;
         this.nhanViens = nhanViens;
@@ -50,7 +50,7 @@ public class NhanVienRecyclerViewAdapter extends RecyclerView.Adapter<NhanVienRe
     }
 
     @Override
-    public void onBindViewHolder(@NonNull NhanVienRecyclerViewAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull QuanLyNhanVienRecyclerViewAdapter.MyViewHolder holder, int position) {
 
         DecimalFormat formatter = new DecimalFormat("#,###,###");
         final int pos = position;

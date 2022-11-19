@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.nhasachonlinedidong2.R;
-import com.example.nhasachonlinedidong2.adapters.NhanVienRecyclerViewAdapter;
+import com.example.nhasachonlinedidong2.adapters.QuanLyNhanVienRecyclerViewAdapter;
 import com.example.nhasachonlinedidong2.firebase.FireBaseNhaSachOnline;
 
 import com.example.nhasachonlinedidong2.item.ItemNhanVien;
@@ -33,7 +33,7 @@ public class ManHinhQuanLyNhanVienActivity extends AppCompatActivity {
 
     private SearchView timkiemNV;
     private ArrayList<ItemNhanVien> nhanViens = new ArrayList<>();
-    private NhanVienRecyclerViewAdapter adapter;
+    private QuanLyNhanVienRecyclerViewAdapter adapter;
     private Spinner layout_spnNhanVien;
     private TextView item_tvTroVe;
     private TextView item_tvThemNhanVien;
@@ -49,7 +49,7 @@ public class ManHinhQuanLyNhanVienActivity extends AppCompatActivity {
         timKiem();
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.layoutMHQLNV_rvDanhSachNhanVien);
-        adapter = new NhanVienRecyclerViewAdapter(this, R.layout.manhinh_quanly_nhanvien_item, nhanViens);
+        adapter = new QuanLyNhanVienRecyclerViewAdapter(this, R.layout.manhinh_quanly_nhanvien_item, nhanViens);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
@@ -89,7 +89,7 @@ public class ManHinhQuanLyNhanVienActivity extends AppCompatActivity {
 
         fireBase.hienThiManHinhChinhQuanLyNhanVien(nhanViens,adapter,this);
 
-        adapter.setOnItemClickListener(new NhanVienRecyclerViewAdapter.OnItemClickListener() {
+        adapter.setOnItemClickListener(new QuanLyNhanVienRecyclerViewAdapter.OnItemClickListener() {
             @Override
             public void onItemClickListener(int position, View view) {
                 item_tvTroVe = view.findViewById(R.id.MHQLNV_tvTroVe);

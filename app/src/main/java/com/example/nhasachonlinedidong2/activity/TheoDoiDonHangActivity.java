@@ -32,8 +32,9 @@ public class TheoDoiDonHangActivity extends AppCompatActivity {
     private String maKhachHang;
 
     private ArrayList<TheoDoiDonHang> theoDoiDonHangs = new ArrayList<>();
-    private ArrayList<TheoDoiDonHang> donHangCanXacNhan = new ArrayList<>();
-    private ArrayList<TheoDoiDonHang> donHangHoanTien = new ArrayList<>();
+    private ArrayList<TheoDoiDonHang> donCanXacNhan = new ArrayList<>();
+    private ArrayList<TheoDoiDonHang> donHangDangXuLy = new ArrayList<>();
+    private ArrayList<TheoDoiDonHang> donHangDaHuy = new ArrayList<>();
     private ArrayList<TheoDoiDonHang> tatCa = new ArrayList<>();
     private TheoDoiDonHangRecyclerViewAdapter adapter;
 
@@ -51,7 +52,8 @@ public class TheoDoiDonHangActivity extends AppCompatActivity {
         ArrayList<String> trangThai = new ArrayList<>();
         trangThai.add("Tất cả đơn hàng");
         trangThai.add("Đơn hàng cần xác nhận");
-        trangThai.add("Đơn hàng hoàn tiền");
+        trangThai.add("Đơn hàng đang xử lý");
+        trangThai.add("Đơn hàng đã hủy");
 
         ArrayAdapter arrayAdapter = new ArrayAdapter(this, R.layout.theodoidonhang_spinner, trangThai);
         layoutTDDH_spnTrangThai.setAdapter(arrayAdapter);
@@ -88,12 +90,17 @@ public class TheoDoiDonHangActivity extends AppCompatActivity {
                         break;
                     case 1:
                         theoDoiDonHangs.clear();
-                        theoDoiDonHangs.addAll(donHangCanXacNhan);
+                        theoDoiDonHangs.addAll(donCanXacNhan);
                         adapter.notifyDataSetChanged();
                         break;
                     case 2:
                         theoDoiDonHangs.clear();
-                        theoDoiDonHangs.addAll(donHangHoanTien);
+                        theoDoiDonHangs.addAll(donHangDangXuLy);
+                        adapter.notifyDataSetChanged();
+                        break;
+                    case 3:
+                        theoDoiDonHangs.clear();
+                        theoDoiDonHangs.addAll(donHangDaHuy);
                         adapter.notifyDataSetChanged();
                         break;
                 }
@@ -120,26 +127,23 @@ public class TheoDoiDonHangActivity extends AppCompatActivity {
 
     public void donHangCanXacNhan() {
         tatCa.clear();
-        donHangCanXacNhan.clear();
-        donHangHoanTien.clear();
+        tatCa.addAll(theoDoiDonHangs);
+        donCanXacNhan.clear();
+        donHangDangXuLy.clear();
+        donHangDaHuy.clear();
         for (TheoDoiDonHang theoDoiDonHang : theoDoiDonHangs) {
-            if (theoDoiDonHang.getTrangThaiChuyenTienKH().equalsIgnoreCase("Đang xử lý") && theoDoiDonHang.getHinhThucThanhToan().equalsIgnoreCase("Online")) {
-                donHangCanXacNhan.add(theoDoiDonHang);
-            } else if (!theoDoiDonHang.getTrangThaiNhanTienKH().equalsIgnoreCase("") && !theoDoiDonHang.getTrangThaiTraTienQL().equalsIgnoreCase("") && !theoDoiDonHang.getTrangThai().equalsIgnoreCase("Hủy")) {
-                donHangHoanTien.add(theoDoiDonHang);
+            if (theoDoiDonHang.getTrangThaiDon().equalsIgnoreCase("Đang xử lý") && theoDoiDonHang.getTrangThaiGiaoHangNV().equalsIgnoreCase("Đã xác nhận")) {
+                donCanXacNhan.add(theoDoiDonHang);
+            } else if (theoDoiDonHang.getTrangThaiDon().equalsIgnoreCase("Hủy")) {
+                donHangDaHuy.add(theoDoiDonHang);
             } else {
-                tatCa.add(theoDoiDonHang);
+                donHangDangXuLy.add(theoDoiDonHang);
             }
         }
-        if (donHangCanXacNhan.size() != 0) {
+        if (donCanXacNhan.size() != 0) {
             layoutTDDH_spnTrangThai.setSelection(1);
             theoDoiDonHangs.clear();
-            theoDoiDonHangs.addAll(donHangCanXacNhan);
-            adapter.notifyDataSetChanged();
-        } else if (donHangHoanTien.size() != 0) {
-            layoutTDDH_spnTrangThai.setSelection(2);
-            theoDoiDonHangs.clear();
-            theoDoiDonHangs.addAll(donHangHoanTien);
+            theoDoiDonHangs.addAll(donCanXacNhan);
             adapter.notifyDataSetChanged();
         } else {
             layoutTDDH_spnTrangThai.setSelection(0);

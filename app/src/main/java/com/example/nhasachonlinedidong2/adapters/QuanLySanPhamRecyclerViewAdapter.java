@@ -16,14 +16,14 @@ import com.example.nhasachonlinedidong2.item.ItemSanPham;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
-public class SanPhamRecyclerViewAdapter extends RecyclerView.Adapter<SanPhamRecyclerViewAdapter.MyViewHolder> {
+public class QuanLySanPhamRecyclerViewAdapter extends RecyclerView.Adapter<QuanLySanPhamRecyclerViewAdapter.MyViewHolder> {
 
     private Activity context;
     private int resource;
     private ArrayList<ItemSanPham> sanPhams;
-    private SanPhamRecyclerViewAdapter.OnItemClickListener onItemClickListener;
+    private QuanLySanPhamRecyclerViewAdapter.OnItemClickListener onItemClickListener;
 
-    public SanPhamRecyclerViewAdapter(Activity context, int resource, ArrayList<ItemSanPham> sanPhams) {
+    public QuanLySanPhamRecyclerViewAdapter(Activity context, int resource, ArrayList<ItemSanPham> sanPhams) {
         this.context = context;
         this.resource = resource;
         this.sanPhams = sanPhams;
@@ -40,7 +40,7 @@ public class SanPhamRecyclerViewAdapter extends RecyclerView.Adapter<SanPhamRecy
     }
 
     @Override
-    public void onBindViewHolder(@NonNull SanPhamRecyclerViewAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull QuanLySanPhamRecyclerViewAdapter.MyViewHolder holder, int position) {
 
         DecimalFormat formatter = new DecimalFormat("#,###,###");
         final int pos = position;
@@ -120,7 +120,7 @@ public class SanPhamRecyclerViewAdapter extends RecyclerView.Adapter<SanPhamRecy
         void onItemClickListener(int position, View view);
     }
 
-    public void setOnItemClickListener(SanPhamRecyclerViewAdapter.OnItemClickListener onItemClickListener) {
+    public void setOnItemClickListener(QuanLySanPhamRecyclerViewAdapter.OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
     }
 }
