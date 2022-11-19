@@ -19,7 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.nhasachonlinedidong2.R;
-import com.example.nhasachonlinedidong2.adapters.SanPhamRecyclerViewAdapter;
+import com.example.nhasachonlinedidong2.adapters.QuanLySanPhamRecyclerViewAdapter;
 import com.example.nhasachonlinedidong2.firebase.FireBaseNhaSachOnline;
 import com.example.nhasachonlinedidong2.item.ItemSanPham;
 import com.example.nhasachonlinedidong2.tools.SharePreferences;
@@ -33,7 +33,7 @@ public class ManHinhQuanLySanPhamActivity extends AppCompatActivity {
 
     private SearchView timkiemSP;
     private ArrayList<ItemSanPham> sanPhams = new ArrayList<>();
-    private SanPhamRecyclerViewAdapter adapter;
+    private QuanLySanPhamRecyclerViewAdapter adapter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
@@ -43,7 +43,7 @@ public class ManHinhQuanLySanPhamActivity extends AppCompatActivity {
         timkiemSP = findViewById(R.id.layoutMHQLSP_swTimKiem);
         timKiem();
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.layoutMHQLSP_rvDanhSachSanPham);
-        adapter = new SanPhamRecyclerViewAdapter(this,R.layout.manhinh_quanly_sanpham_item, sanPhams);
+        adapter = new QuanLySanPhamRecyclerViewAdapter(this,R.layout.manhinh_quanly_sanpham_item, sanPhams);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
@@ -82,7 +82,7 @@ public class ManHinhQuanLySanPhamActivity extends AppCompatActivity {
 
         fireBase.hienThiManHinhChinhQuanLySanPham(sanPhams,adapter,this);
 
-        adapter.setOnItemClickListener(new SanPhamRecyclerViewAdapter.OnItemClickListener() {
+        adapter.setOnItemClickListener(new QuanLySanPhamRecyclerViewAdapter.OnItemClickListener() {
             @Override
             public void onItemClickListener(int position, View view) {
                 Button item_btnTroVe = view.findViewById(R.id.layoutMHQLSP_btnBack);

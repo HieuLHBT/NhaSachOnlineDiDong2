@@ -65,7 +65,7 @@ public class LichSuMuaHangActivity extends AppCompatActivity {
                 itemLSMH_btnMuaLai.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
+                        fireBaseNhaSachOnline.muaLaiDonHang(maKhachHang, lichSuMuaHang_donHangs.get(position).getLichSuMuaHang_sanPhams(), LichSuMuaHangActivity.this);
                     }
                 });
             }
