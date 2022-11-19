@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.ThemSachActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/layoutThemSach_btnTroVe"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/tvtrove"
+            android:textSize="@dimen/tieudesize"
+            android:textStyle="bold"
+            android:backgroundTint="@color/white"
+            android:textColor="@color/black"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="6"
+            android:gravity="center"
+            android:paddingRight="@dimen/tieude"
+            android:text="Thêm sách"
+            android:textColor="@color/design_default_color_error"
+            android:textSize="@dimen/tieudesize"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="4"
+        android:orientation="horizontal"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp">
+
+        <ImageView
+            android:id="@+id/layoutThemSach_imgHinhSach"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:src="@drawable/chonanh"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="8"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/le">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:text=" Mã sách"
+                android:gravity="center|left"
+                android:textColor="@color/black"
+                android:textSize="@dimen/textsize" />
+
+            <EditText
+                android:id="@+id/layoutThemSach_edtMaSach"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:textColor="@color/black"
+                android:textSize="@dimen/textsize"
+                android:background="#D6D5CC"
+                android:focusable="false"
+                android:layout_margin="5dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:text=" Tên sách"
+                android:gravity="center|left"
+                android:textColor="@color/black"
+                android:textSize="@dimen/textsize" />
+
+            <EditText
+                android:id="@+id/layoutThemSach_edtTenSach"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:textColor="@color/black"
+                android:textSize="@dimen/textsize"
+                android:maxLines="1" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:text=" Thể loại"
+                android:gravity="center|left"
+                android:textColor="@color/black"
+                android:textSize="@dimen/textsize" />
+
+            <EditText
+                android:id="@+id/layoutThemSach_edtTheLoai"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:textColor="@color/black"
+                android:textSize="@dimen/textsize" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:text=" Tác giả"
+                android:gravity="center|left"
+                android:textColor="@color/black"
+                android:textSize="@dimen/textsize" />
+
+            <EditText
+                android:id="@+id/layoutThemSach_edtTacGia"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:textColor="@color/black"
+                android:textSize="@dimen/textsize" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:text=" Nhà xuất bản"
+                android:gravity="center|left"
+                android:textColor="@color/black"
+                android:textSize="@dimen/textsize" />
+
+            <EditText
+                android:id="@+id/layoutThemSach_edtNhaXuatBan"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:textColor="@color/black"
+                android:textSize="@dimen/textsize" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:text=" Ngày xuất bản"
+                android:gravity="center|left"
+                android:textColor="@color/black"
+                android:textSize="@dimen/textsize" />
+
+            <EditText
+                android:id="@+id/layoutThemSach_edtNgayXuatBan"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:textColor="@color/black"
+                android:textSize="@dimen/textsize" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:text=" Đơn giá"
+                android:gravity="center|left"
+                android:textColor="@color/black"
+                android:textSize="@dimen/textsize" />
+
+            <EditText
+                android:id="@+id/layoutThemSach_edtDonGia"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:textColor="@color/black"
+                android:textSize="@dimen/textsize" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:text=" Số lượng kho"
+                android:gravity="center|left"
+                android:textColor="@color/black"
+                android:textSize="@dimen/textsize" />
+
+            <EditText
+                android:id="@+id/layoutThemSach_edtSoLuongTonKho"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:textColor="@color/black"
+                android:textSize="@dimen/textsize"
+                android:background="#D6D5CC"
+                android:focusable="false"
+                android:layout_margin="5dp"/>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingLeft="@dimen/le"
+        android:paddingRight="@dimen/le">
+
+        <Button
+            android:id="@+id/layoutThemSach_btnNhapMoi"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:text="Nhập mới"
+            android:textSize="@dimen/textsize"
+            android:textStyle="bold"
+            android:layout_marginRight="@dimen/le"/>
+
+        <Button
+            android:id="@+id/layoutThemSach_btnThemSach"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:text="Thêm sách"
+            android:textSize="@dimen/textsize"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+</LinearLayout>
