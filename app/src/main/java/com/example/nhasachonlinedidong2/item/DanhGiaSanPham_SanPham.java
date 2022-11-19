@@ -1,6 +1,6 @@
 package com.example.nhasachonlinedidong2.item;
 
-public class DanhGia {
+public class DanhGiaSanPham_SanPham {
     private String maSanPham;
     private String tenSanPham;
     private String hinhSanPham;
@@ -9,30 +9,30 @@ public class DanhGia {
         return maSanPham;
     }
 
-    public void setMaSanPham(String maSanPham) {
-        this.maSanPham = maSanPham;
-    }
-
     public String getTenSanPham() {
         return tenSanPham;
-    }
-
-    public void setTenSanPham(String tenSanPham) {
-        this.tenSanPham = tenSanPham;
     }
 
     public String getHinhSanPham() {
         return hinhSanPham;
     }
 
+    public void setMaSanPham(String maSanPham) {
+        this.maSanPham = maSanPham;
+    }
+
+    public void setTenSanPham(String tenSanPham) {
+        this.tenSanPham = tenSanPham;
+    }
+
     public void setHinhSanPham(String hinhSanPham) {
         this.hinhSanPham = hinhSanPham;
     }
 
-    public DanhGia() {
+    public DanhGiaSanPham_SanPham() {
     }
 
-    public DanhGia(String maSanPham, String tenSanPham, String hinhSanPham) {
+    public DanhGiaSanPham_SanPham(String maSanPham, String tenSanPham, String hinhSanPham) {
         this.maSanPham = maSanPham;
         this.tenSanPham = tenSanPham;
         this.hinhSanPham = hinhSanPham;
