@@ -81,6 +81,8 @@
         <activity
             android:name=".activity.DanhGiaSanPhamActivity"
             android:exported="true"></activity>
+
+        <!--Nhân viên-->
         <activity
             android:name=".activity.ManHinhChinhNhanVienActivity"
             android:exported="true"></activity>
@@ -93,7 +95,17 @@
         <activity
             android:name=".activity.TraLoiBinhLuanActivity"
             android:exported="true"></activity>
+        <activity
+            android:name=".activity.QuanLyDonHangActivity"
+            android:exported="true"></activity>
+        <activity
+            android:name=".activity.HuyDonHangActivity"
+            android:exported="true"></activity>
 
+        <!--Quản lý-->
+        <activity
+            android:name=".activity.ManHinhChinhQuanLyActivity"
+            android:exported="true"></activity>
     </application>
 
 </manifest>

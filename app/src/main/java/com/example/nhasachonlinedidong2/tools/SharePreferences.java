@@ -47,11 +47,20 @@ public class SharePreferences {
     }
 
     public void saveLoginInfo(Context context, String taikhoan, String matKhau, boolean checkBox) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences("loginInfo", context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = context.getSharedPreferences("dulieu", context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("account", taikhoan);
-        editor.putString("matkhau", matKhau);
+        editor.putString("taiKhoan", taikhoan);
+        editor.putString("matKhau", matKhau);
         editor.putBoolean("checkbox", checkBox);
+        editor.commit();
+    }
+
+    public void deleteLoginInfo(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("dulieu", context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.remove("taiKhoan");
+        editor.remove("matKhau");
+        editor.remove("checkbox");
         editor.commit();
     }
 }

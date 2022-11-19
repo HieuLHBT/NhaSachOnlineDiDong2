@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="150dp"
+    android:layout_marginBottom="150dp"
+    android:orientation="vertical"
+    tools:context=".activity.HuyDonHangActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="Hủy Đơn Hàng"
+        android:textColor="@color/red"
+        android:textSize="@dimen/tieude"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="@dimen/marginleft"
+        android:layout_marginRight="@dimen/marginleft"
+        android:layout_weight="0.5"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="left|center"
+            android:text="Mã đơn hàng"
+            android:textColor="@color/black"
+            android:textSize="@dimen/textsize"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/layoutHDH_tvMaDonHang"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/border_layout"
+            android:gravity="center"
+            android:text="DH003"
+            android:textColor="@color/black"
+            android:textSize="@dimen/textsize" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="@dimen/marginleft"
+        android:layout_marginRight="@dimen/marginleft"
+        android:layout_weight="1">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="left|center"
+            android:text="Nội dung hủy đơn hàng"
+            android:textColor="@color/black"
+            android:textSize="@dimen/textsize"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginLeft="@dimen/marginleft"
+        android:layout_marginRight="@dimen/marginleft"
+        android:layout_weight="2"
+        android:background="@drawable/border_layout">
+
+        <EditText
+            android:id="@+id/layoutHDH_edtLyDoHuy"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="4"
+            android:layout_marginLeft="@dimen/le"
+            android:layout_marginRight="@dimen/le"
+            android:hint="Nhập lý do hủy đơn hàng ở đây!"
+            android:textColor="@color/black"
+            android:textSize="@dimen/textsize" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/layoutHDH_btnHuy"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/marginleft"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Huỷ"
+            android:textSize="@dimen/textsize" />
+
+        <Button
+            android:id="@+id/layoutHDH_btnXacNhan"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/marginleft"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Xác nhận"
+            android:textSize="@dimen/textsize" />
+
+    </LinearLayout>
+
+</LinearLayout>
