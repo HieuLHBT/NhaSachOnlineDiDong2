@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
         android:allowBackup="true"
@@ -16,7 +18,7 @@
         tools:targetApi="31">
 
         <activity
-            android:name=".activity.QuanLySanPhamQLActivity"
+            android:name=".activity.DangNhapActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.media.action.IMAGE_CAPTURE" />
@@ -29,77 +31,81 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-        <!--        Hiếu        -->
-<!--        <activity-->
-<!--            android:name=".activity.GioHangActivity"-->
-<!--            android:exported="true"></activity>-->
+
+        <!--Khách hàng-->
+        <activity
+            android:name=".activity.DangKyActivity"
+            android:exported="true"></activity>
+        <activity
+            android:name=".activity.QuenMatKhauActivity"
+            android:exported="true"></activity>
+        <activity
+            android:name=".activity.QuenMatKhauXacNhanOTPActivity"
+            android:exported="true"></activity>
+        <activity
+            android:name=".activity.QuenMatKhauCapLaiMatKhauActivity"
+            android:exported="true"></activity>
+        <activity
+            android:name=".activity.ManHinhChinhKhachHangActivity"
+            android:exported="true"></activity>
+        <activity
+            android:name=".activity.ChiTietSanPhamActivity"
+            android:exported="true"></activity>
+        <activity
+            android:name=".activity.GioHangActivity"
+            android:exported="true"></activity>
         <activity
             android:name=".activity.ThanhToanActivity"
             android:exported="true"></activity>
         <activity
             android:name=".activity.MaGiamGiaActivity"
             android:exported="true"></activity>
-<!--        <activity-->
-<!--            android:name=".activity.LichLamViecActivity"-->
-<!--            android:exported="true"></activity>-->
-<!--        <activity-->
-<!--            android:name=".activity.BangChamCongActivity"-->
-<!--            android:exported="true"></activity>-->
         <activity
-            android:name=".activity.ChiTietDonDaNhanActivity"
+            android:name=".activity.TheoDoiDonHangActivity"
             android:exported="true"></activity>
         <activity
-            android:name=".activity.ChiTietDonDaGiaoActivity"
+            android:name=".activity.ChiTietTheoDoiDonHangActivity"
             android:exported="true"></activity>
         <activity
-            android:name=".activity.ChiTietDonDaHuyActivity"
-            android:exported="true"></activity>
-
-
-
-        <!--        Tin        -->
-        <activity
-            android:name=".activity.ChiTietSanPhamActivity"
+            android:name=".activity.ThongTinKhachHangActivity"
             android:exported="true"></activity>
         <activity
-        android:name=".activity.QuanLyDonHangNVActivity"
-        android:exported="true"></activity>
-        <activity
-            android:name=".activity.SuaSachActivity"
+            android:name=".activity.ThayDoiThongTinKhachHangActivity"
             android:exported="true"></activity>
         <activity
-            android:name=".activity.SuaVanPhongPhamActivity"
+            android:name=".activity.DoiMatKhauActivity"
             android:exported="true"></activity>
         <activity
-            android:name=".activity.ThemSachActivity"
+            android:name=".activity.LichSuMuaHangActivity"
             android:exported="true"></activity>
         <activity
-            android:name=".activity.ThemVanPhongPhamActivity"
-            android:exported="true"></activity>
-        <activity
-            android:name=".activity.NhapKhoSachActivity"
-            android:exported="true"></activity>
-        <activity
-            android:name=".activity.NhapKhoVPPActivity"
+            android:name=".activity.DanhGiaSanPhamActivity"
             android:exported="true"></activity>
 
-        <!--<activity
-            android:name=".activity.QuanLySanPhamQLActivity"
-            android:exported="true"></activity>-->
+        <!--Nhân viên-->
         <activity
-            android:name=".activity.LichLamViecActivity"
+            android:name=".activity.ManHinhChinhNhanVienActivity"
             android:exported="true"></activity>
-<!--        <activity-->
-<!--            android:name=".activity.DangKyActivity"-->
-<!--            android:exported="true"></activity>-->
-<!--        <activity android:name=".activity.QuenMatKhauActivity"/>-->
-       <!-- <activity
-            android:name=".activity.ChiTietGiaoHangActivity"
-            android:exported="true"></activity>-->
-        <activity android:name=".activity.ManHinhChinhKhachHangActivity"/>
-        <activity android:name=".activity.ManHinhChinhNhanVienActivity"/>
-        <activity android:name=".activity.DangKyActivity"/>
-        <activity android:name=".activity.LayLaimatKhauActivity"/>
+        <activity
+            android:name=".activity.DanhMucSanPhamActivity"
+            android:exported="true"></activity>
+        <activity
+            android:name=".activity.PhanHoiYKienKhachHangActivity"
+            android:exported="true"></activity>
+        <activity
+            android:name=".activity.TraLoiBinhLuanActivity"
+            android:exported="true"></activity>
+        <activity
+            android:name=".activity.QuanLyDonHangActivity"
+            android:exported="true"></activity>
+        <activity
+            android:name=".activity.HuyDonHangActivity"
+            android:exported="true"></activity>
+
+        <!--Quản lý-->
+        <activity
+            android:name=".activity.ManHinhChinhQuanLyActivity"
+            android:exported="true"></activity>
     </application>
 
 </manifest>

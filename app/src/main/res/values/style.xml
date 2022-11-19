@@ -3,6 +3,6 @@
 
     <style name="layout_weight_dangKy">
         <item name="android:layout_weight">0.7</item>
-
     </style>
+
 </resources>

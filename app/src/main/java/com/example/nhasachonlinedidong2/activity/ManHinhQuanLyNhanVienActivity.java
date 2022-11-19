@@ -4,8 +4,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -17,7 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.nhasachonlinedidong2.R;
-import com.example.nhasachonlinedidong2.adapters.NhanVienRecyclerViewAdapter;
+import com.example.nhasachonlinedidong2.adapters.QuanLyNhanVienRecyclerViewAdapter;
 import com.example.nhasachonlinedidong2.firebase.FireBaseNhaSachOnline;
 
 import com.example.nhasachonlinedidong2.item.ItemNhanVien;
@@ -30,18 +31,25 @@ public class ManHinhQuanLyNhanVienActivity extends AppCompatActivity {
     private FireBaseNhaSachOnline fireBase = new FireBaseNhaSachOnline();
     private String maNhanVien;
 
-    private SearchView timkiemSP;
+    private SearchView timkiemNV;
     private ArrayList<ItemNhanVien> nhanViens = new ArrayList<>();
-    private NhanVienRecyclerViewAdapter adapter;
+    private QuanLyNhanVienRecyclerViewAdapter adapter;
     private Spinner layout_spnNhanVien;
+    private TextView item_tvTroVe;
+    private TextView item_tvThemNhanVien;
+    private CardView itemMHQLNV_SuaNhanVien;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.manhinh_quanly_nhanvien_layout);
 
+        //search
+        timkiemNV = findViewById(R.id.layoutMHQLNV_swTimKiem);
+        timKiem();
+
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.layoutMHQLNV_rvDanhSachNhanVien);
-        adapter = new NhanVienRecyclerViewAdapter(this, R.layout.manhinh_quanly_nhanvien_item, nhanViens);
+        adapter = new QuanLyNhanVienRecyclerViewAdapter(this, R.layout.manhinh_quanly_nhanvien_item, nhanViens);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(RecyclerView.VERTICAL);
         recyclerView.setLayoutManager(layoutManager);
@@ -81,31 +89,32 @@ public class ManHinhQuanLyNhanVienActivity extends AppCompatActivity {
 
         fireBase.hienThiManHinhChinhQuanLyNhanVien(nhanViens,adapter,this);
 
-        adapter.setOnItemClickListener(new NhanVienRecyclerViewAdapter.OnItemClickListener() {
+        adapter.setOnItemClickListener(new QuanLyNhanVienRecyclerViewAdapter.OnItemClickListener() {
             @Override
             public void onItemClickListener(int position, View view) {
-                ImageButton item_btnTroVe = view.findViewById(R.id.layoutMHQLNV_btnTroVe);
-                item_btnTroVe.setOnClickListener(new View.OnClickListener() {
+                item_tvTroVe = view.findViewById(R.id.MHQLNV_tvTroVe);
+                item_tvTroVe.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         finish();
                     }
                 });
 
-                ImageButton item_btnThemNhanVien = view.findViewById(R.id.layoutMHQLNV_btnThemNhanVien);
-                item_btnThemNhanVien.setOnClickListener(new View.OnClickListener() {
+                item_tvThemNhanVien = view.findViewById(R.id.layoutMHQLNV_tvThemNhanVien);
+                item_tvThemNhanVien.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent1 = new Intent(ManHinhQuanLyNhanVienActivity.this, ThemNhanVienActivity.class);
-                        ManHinhQuanLyNhanVienActivity.this.startActivity(intent1);
+                        Intent intent = new Intent(ManHinhQuanLyNhanVienActivity.this, ThemNhanVienActivity.class);
+                        ManHinhQuanLyNhanVienActivity.this.startActivity(intent);
                     }
                 });
 
-                CardView itemMHQLNV = view.findViewById(R.id.itemMHQLNV);
-                itemMHQLNV.setOnClickListener(new View.OnClickListener() {
+                itemMHQLNV_SuaNhanVien = view.findViewById(R.id.itemMHQLNV);
+                itemMHQLNV_SuaNhanVien.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(ManHinhQuanLyNhanVienActivity.this, SuaNhanVienActivity.class);
+                        intent.putExtra(maNhanVien, nhanViens.get(position).getMaNhanVien());
                         ManHinhQuanLyNhanVienActivity.this.startActivity(intent);
                     }
                 });
@@ -113,4 +122,34 @@ public class ManHinhQuanLyNhanVienActivity extends AppCompatActivity {
         });
     }
 
+    public void filterList(String newText) {
+        ArrayList<ItemNhanVien> fiIteredList = new ArrayList<>();
+        for(ItemNhanVien nhanVien : nhanViens){
+            if(nhanVien.getTenNhanVien().toLowerCase().contains(newText.toLowerCase()) || nhanVien.getMaNhanVien().toLowerCase().contains(newText.toLowerCase())){
+                fiIteredList.add(nhanVien);
+            }
+        }
+
+        if(fiIteredList.isEmpty()){
+            Toast.makeText(this,"Không có dữ liệu",Toast.LENGTH_SHORT).show();
+        }else {
+            adapter.setFilteredList1(fiIteredList);
+        }
+    }
+
+    public void timKiem(){
+        timkiemNV.clearFocus();
+        timkiemNV.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filterList(newText);
+                return true;
+            }
+        });
+    }
 }

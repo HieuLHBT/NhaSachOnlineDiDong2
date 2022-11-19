@@ -7,275 +7,215 @@
     android:orientation="vertical"
     tools:context=".activity.ManHinhChinhNhanVienActivity">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Nhà Sách Online"
-        android:textSize="40dp"
-        android:textStyle="bold"
-        android:textColor="@color/black"/>
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="6"
+            android:gravity="center"
+            android:paddingLeft="70dp"
+            android:text="Nhà Sách Online"
+            android:textColor="@color/design_default_color_error"
+            android:textSize="@dimen/tieudesize"
+            android:textStyle="bold" />
+
+        <ImageButton
+            android:id="@+id/layoutMHCNV_btnLogout"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:src="@drawable/ic_baseline_logout_24" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:orientation="horizontal">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="horizontal">
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/marginleft"
+            android:layout_weight="1">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/layoutMHCNV_NV_rvManHinhChinhNhanVien"
+            <ImageView
+                android:id="@+id/layoutMHCNV_imgHinhNhanVien"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:layout_height="match_parent" />
 
         </LinearLayout>
 
-
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="2"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:padding="20dp">
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="@dimen/marginleft"
+            android:layout_weight="1.5"
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/border_layout"
-                android:orientation="vertical">
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/layoutMHCNV_txtNgay"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:paddingLeft="10dp"
-                    android:paddingTop="5dp"
-                    android:textSize="20dp"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"/>
+                    android:gravity="center|left"
+                    android:text="Họ tên:"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/textsize" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1.5"
-                    android:orientation="vertical"
-                    android:paddingLeft="50dp"
-                    android:paddingRight="50dp">
-
-                    <Button
-                        android:id="@+id/layoutMHCNV_btnCheckin"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:text="Check in"
-                        android:textColor="@color/black"
-                        android:textStyle="bold"
-                        android:backgroundTint="@color/darker_gray"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1.5"
-                    android:orientation="vertical"
-                    android:paddingLeft="50dp"
-                    android:paddingRight="50dp">
-
-                    <Button
-                        android:id="@+id/layoutMHCNV_btnCheckout"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:text="Check out"
-                        android:textColor="@color/black"
-                        android:textStyle="bold"
-                        android:backgroundTint="@color/darker_gray" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="0.3"
-                    android:orientation="vertical"></LinearLayout>
+                <TextView
+                    android:id="@+id/layoutMHCNV_tvHoTen"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:gravity="center|left"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/textsize" />
 
             </LinearLayout>
 
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="2"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:padding="20dp">
-
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/border_layout"
-                android:orientation="vertical">
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="0.8"
-                    android:paddingLeft="10dp"
-                    android:paddingTop="2dp"
-                    android:text="Quản lý"
-                    android:textSize="20dp"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"/>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1.5"
-                    android:orientation="vertical"
-                    android:paddingLeft="50dp"
-                    android:paddingRight="50dp">
-
-                    <Button
-                        android:id="@+id/layoutMHCNV_btnQuanLyDonHang"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:text="Quản lý đơn hàng"
-                        android:textColor="@color/black"
-                        android:textStyle="bold"
-                        android:backgroundTint="@color/darker_gray"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1.5"
-                    android:orientation="vertical"
-                    android:paddingLeft="50dp"
-                    android:paddingRight="50dp">
-
-                    <Button
-                        android:id="@+id/layoutMHCNV_btnQuanLySanPham"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:text="Quản lý sản phẩm"
-                        android:textColor="@color/black"
-                        android:textStyle="bold"
-                        android:backgroundTint="@color/darker_gray"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="0.3"
-                    android:orientation="vertical"></LinearLayout>
-
-            </LinearLayout>
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="2.3"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:padding="20dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/border_layout"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="2.2"
-                    android:paddingLeft="10dp"
-                    android:text="Công việc"
-                    android:textSize="20dp"
-                    android:textStyle="bold"
-                    android:textColor="@color/black"/>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="3.4"
-                    android:orientation="vertical"
-                    android:paddingLeft="50dp"
-                    android:paddingRight="50dp">
-
-                    <Button
-                        android:id="@+id/layoutMHCNV_btnLichLamViec"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="2"
-                        android:text="Lịch làm việc"
-                        android:textColor="@color/black"
-                        android:textStyle="bold"
-                        android:backgroundTint="@color/darker_gray"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="3.4"
-                    android:orientation="vertical"
-                    android:paddingLeft="50dp"
-                    android:paddingRight="50dp">
-
-                    <Button
-                        android:id="@+id/layoutMHCNV_btnBangCong"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="2"
-                        android:text="Bảng công"
-                        android:textColor="@color/black"
-                        android:textStyle="bold"
-                        android:backgroundTint="@color/darker_gray"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="3.4"
-                    android:orientation="vertical"
-                    android:paddingLeft="50dp"
-                    android:paddingRight="50dp">
-
-                    <Button
-                        android:id="@+id/layoutMHCNV_btnPhanHoiKhachHang"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="2"
-                        android:text="Phản hồi khách hàng"
-                        android:textColor="@color/black"
-                        android:textStyle="bold"
-                        android:backgroundTint="@color/darker_gray"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:orientation="vertical"></LinearLayout>
+                    android:gravity="center|left"
+                    android:text="Mã nhân viên:"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/textsize" />
+
+                <TextView
+                    android:id="@+id/layoutMHCNV_tvMaNhanVien"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.7"
+                    android:gravity="center|left"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/textsize" />
 
             </LinearLayout>
 
         </LinearLayout>
+
+
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="150dp"
+        android:layout_weight="5"
+        android:orientation="vertical"
+        android:padding="@dimen/marginleft">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/border_layout"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/layoutMHCNV_tvNgay"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.5"
+                android:paddingLeft="10dp"
+                android:paddingTop="5dp"
+                android:textColor="@color/black"
+                android:textSize="@dimen/textsize"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_margin="@dimen/marginleft"
+                android:layout_weight="1">
+
+                <Button
+                    android:id="@+id/layoutMHCNV_btnDanhMucSanPham"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:backgroundTint="@color/darker_gray"
+                    android:text="Danh mục sản phẩm"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/textsize"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_margin="@dimen/marginleft"
+                android:layout_weight="1">
+
+                <Button
+                    android:id="@+id/layoutMHCNV_btnQuanLyDonHang"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:backgroundTint="@color/darker_gray"
+                    android:text="Quản lý đơn hàng"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/textsize"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_margin="@dimen/marginleft"
+                android:layout_weight="1">
+
+                <Button
+                    android:id="@+id/layoutMHCNV_btnXacNhanGiaoHang"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:backgroundTint="@color/darker_gray"
+                    android:text="Xác nhận giao hàng"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/textsize"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_margin="@dimen/marginleft"
+                android:layout_weight="1">
+
+                <Button
+                    android:id="@+id/layoutMHCNV_btnPhanHoiBinhLuan"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:backgroundTint="@color/darker_gray"
+                    android:text="Phản hồi bình luận"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/textsize"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
 </LinearLayout>

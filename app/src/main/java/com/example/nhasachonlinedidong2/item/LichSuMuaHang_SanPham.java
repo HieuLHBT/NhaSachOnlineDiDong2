@@ -1,40 +1,80 @@
 package com.example.nhasachonlinedidong2.item;
 
 public class LichSuMuaHang_SanPham {
-    private String tenSanPham;
-    private int giaSanPham;
-    //private String hinhSanPham;
+    private String maSanPham;
+    private String temSanPham;
+    private String hinhSanPham;
+    private int giaTien;
+    private int khuyenMai;
+    private int soLuongMua;
+    private int tongTien;
 
-
-    public String getTenSanPham() {
-        return tenSanPham;
+    public String getMaSanPham() {
+        return maSanPham;
     }
 
-    public void setTenSanPham(String tenSanPham) {
-        this.tenSanPham = tenSanPham;
+    public String getTemSanPham() {
+        return temSanPham;
     }
 
-    public int getGiaSanPham() {
-        return giaSanPham;
+    public String getHinhSanPham() {
+        return hinhSanPham;
     }
 
-    public void setGiaSanPham(int giaSanPham) {
-        this.giaSanPham = giaSanPham;
+    public int getGiaTien() {
+        return giaTien;
     }
 
-//    public String getHinhSanPham() {
-//        return hinhSanPham;
-//    }
-//
-//    public void setHinhSanPham(String hinhSanPham) {
-//        this.hinhSanPham = hinhSanPham;
-//    }
+    public int getKhuyenMai() {
+        return khuyenMai;
+    }
+
+    public int getSoLuongMua() {
+        return soLuongMua;
+    }
+
+    public int getTongTien() {
+        return tongTien;
+    }
+
+    public void setMaSanPham(String maSanPham) {
+        this.maSanPham = maSanPham;
+    }
+
+    public void setTemSanPham(String temSanPham) {
+        this.temSanPham = temSanPham;
+    }
+
+    public void setHinhSanPham(String hinhSanPham) {
+        this.hinhSanPham = hinhSanPham;
+    }
+
+    public void setGiaTien(int giaTien) {
+        this.giaTien = giaTien;
+    }
+
+    public void setKhuyenMai(int khuyenMai) {
+        this.khuyenMai = khuyenMai;
+    }
+
+    public void setSoLuongMua(int soLuongMua) {
+        this.soLuongMua = soLuongMua;
+    }
+
+    public void setTongTien(int tongTien) {
+        this.tongTien = tongTien;
+    }
 
     public LichSuMuaHang_SanPham() {
     }
 
-    public LichSuMuaHang_SanPham(String tenSanPham, int giaSanPham) {
-        this.tenSanPham = tenSanPham;
-        this.giaSanPham = giaSanPham;
+    public LichSuMuaHang_SanPham(String maSanPham, String temSanPham, String hinhSanPham, int giaTien, int khuyenMai, int soLuongMua) {
+        this.maSanPham = maSanPham;
+        this.temSanPham = temSanPham;
+        this.hinhSanPham = hinhSanPham;
+        this.giaTien = (giaTien - (giaTien * khuyenMai / 100));
+        this.khuyenMai = khuyenMai;
+        this.soLuongMua = soLuongMua;
+        this.tongTien = (giaTien - (giaTien * khuyenMai / 100)) * soLuongMua;
     }
 }

@@ -1,84 +1,110 @@
 package com.example.nhasachonlinedidong2.item;
 
-import java.util.ArrayList;
-
 public class TheoDoiDonHang {
     private String maDonHang;
-    private String tenNVGiaoHang;
-    private String thoiGianDat;
-    private String thoiGianDuKienGiao;
-    private int tongTienThanhToan;
-    private ArrayList<TheoDoiDonHangSanPham> theoDoiDonHangSanPhams;
-    private String trangThai;
+    private String tenNhanVien;
+    private String ngayGiao;
+    private String ngayLap;
+    private int tongTien;
+    private String trangThaiDon;
+    private String trangThaiDuyetNV;
+    private String trangThaiGiaoHangNV;
+    private String trangThaiGiaoHangKH;
+    private String hinhThucThanhToan;
 
     public String getMaDonHang() {
         return maDonHang;
     }
 
-    public String getTenNVGiaoHang() {
-        return tenNVGiaoHang;
+    public String getTenNhanVien() {
+        return tenNhanVien;
     }
 
-    public String getThoiGianDat() {
-        return thoiGianDat;
+    public String getNgayGiao() {
+        return ngayGiao;
     }
 
-    public String getThoiGianDuKienGiao() {
-        return thoiGianDuKienGiao;
+    public String getNgayLap() {
+        return ngayLap;
     }
 
-    public int getTongTienThanhToan() {
-        return tongTienThanhToan;
+    public int getTongTien() {
+        return tongTien;
     }
 
-    public ArrayList<TheoDoiDonHangSanPham> getTheoDoiDonHangSanPhams() {
-        return theoDoiDonHangSanPhams;
+    public String getTrangThaiDon() {
+        return trangThaiDon;
     }
 
-    public String getTrangThai() {
-        return trangThai;
+    public String getTrangThaiDuyetNV() {
+        return trangThaiDuyetNV;
+    }
+
+    public String getTrangThaiGiaoHangNV() {
+        return trangThaiGiaoHangNV;
+    }
+
+    public String getTrangThaiGiaoHangKH() {
+        return trangThaiGiaoHangKH;
+    }
+
+    public String getHinhThucThanhToan() {
+        return hinhThucThanhToan;
     }
 
     public void setMaDonHang(String maDonHang) {
         this.maDonHang = maDonHang;
     }
 
-    public void setTenNVGiaoHang(String tenNVGiaoHang) {
-        this.tenNVGiaoHang = tenNVGiaoHang;
+    public void setTenNhanVien(String tenNhanVien) {
+        this.tenNhanVien = tenNhanVien;
     }
 
-    public void setThoiGianDat(String thoiGianDat) {
-        this.thoiGianDat = thoiGianDat;
+    public void setNgayGiao(String ngayGiao) {
+        this.ngayGiao = ngayGiao;
     }
 
-    public void setThoiGianDuKienGiao(String thoiGianDuKienGiao) {
-        this.thoiGianDuKienGiao = thoiGianDuKienGiao;
+    public void setNgayLap(String ngayLap) {
+        this.ngayLap = ngayLap;
     }
 
-    public void setTongTienThanhToan(int tongTienThanhToan) {
-        this.tongTienThanhToan = tongTienThanhToan;
+    public void setTongTien(int tongTien) {
+        this.tongTien = tongTien;
     }
 
-    public void setTheoDoiDonHangSanPhams(ArrayList<TheoDoiDonHangSanPham> theoDoiDonHangSanPhams) {
-        this.theoDoiDonHangSanPhams = theoDoiDonHangSanPhams;
+    public void setTrangThaiDon(String trangThaiDon) {
+        this.trangThaiDon = trangThaiDon;
     }
 
-    public void setTrangThai(String trangThai) {
-        this.trangThai = trangThai;
+    public void setTrangThaiDuyetNV(String trangThaiDuyetNV) {
+        this.trangThaiDuyetNV = trangThaiDuyetNV;
+    }
+
+    public void setTrangThaiGiaoHangNV(String trangThaiGiaoHangNV) {
+        this.trangThaiGiaoHangNV = trangThaiGiaoHangNV;
+    }
+
+    public void setTrangThaiGiaoHangKH(String trangThaiGiaoHangKH) {
+        this.trangThaiGiaoHangKH = trangThaiGiaoHangKH;
+    }
+
+    public void setHinhThucThanhToan(String hinhThucThanhToan) {
+        this.hinhThucThanhToan = hinhThucThanhToan;
     }
 
     public TheoDoiDonHang() {
     }
 
-    public TheoDoiDonHang(String maDonHang, String tenNVGiaoHang, String thoiGianDat, String thoiGianDuKienGiao, ArrayList<TheoDoiDonHangSanPham> theoDoiDonHangSanPhams, String trangThai) {
+    public TheoDoiDonHang(String maDonHang, String tenNhanVien, String ngayGiao, String ngayLap, int tongTien, String trangThaiDon, String trangThaiDuyetNV, String trangThaiGiaoHangNV, String trangThaiGiaoHangKH, String hinhThucThanhToan) {
         this.maDonHang = maDonHang;
-        this.tenNVGiaoHang = tenNVGiaoHang;
-        this.thoiGianDat = thoiGianDat;
-        this.thoiGianDuKienGiao = thoiGianDuKienGiao;
-        this.theoDoiDonHangSanPhams = theoDoiDonHangSanPhams;
-        this.trangThai = trangThai;
-        for (TheoDoiDonHangSanPham sanPham: this.theoDoiDonHangSanPhams) {
-            this.tongTienThanhToan = (sanPham.getGiaTien() - (sanPham.getGiaTien() * sanPham.getKhuyenMai() / 100)) * sanPham.getSoLuongXuat();
-        }
+        this.tenNhanVien = tenNhanVien;
+        this.ngayGiao = ngayGiao;
+        this.ngayLap = ngayLap;
+        this.tongTien = tongTien;
+        this.trangThaiDon = trangThaiDon;
+        this.trangThaiDuyetNV = trangThaiDuyetNV;
+        this.trangThaiGiaoHangNV = trangThaiGiaoHangNV;
+        this.trangThaiGiaoHangKH = trangThaiGiaoHangKH;
+        this.hinhThucThanhToan = hinhThucThanhToan;
     }
 }
