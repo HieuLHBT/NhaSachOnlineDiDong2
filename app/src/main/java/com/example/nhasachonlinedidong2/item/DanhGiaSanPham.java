@@ -1,70 +1,69 @@
 package com.example.nhasachonlinedidong2.item;
 
 public class DanhGiaSanPham {
-    private String id;
-    private String idSanPham;
-    private String imgAnhSanPham;
-    private String gia;
-    private String soLuong;
-    private String soLuongDanhGia;
+    private String maSanPham;
+    private String tenSanPham;
+    private String hinhSanPham;
+    private String binhLuan;
+    private Integer danhGia = 0;
+    private Boolean check = false;
 
-    public String getId() {
-        return id;
+    public String getMaSanPham() {
+        return maSanPham;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public String getTenSanPham() {
+        return tenSanPham;
     }
 
-    public String getIdSanPham() {
-        return idSanPham;
+    public String getHinhSanPham() {
+        return hinhSanPham;
     }
 
-    public void setIdSanPham(String idSanPham) {
-        this.idSanPham = idSanPham;
+    public String getBinhLuan() {
+        return binhLuan;
     }
 
-    public String getImgAnhSanPham() {
-        return imgAnhSanPham;
+    public Integer getDanhGia() {
+        return danhGia;
     }
 
-    public void setImgAnhSanPham(String imgAnhSanPham) {
-        this.imgAnhSanPham = imgAnhSanPham;
+    public Boolean getCheck() {
+        return check;
     }
 
-    public String getGia() {
-        return gia;
+    public void setMaSanPham(String maSanPham) {
+        this.maSanPham = maSanPham;
     }
 
-    public void setGia(String gia) {
-        this.gia = gia;
+    public void setTenSanPham(String tenSanPham) {
+        this.tenSanPham = tenSanPham;
     }
 
-    public String getSoLuong() {
-        return soLuong;
+    public void setHinhSanPham(String hinhSanPham) {
+        this.hinhSanPham = hinhSanPham;
     }
 
-    public void setSoLuong(String soLuong) {
-        this.soLuong = soLuong;
+    public void setBinhLuan(String binhLuan) {
+        this.binhLuan = binhLuan;
     }
 
-    public String getSoLuongDanhGia() {
-        return soLuongDanhGia;
+    public void setDanhGia(Integer danhGia) {
+        this.danhGia = danhGia;
     }
 
-    public void setSoLuongDanhGia(String soLuongDanhGia) {
-        this.soLuongDanhGia = soLuongDanhGia;
+    public void setCheck(Boolean check) {
+        this.check = check;
     }
 
     public DanhGiaSanPham() {
     }
 
-    public DanhGiaSanPham(String id, String idSanPham, String imgAnhSanPham, String gia, String soLuong, String soLuongDanhGia) {
-        this.id = id;
-        this.idSanPham = idSanPham;
-        this.imgAnhSanPham = imgAnhSanPham;
-        this.gia = gia;
-        this.soLuong = soLuong;
-        this.soLuongDanhGia = soLuongDanhGia;
+    public DanhGiaSanPham(String maSanPham, String tenSanPham, String hinhSanPham, String binhLuan, Integer danhGia) {
+        this.maSanPham = maSanPham;
+        this.tenSanPham = tenSanPham;
+        this.hinhSanPham = hinhSanPham;
+        this.binhLuan = binhLuan;
+        this.danhGia = danhGia;
     }
 }

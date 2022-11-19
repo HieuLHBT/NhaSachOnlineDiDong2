@@ -6,10 +6,10 @@ public class TheoDoiDonHang {
     private String ngayGiao;
     private String ngayLap;
     private int tongTien;
-    private String trangThai;
-    private String trangThaiChuyenTienKH;
-    private String trangThaiNhanTienKH;
-    private String trangThaiTraTienQL;
+    private String trangThaiDon;
+    private String trangThaiDuyetNV;
+    private String trangThaiGiaoHangNV;
+    private String trangThaiGiaoHangKH;
     private String hinhThucThanhToan;
 
     public String getMaDonHang() {
@@ -32,20 +32,20 @@ public class TheoDoiDonHang {
         return tongTien;
     }
 
-    public String getTrangThai() {
-        return trangThai;
+    public String getTrangThaiDon() {
+        return trangThaiDon;
     }
 
-    public String getTrangThaiChuyenTienKH() {
-        return trangThaiChuyenTienKH;
+    public String getTrangThaiDuyetNV() {
+        return trangThaiDuyetNV;
     }
 
-    public String getTrangThaiNhanTienKH() {
-        return trangThaiNhanTienKH;
+    public String getTrangThaiGiaoHangNV() {
+        return trangThaiGiaoHangNV;
     }
 
-    public String getTrangThaiTraTienQL() {
-        return trangThaiTraTienQL;
+    public String getTrangThaiGiaoHangKH() {
+        return trangThaiGiaoHangKH;
     }
 
     public String getHinhThucThanhToan() {
@@ -72,20 +72,20 @@ public class TheoDoiDonHang {
         this.tongTien = tongTien;
     }
 
-    public void setTrangThai(String trangThai) {
-        this.trangThai = trangThai;
+    public void setTrangThaiDon(String trangThaiDon) {
+        this.trangThaiDon = trangThaiDon;
     }
 
-    public void setTrangThaiChuyenTienKH(String trangThaiChuyenTienKH) {
-        this.trangThaiChuyenTienKH = trangThaiChuyenTienKH;
+    public void setTrangThaiDuyetNV(String trangThaiDuyetNV) {
+        this.trangThaiDuyetNV = trangThaiDuyetNV;
     }
 
-    public void setTrangThaiNhanTienKH(String trangThaiNhanTienKH) {
-        this.trangThaiNhanTienKH = trangThaiNhanTienKH;
+    public void setTrangThaiGiaoHangNV(String trangThaiGiaoHangNV) {
+        this.trangThaiGiaoHangNV = trangThaiGiaoHangNV;
     }
 
-    public void setTrangThaiTraTienQL(String trangThaiTraTienQL) {
-        this.trangThaiTraTienQL = trangThaiTraTienQL;
+    public void setTrangThaiGiaoHangKH(String trangThaiGiaoHangKH) {
+        this.trangThaiGiaoHangKH = trangThaiGiaoHangKH;
     }
 
     public void setHinhThucThanhToan(String hinhThucThanhToan) {
@@ -95,16 +95,16 @@ public class TheoDoiDonHang {
     public TheoDoiDonHang() {
     }
 
-    public TheoDoiDonHang(String maDonHang, String tenNhanVien, String ngayGiao, String ngayLap, int tongTien, String trangThai, String trangThaiChuyenTienKH, String trangThaiNhanTienKH, String trangThaiTraTienQL, String hinhThucThanhToan) {
+    public TheoDoiDonHang(String maDonHang, String tenNhanVien, String ngayGiao, String ngayLap, int tongTien, String trangThaiDon, String trangThaiDuyetNV, String trangThaiGiaoHangNV, String trangThaiGiaoHangKH, String hinhThucThanhToan) {
         this.maDonHang = maDonHang;
         this.tenNhanVien = tenNhanVien;
         this.ngayGiao = ngayGiao;
         this.ngayLap = ngayLap;
         this.tongTien = tongTien;
-        this.trangThai = trangThai;
-        this.trangThaiChuyenTienKH = trangThaiChuyenTienKH;
-        this.trangThaiNhanTienKH = trangThaiNhanTienKH;
-        this.trangThaiTraTienQL = trangThaiTraTienQL;
+        this.trangThaiDon = trangThaiDon;
+        this.trangThaiDuyetNV = trangThaiDuyetNV;
+        this.trangThaiGiaoHangNV = trangThaiGiaoHangNV;
+        this.trangThaiGiaoHangKH = trangThaiGiaoHangKH;
         this.hinhThucThanhToan = hinhThucThanhToan;
     }
 }

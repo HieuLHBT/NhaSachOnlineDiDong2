@@ -1,24 +1,19 @@
 
 package com.example.nhasachonlinedidong2.activity;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
@@ -26,7 +21,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.nhasachonlinedidong2.R;
-import com.example.nhasachonlinedidong2.adapters.LichSuMuaHangActivity;
 import com.example.nhasachonlinedidong2.adapters.ManHinhChinhKhachHangAdapter;
 import com.example.nhasachonlinedidong2.data_model.KhachHang;
 import com.example.nhasachonlinedidong2.firebase.FireBaseNhaSachOnline;
@@ -34,13 +28,11 @@ import com.example.nhasachonlinedidong2.item.ItemSanPham;
 import com.example.nhasachonlinedidong2.tools.SharePreferences;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-
-import java.io.Serializable;
 import java.util.ArrayList;
 
 public class ManHinhChinhKhachHangActivity extends AppCompatActivity {
     private SharePreferences sharePreferences = new SharePreferences();
-    private FireBaseNhaSachOnline fireBase = new FireBaseNhaSachOnline();
+    private FireBaseNhaSachOnline fireBaseNhaSachOnline = new FireBaseNhaSachOnline();
     private String maKhachHang;
 
     private SearchView layoutMHCKH_swTimKiem;
@@ -100,7 +92,7 @@ public class ManHinhChinhKhachHangActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        fireBase.hienThiManHinhChinhKhachHang(khachHang, sanPhams, adapter, this);
+        fireBaseNhaSachOnline.hienThiManHinhChinhKhachHang(khachHang, sanPhams, adapter, this);
     }
 
     public void hienThiTenKhachHang() {
@@ -159,7 +151,7 @@ public class ManHinhChinhKhachHangActivity extends AppCompatActivity {
                 itemMHCKH_btnThemGioHang.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        fireBase.themVaoGioHang(maKhachHang, sanPhams.get(position).getMaSanPham(), itemMHCKH_edtSoLuong.getText().toString());
+                        fireBaseNhaSachOnline.themVaoGioHang(maKhachHang, sanPhams.get(position).getMaSanPham(), itemMHCKH_edtSoLuong.getText().toString());
                         Intent intent = new Intent(ManHinhChinhKhachHangActivity.this, GioHangActivity.class);
                         intent.putExtra("maSanPham", sanPhams.get(position).getMaSanPham());
                         ManHinhChinhKhachHangActivity.this.startActivity(intent);
@@ -186,19 +178,7 @@ public class ManHinhChinhKhachHangActivity extends AppCompatActivity {
                 fiIteredList.add(sanPham);
             }
         }
-
-        if (fiIteredList.isEmpty()) {
-            AlertDialog.Builder b = new AlertDialog.Builder(this);
-            b.setTitle("THÔNG BÁO");
-            b.setMessage("Không tìm thấy sản phẩm!");
-            b.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    dialogInterface.cancel();
-                }
-            });
-            b.create().show();
-        } else {
+        if (!fiIteredList.isEmpty()) {
             adapter.setFilteredList(fiIteredList);
         }
     }
@@ -219,41 +199,8 @@ public class ManHinhChinhKhachHangActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.bottom_nav_menu, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_ManHinhChinhKH:
-
-                break;
-            case R.id.menu_TheoDoiDonHang:
-                Intent intentTDDH = new Intent(ManHinhChinhKhachHangActivity.this, TheoDoiDonHangActivity.class);
-                startActivity(intentTDDH);
-                break;
-            case R.id.menu_GioHang:
-                Intent intentGH = new Intent(ManHinhChinhKhachHangActivity.this, GioHangActivity.class);
-                startActivity(intentGH);
-                break;
-            case R.id.menu_LichSuMuaHang:
-//                Intent intentLSMH = new Intent(ManHinhChinhKhachHangActivity.this, .class);
-//                startActivity(intentLSMH);
-                break;
-            case R.id.menu_ThongTin:
-                Intent intentTTKH = new Intent(ManHinhChinhKhachHangActivity.this, ThongTinKhachHangActivity.class);
-                startActivity(intentTTKH);
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             Fragment fragment;

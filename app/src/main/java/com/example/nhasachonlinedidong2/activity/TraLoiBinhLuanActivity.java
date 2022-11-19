@@ -40,7 +40,7 @@ public class TraLoiBinhLuanActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.traloibinhluan_layout);
 
-        maNhanVien = "nv1";
+        maNhanVien = sharePreferences.layMa(this);
 
         layoutTLBL_btnTroVe = findViewById(R.id.layoutTLBL_btnTroVe);
         layoutTLBL_btnXacNhan = findViewById(R.id.layoutTLBL_btnXacNhan);

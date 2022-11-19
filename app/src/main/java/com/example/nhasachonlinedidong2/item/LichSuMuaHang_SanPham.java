@@ -72,7 +72,7 @@ public class LichSuMuaHang_SanPham {
         this.maSanPham = maSanPham;
         this.temSanPham = temSanPham;
         this.hinhSanPham = hinhSanPham;
-        this.giaTien = giaTien;
+        this.giaTien = (giaTien - (giaTien * khuyenMai / 100));
         this.khuyenMai = khuyenMai;
         this.soLuongMua = soLuongMua;
         this.tongTien = (giaTien - (giaTien * khuyenMai / 100)) * soLuongMua;

@@ -46,16 +46,12 @@ public class TheoDoiDonHangRecyclerViewAdapter extends RecyclerView.Adapter<Theo
         holder.itemTDDH_tvThoiGianGiao.setText(theoDoiDonHang.getNgayGiao());
         holder.itemTDDH_tvThoiGianDatHang.setText(theoDoiDonHang.getNgayLap());
         holder.itemTDDH_tvTongTienThanhToan.setText(formatter.format(theoDoiDonHang.getTongTien()) + " VNĐ");
-        holder.itemTDDH_tvTrangThaiDon.setText(theoDoiDonHang.getTrangThai());
+        holder.itemTDDH_tvTrangThaiDon.setText(theoDoiDonHang.getTrangThaiDon());
         holder.itemTDDH_tvHinhThucThanhToan.setText(theoDoiDonHang.getHinhThucThanhToan());
 
-        if (theoDoiDonHang.getTrangThaiChuyenTienKH().equalsIgnoreCase("Đang xử lý")) {
-            holder.itemTDDH_llHinhThuc.setVisibility(View.VISIBLE);
-            holder.itemTDDH_llDuKienGiao.setVisibility(View.GONE);
+        if (theoDoiDonHang.getTrangThaiGiaoHangNV().equalsIgnoreCase("Đã xác nhận")) {
             holder.itemTDDH_tvTrangThaiDon.setVisibility(View.GONE);
         } else {
-            holder.itemTDDH_llHinhThuc.setVisibility(View.GONE);
-            holder.itemTDDH_llDuKienGiao.setVisibility(View.VISIBLE);
             holder.itemTDDH_tvTrangThaiDon.setVisibility(View.VISIBLE);
         }
 

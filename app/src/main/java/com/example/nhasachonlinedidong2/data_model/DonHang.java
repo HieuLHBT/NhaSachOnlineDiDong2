@@ -5,8 +5,7 @@ public class DonHang {
     private String diaChiGiao;
     private String maGiamGia;
     private String maKhachHang;
-    private String maNVDuyet;
-    private String maNVGiao;
+    private String maNhanVien;
     private String thoiGianGiao;
     private String thoiGianLap;
     private String phiVanChuyen;
@@ -27,12 +26,8 @@ public class DonHang {
         return maKhachHang;
     }
 
-    public String getMaNVDuyet() {
-        return maNVDuyet;
-    }
-
-    public String getMaNVGiao() {
-        return maNVGiao;
+    public String getMaNhanVien() {
+        return maNhanVien;
     }
 
     public String getThoiGianGiao() {
@@ -63,12 +58,8 @@ public class DonHang {
         this.maKhachHang = maKhachHang;
     }
 
-    public void setMaNVDuyet(String maNVDuyet) {
-        this.maNVDuyet = maNVDuyet;
-    }
-
-    public void setMaNVGiao(String maNVGiao) {
-        this.maNVGiao = maNVGiao;
+    public void setMaNhanVien(String maNhanVien) {
+        this.maNhanVien = maNhanVien;
     }
 
     public void setThoiGianGiao(String thoiGianGiao) {
@@ -86,13 +77,12 @@ public class DonHang {
     public DonHang() {
     }
 
-    public DonHang(String maDonHang, String diaChiGiao, String maGiamGia, String maKhachHang, String maNVDuyet, String maNVGiao, String thoiGianGiao, String thoiGianLap, String phiVanChuyen) {
+    public DonHang(String maDonHang, String diaChiGiao, String maGiamGia, String maKhachHang, String maNhanVien, String thoiGianGiao, String thoiGianLap, String phiVanChuyen) {
         this.maDonHang = maDonHang;
         this.diaChiGiao = diaChiGiao;
         this.maGiamGia = maGiamGia;
         this.maKhachHang = maKhachHang;
-        this.maNVDuyet = maNVDuyet;
-        this.maNVGiao = maNVGiao;
+        this.maNhanVien = maNhanVien;
         this.thoiGianGiao = thoiGianGiao;
         this.thoiGianLap = thoiGianLap;
         this.phiVanChuyen = phiVanChuyen;

@@ -28,7 +28,7 @@
             android:layout_weight="6"
             android:gravity="center"
             android:paddingRight="@dimen/tieude"
-            android:text="Thông tin cá nhân"
+            android:text="Thông Tin Cá Nhân"
             android:textColor="@color/design_default_color_error"
             android:textSize="@dimen/tieudesize"
             android:textStyle="bold" />

@@ -29,6 +29,7 @@ import com.example.nhasachonlinedidong2.tools.SharePreferences;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class ThanhToanActivity extends AppCompatActivity {
@@ -86,7 +87,6 @@ public class ThanhToanActivity extends AppCompatActivity {
         ArrayAdapter arrayAdapterHinhThucGiao = new ArrayAdapter(this, R.layout.thanhtoan_spinner, hinhThucGiao);
         layoutTT_spnHinhThucGiao.setAdapter(arrayAdapterHinhThucGiao);
         phuongThucThanhToan.add("Trực tiếp");
-        phuongThucThanhToan.add("Online");
         ArrayAdapter arrayAdapterPhuongThucThanhToan = new ArrayAdapter(this, R.layout.thanhtoan_spinner, phuongThucThanhToan);
         layoutTT_spnPhuongThucThanhToan.setAdapter(arrayAdapterPhuongThucThanhToan);
 
@@ -166,42 +166,42 @@ public class ThanhToanActivity extends AppCompatActivity {
                 al.show();
             }
         });
+
         layoutTT_btnDatHang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder b = new AlertDialog.Builder(ThanhToanActivity.this);
-                b.setTitle("THÔNG BÁO!");
+                b.setTitle("THÔNG BÁO");
                 b.setMessage("Xác nhận đặt hàng?");
                 b.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-                        String ngayHienTai = sdf.format(LocalDate.now());
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                        String ngayHienTai = LocalDate.now().format(formatter);
                         DonHang donHang;
                         if (giamGia.getMaGiamGia() != null && Integer.valueOf(giamGia.getYeuCau()) < tongTien) {
-                            donHang = new DonHang(maDonHang,khachHang.getDiaChi(),giamGia.getMaGiamGia(),maKhachHang,"","","",ngayHienTai, String.valueOf(phiVanChuyen));
+                            donHang = new DonHang(maDonHang,khachHang.getDiaChi(),giamGia.getMaGiamGia(),maKhachHang,"","",ngayHienTai, String.valueOf(phiVanChuyen));
                         } else {
-                            donHang = new DonHang(maDonHang,khachHang.getDiaChi(), "",maKhachHang,"","","",ngayHienTai, String.valueOf(phiVanChuyen));
+                            donHang = new DonHang(maDonHang,khachHang.getDiaChi(), "",maKhachHang,"","",ngayHienTai, String.valueOf(phiVanChuyen));
                         }
                         String ngayGiao = "";
                         if (donHang.getPhiVanChuyen().equalsIgnoreCase("15000")) {
                             int thu = LocalDate.now().plusDays(3).getDayOfWeek().getValue();
                             if (thu == 0) {
-                                ngayGiao = sdf.format(LocalDate.now().plusDays(4));
+                                ngayGiao = LocalDate.now().plusDays(4).format(formatter);
                             } else {
-                                ngayGiao = sdf.format(LocalDate.now().plusDays(3));
+                                ngayGiao = LocalDate.now().plusDays(3).format(formatter);
                             }
                         } else if (donHang.getPhiVanChuyen().equalsIgnoreCase("30000")) {
                             int thu = LocalDate.now().plusDays(1).getDayOfWeek().getValue();
                             if (thu == 0) {
-                                ngayGiao = sdf.format(LocalDate.now().plusDays(2));
+                                ngayGiao = LocalDate.now().plusDays(2).format(formatter);
                             } else {
-                                ngayGiao = sdf.format(LocalDate.now().plusDays(1));
+                                ngayGiao = LocalDate.now().plusDays(1).format(formatter);
                             }
                         }
                         donHang.setThoiGianGiao(ngayGiao);
                         fireBaseNhaSachOnline.datHang(layoutTT_spnPhuongThucThanhToan.getSelectedItem().toString() ,donHang, ThanhToanActivity.this);
-                        finish();
                     }
                 });
                 b.setNegativeButton("Không đồng ý", new DialogInterface.OnClickListener() {

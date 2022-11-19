@@ -1,13 +1,17 @@
 package com.example.nhasachonlinedidong2.activity;
 
+import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -57,7 +61,7 @@ import java.util.List;
 public class ManHinhChinhQuanLyActivity extends AppCompatActivity {
     private PieChart layoutMHCQL_pcBieuDoDonHang;
     private BarChart layoutMHCQL_bcBieuDoDoanhSo;
-    private TextView layoutMHCQL_tvHoTen, layoutMHCQL_tvMaQuanLy, layoutMHCQL_tvChucVu, layoutMHCQL_tvSoNguoiCa1, layoutMHCQL_tvSoNguoiCa2;
+    private TextView layoutMHCQL_tvHoTen, layoutMHCQL_tvMaQuanLy, layoutMHCQL_tvChucVu, layoutMHCQL_btnMenu;
     private Spinner layoutMHCQL_spnNgay;
     private ImageView layoutMHCQL_imgHinh;
 
@@ -77,7 +81,7 @@ public class ManHinhChinhQuanLyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.manhinhchinh_quanly_layout);
 
-        maQuanLy = "ql1";
+        maQuanLy = sharePreferences.layMa(this);
         duLieuNgayHienTai = LocalDate.now();
 
         layoutMHCQL_pcBieuDoDonHang = findViewById(R.id.layoutMHCQL_pcBieuDoDonHang);
@@ -87,8 +91,7 @@ public class ManHinhChinhQuanLyActivity extends AppCompatActivity {
         layoutMHCQL_tvChucVu = findViewById(R.id.layoutMHCQL_tvChucVu);
         layoutMHCQL_spnNgay = findViewById(R.id.layoutMHCQL_spnNgay);
         layoutMHCQL_imgHinh = findViewById(R.id.layoutMHCQL_imgHinh);
-        layoutMHCQL_tvSoNguoiCa1 = findViewById(R.id.layoutMHCQL_tvSoNguoiCa1);
-        layoutMHCQL_tvSoNguoiCa2 = findViewById(R.id.layoutMHCQL_tvSoNguoiCa2);
+        layoutMHCQL_btnMenu = findViewById(R.id.layoutMHCQL_btnMenu);
 
         hienThiNgay();
 
@@ -110,11 +113,36 @@ public class ManHinhChinhQuanLyActivity extends AppCompatActivity {
 
         // Thiet lap BarChart
         layoutMHCQL_bcBieuDoDoanhSo.getDescription().setText("Đơn vị: triệu đồng (VNĐ)");
-        layoutMHCQL_bcBieuDoDoanhSo.getDescription().setPosition(230, 20);
+        layoutMHCQL_bcBieuDoDoanhSo.getDescription().setTextSize(11);
+        layoutMHCQL_bcBieuDoDoanhSo.getDescription().setPosition(310, 28);
         layoutMHCQL_bcBieuDoDoanhSo.getLegend().setEnabled(false);
         layoutMHCQL_bcBieuDoDoanhSo.getAxisRight().setEnabled(false);
         layoutMHCQL_bcBieuDoDoanhSo.setDrawGridBackground(true);
 
+        layoutMHCQL_btnMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PopupMenu popup = new PopupMenu(v.getContext(), layoutMHCQL_btnMenu);
+                popup.inflate(R.menu.manhinhchinhquanly_menu);
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId()) {
+                            case R.id.menuMHCQL_itemQuanLySanPham:
+                                Intent intentQLSP = new Intent(ManHinhChinhQuanLyActivity.this, TraLoiBinhLuanActivity.class);
+                                ManHinhChinhQuanLyActivity.this.startActivity(intentQLSP);
+                                break;
+                            case R.id.menuMHCQL_itemDangXuat:
+                                sharePreferences.dangXuat(ManHinhChinhQuanLyActivity.this);
+                                ManHinhChinhQuanLyActivity.this.finish();
+                                break;
+                        }
+                        return false;
+                    }
+                });
+                popup.show();
+            }
+        });
     }
 
     @Override
@@ -214,7 +242,7 @@ public class ManHinhChinhQuanLyActivity extends AppCompatActivity {
                 ngay = duLieuNgayHienTai.plusDays(3).format(fm);
                 tuanHienTai.set(5, ngay);
                 ngay = duLieuNgayHienTai.plusDays(4).format(fm);
-                tuanHienTai.set(5, ngay);
+                tuanHienTai.set(6, ngay);
                 break;
             case 3:
                 ngay = duLieuNgayHienTai.minusDays(3).format(fm);
@@ -230,7 +258,7 @@ public class ManHinhChinhQuanLyActivity extends AppCompatActivity {
                 ngay = duLieuNgayHienTai.plusDays(2).format(fm);
                 tuanHienTai.set(5, ngay);
                 ngay = duLieuNgayHienTai.plusDays(3).format(fm);
-                tuanHienTai.set(5, ngay);
+                tuanHienTai.set(6, ngay);
                 break;
             case 4:
                 ngay = duLieuNgayHienTai.minusDays(4).format(fm);
@@ -246,7 +274,7 @@ public class ManHinhChinhQuanLyActivity extends AppCompatActivity {
                 ngay = duLieuNgayHienTai.plusDays(1).format(fm);
                 tuanHienTai.set(5, ngay);
                 ngay = duLieuNgayHienTai.plusDays(2).format(fm);
-                tuanHienTai.set(5, ngay);
+                tuanHienTai.set(6, ngay);
                 break;
             case 5:
                 ngay = duLieuNgayHienTai.minusDays(5).format(fm);
@@ -262,7 +290,7 @@ public class ManHinhChinhQuanLyActivity extends AppCompatActivity {
                 ngay = duLieuNgayHienTai.format(fm);
                 tuanHienTai.set(5, ngay);
                 ngay = duLieuNgayHienTai.plusDays(1).format(fm);
-                tuanHienTai.set(5, ngay);
+                tuanHienTai.set(6, ngay);
                 break;
             case 6:
                 ngay = duLieuNgayHienTai.minusDays(6).format(fm);
@@ -278,7 +306,7 @@ public class ManHinhChinhQuanLyActivity extends AppCompatActivity {
                 ngay = duLieuNgayHienTai.minusDays(1).format(fm);
                 tuanHienTai.set(5, ngay);
                 ngay = duLieuNgayHienTai.format(fm);
-                tuanHienTai.set(5, ngay);
+                tuanHienTai.set(6, ngay);
                 break;
         }
         ArrayAdapter arrayAdapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item, tuanHienTai);
@@ -345,10 +373,6 @@ public class ManHinhChinhQuanLyActivity extends AppCompatActivity {
         } else {
             layoutMHCQL_pcBieuDoDonHang.setCenterText("HIỆN TẠI KHÔNG CÓ ĐƠN HÀNG NÀO");
         }
-
-
-        layoutMHCQL_tvSoNguoiCa1.setText(thongKeDon.getSoNguoiLamCa1() + " người");
-        layoutMHCQL_tvSoNguoiCa2.setText(thongKeDon.getSoNguoiLamCa2() + " người");
     }
 
     public void thielapDuLieuBarChart() {

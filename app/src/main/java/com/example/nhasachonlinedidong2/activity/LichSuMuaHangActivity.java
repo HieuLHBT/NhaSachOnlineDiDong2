@@ -1,4 +1,4 @@
-package com.example.nhasachonlinedidong2.adapters;
+package com.example.nhasachonlinedidong2.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.example.nhasachonlinedidong2.R;
+import com.example.nhasachonlinedidong2.adapters.LichSuMuaHangDonHangRecyclerViewAdapter;
 import com.example.nhasachonlinedidong2.firebase.FireBaseNhaSachOnline;
 import com.example.nhasachonlinedidong2.item.LichSuMuaHang_DonHang;
 import com.example.nhasachonlinedidong2.tools.SharePreferences;
@@ -55,14 +56,16 @@ public class LichSuMuaHangActivity extends AppCompatActivity {
                 itemLSMH_btnDanhGia.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
+                        Intent intent = new Intent(LichSuMuaHangActivity.this, DanhGiaSanPhamActivity.class);
+                        intent.putExtra("maDonHang", lichSuMuaHang_donHangs.get(position).getMaDonHang());
+                        startActivity(intent);
                     }
                 });
 
                 itemLSMH_btnMuaLai.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
+                        fireBaseNhaSachOnline.muaLaiDonHang(maKhachHang, lichSuMuaHang_donHangs.get(position).getLichSuMuaHang_sanPhams(), LichSuMuaHangActivity.this);
                     }
                 });
             }
@@ -79,5 +82,6 @@ public class LichSuMuaHangActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        fireBaseNhaSachOnline.hienThiLichSuMuaHang(maKhachHang, lichSuMuaHang_donHangs, adapter);
     }
 }

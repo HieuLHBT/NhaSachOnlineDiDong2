@@ -150,7 +150,6 @@ public class ManHinhChinhKhachHangAdapter extends RecyclerView.Adapter<ManHinhCh
                 holder.itemMHCKH_img4Sao.setImageResource(R.drawable.ic_baseline_star_outline_24);
                 holder.itemMHCKH_img5Sao.setImageResource(R.drawable.ic_baseline_star_outline_24);
                 break;
-
             case 2:
                 holder.itemMHCKH_img1Sao.setImageResource(R.drawable.ic_baseline_star_24);
                 holder.itemMHCKH_img2Sao.setImageResource(R.drawable.ic_baseline_star_24);

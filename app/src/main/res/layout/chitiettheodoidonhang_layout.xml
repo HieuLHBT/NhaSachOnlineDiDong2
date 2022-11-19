@@ -327,15 +327,14 @@
         android:visibility="gone">
 
         <Button
-            android:id="@+id/layoutCTTDDH_btnXacNhanThanhToanOnline"
+            android:id="@+id/layoutCTTDDH_btnXacNhanNhanHang"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_marginRight="@dimen/le"
             android:layout_weight="1"
-            android:text="Xác nhận đã thanh toán online"
+            android:text="Xác nhận nhận hàng"
             android:textSize="@dimen/textsize"
-            android:textStyle="bold"
-            android:visibility="gone" />
+            android:textStyle="bold"/>
 
         <Button
             android:id="@+id/layoutCTTDDH_btnHuyDonHang"
@@ -346,17 +345,6 @@
             android:text="Hủy đơn hàng"
             android:textSize="@dimen/textsize"
             android:textStyle="bold" />
-
-        <Button
-            android:id="@+id/layoutCTTDDH_btnXacNhanHoanTien"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginRight="@dimen/le"
-            android:layout_weight="1"
-            android:text="Xác nhận đã nhận hoàn tiền"
-            android:textSize="@dimen/textsize"
-            android:textStyle="bold"
-            android:visibility="gone" />
 
     </LinearLayout>
 

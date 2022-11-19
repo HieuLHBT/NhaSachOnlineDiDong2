@@ -1,12 +1,18 @@
 package com.example.nhasachonlinedidong2.item;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class LichSuMuaHang_DonHang {
+public class LichSuMuaHang_DonHang implements Serializable {
+    private String maDonHang;
     private String ngayGiaoHang;
     private String trangThai;
     private int tongTien;
     private ArrayList<LichSuMuaHang_SanPham> lichSuMuaHang_sanPhams = new ArrayList<>();
+
+    public String getMaDonHang() {
+        return maDonHang;
+    }
 
     public String getNgayGiaoHang() {
         return ngayGiaoHang;
@@ -22,6 +28,10 @@ public class LichSuMuaHang_DonHang {
 
     public ArrayList<LichSuMuaHang_SanPham> getLichSuMuaHang_sanPhams() {
         return lichSuMuaHang_sanPhams;
+    }
+
+    public void setMaDonHang(String maDonHang) {
+        this.maDonHang = maDonHang;
     }
 
     public void setNgayGiaoHang(String ngayGiaoHang) {
@@ -43,7 +53,8 @@ public class LichSuMuaHang_DonHang {
     public LichSuMuaHang_DonHang() {
     }
 
-    public LichSuMuaHang_DonHang(String ngayGiaoHang, String trangThai, int tongTien, ArrayList<LichSuMuaHang_SanPham> lichSuMuaHang_sanPhams) {
+    public LichSuMuaHang_DonHang(String maDonHang, String ngayGiaoHang, String trangThai, int tongTien, ArrayList<LichSuMuaHang_SanPham> lichSuMuaHang_sanPhams) {
+        this.maDonHang = maDonHang;
         this.ngayGiaoHang = ngayGiaoHang;
         this.trangThai = trangThai;
         this.tongTien = tongTien;

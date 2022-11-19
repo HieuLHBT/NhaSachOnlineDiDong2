@@ -30,7 +30,6 @@ public class PhanHoiYKienKhachHangActivity extends AppCompatActivity {
     private Spinner layoutPHYKKH_spnTrangThai;
 
     private FireBaseNhaSachOnline fireBaseNhaSachOnline = new FireBaseNhaSachOnline();
-    private SharePreferences sharePreferences = new SharePreferences();
 
     private PhanHoiYKienKhachHangRecyclerViewAdapter adapter;
     private ArrayList<PhanHoiYKienKhachHang> phanHoiYKienKhachHangs = new ArrayList<>();
