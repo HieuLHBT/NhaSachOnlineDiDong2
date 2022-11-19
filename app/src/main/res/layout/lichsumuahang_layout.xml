@@ -27,7 +27,7 @@
             android:layout_weight="6"
             android:gravity="center"
             android:paddingRight="@dimen/tieude"
-            android:text="Lịch sử mua hàng"
+            android:text="Lịch Sử Mua Hàng"
             android:textColor="@color/design_default_color_error"
             android:textSize="@dimen/tieudesize"
             android:textStyle="bold" />

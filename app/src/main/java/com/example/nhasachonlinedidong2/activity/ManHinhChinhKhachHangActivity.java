@@ -26,7 +26,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.nhasachonlinedidong2.R;
-import com.example.nhasachonlinedidong2.adapters.LichSuMuaHangActivity;
 import com.example.nhasachonlinedidong2.adapters.ManHinhChinhKhachHangAdapter;
 import com.example.nhasachonlinedidong2.data_model.KhachHang;
 import com.example.nhasachonlinedidong2.firebase.FireBaseNhaSachOnline;
@@ -34,8 +33,6 @@ import com.example.nhasachonlinedidong2.item.ItemSanPham;
 import com.example.nhasachonlinedidong2.tools.SharePreferences;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-
-import java.io.Serializable;
 import java.util.ArrayList;
 
 public class ManHinhChinhKhachHangActivity extends AppCompatActivity {
