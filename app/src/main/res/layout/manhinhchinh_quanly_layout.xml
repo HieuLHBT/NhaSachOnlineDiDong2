@@ -156,15 +156,16 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center|left"
-                    android:text="Thống kê ngày:"
+                    android:text="Thống kê:"
                     android:textColor="@color/black"
+                    android:textSize="@dimen/textthu"
                     android:textStyle="bold" />
 
                 <Spinner
                     android:id="@+id/layoutMHCQL_spnNgay"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1.6"
+                    android:layout_weight="2.3"
                     android:gravity="center|left"
                     android:textColor="@color/black"
                     android:textSize="@dimen/textsize" />
@@ -193,117 +194,14 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginLeft="@dimen/marginleft"
-        android:layout_weight="3">
+        android:layout_weight="3"
+        android:layout_marginBottom="@dimen/marginbottom">
 
         <com.github.mikephil.charting.charts.BarChart
             android:id="@+id/layoutMHCQL_bcBieuDoDoanhSo"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@+id/seekBar1" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.7"
-        android:orientation="horizontal">
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_margin="@dimen/le"
-            android:layout_weight="1"
-            android:background="@drawable/border"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginLeft="@dimen/le"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="Ca 1"
-                android:textColor="@color/black"
-                android:textSize="@dimen/textsize"
-                android:textStyle="bold" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginLeft="@dimen/le"
-                android:layout_weight="1"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center|left"
-                    android:text="Nhân viên làm việc:"
-                    android:textColor="@color/black"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/layoutMHCQL_tvSoNguoiCa1"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.45"
-                    android:gravity="center|left"
-                    android:text="4 người"
-                    android:textColor="@color/black" />
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_margin="@dimen/le"
-            android:layout_weight="1"
-            android:background="@drawable/border"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginLeft="@dimen/le"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="Ca 2"
-                android:textColor="@color/black"
-                android:textSize="@dimen/textsize"
-                android:textStyle="bold" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginLeft="@dimen/le"
-                android:layout_weight="1"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center|left"
-                    android:text="Nhân viên làm việc:"
-                    android:textColor="@color/black"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/layoutMHCQL_tvSoNguoiCa2"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.45"
-                    android:gravity="center|left"
-                    android:text="4 người"
-                    android:textColor="@color/black" />
-
-            </LinearLayout>
-
-        </LinearLayout>
 
     </LinearLayout>
 

@@ -78,6 +78,14 @@ public class ManHinhChinhNhanVienActivity extends AppCompatActivity {
             }
         });
 
+        layoutMHCNV_btnQuanLyDonHang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentDMSP = new Intent(ManHinhChinhNhanVienActivity.this, QuanLyDonHangActivity.class);
+                startActivity(intentDMSP);
+            }
+        });
+
         layoutMHCNV_btnPhanHoiBinhLuan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
