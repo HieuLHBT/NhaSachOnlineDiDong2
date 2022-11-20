@@ -1,5 +1,6 @@
 package com.example.nhasachonlinedidong2.firebase;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -33,6 +34,7 @@ import com.example.nhasachonlinedidong2.activity.SuaVanPhongPhamActivity;
 import com.example.nhasachonlinedidong2.activity.ThayDoiThongTinKhachHangActivity;
 import com.example.nhasachonlinedidong2.activity.ManHinhChinhNhanVienActivity;
 import com.example.nhasachonlinedidong2.activity.ThanhToanActivity;
+import com.example.nhasachonlinedidong2.activity.ThemNhanVienActivity;
 import com.example.nhasachonlinedidong2.activity.TheoDoiDonHangActivity;
 import com.example.nhasachonlinedidong2.activity.HuyDonHangActivity;
 import com.example.nhasachonlinedidong2.activity.ThongTinKhachHangActivity;
@@ -1019,7 +1021,7 @@ public class FireBaseNhaSachOnline {
         });
     }
 
-    public void xacNhanNhanHang(String maDonHang, String ngay,Context context) {
+    public void xacNhanNhanHang(String maDonHang, String ngay, Context context) {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference trangThaiDatabase = firebaseDatabase.getReference("TRANGTHAIDONHANG");
         DatabaseReference donHangDatabase = firebaseDatabase.getReference("DONHANG");
@@ -1246,6 +1248,29 @@ public class FireBaseNhaSachOnline {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference nguoiDungDatabase = firebaseDatabase.getReference("NGUOIDUNG");
         nguoiDungDatabase.child("nhanvien").child(maNhanVien).removeValue();
+    }
+
+    // Minh: Lấy nhân viên
+    public void getNhanVien(ArrayList<ItemNhanVien> nhanViens, Activity activity) {
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference nguoiDungDatabase = firebaseDatabase.getReference("NGUOIDUNG");
+        nguoiDungDatabase.child("nhanvien").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren())
+                {
+                    ItemNhanVien nhanVien = dataSnapshot.getValue(ItemNhanVien.class);
+                    nhanViens.add(nhanVien);
+
+                    ((ThemNhanVienActivity)activity).createMaNhanvien();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     // Sửa Nhân Viên
@@ -2630,4 +2655,9 @@ public class FireBaseNhaSachOnline {
         al.show();
     }
 
+    public void suaSanPhamSach(SuaSachActivity suaSachActivity, String maSach, String toString, String toString1, String toString2, String toString3, String toString4, String toString5, String toString6, String toString7) {
+    }
+
+    public void hienThiVanPhongPham(String maSanPham, VanPhongPham vanPhongPham, SuaVanPhongPhamActivity suaVanPhongPhamActivity) {
+    }
 }

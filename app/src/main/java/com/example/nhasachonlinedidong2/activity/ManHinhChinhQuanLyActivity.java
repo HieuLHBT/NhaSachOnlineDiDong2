@@ -136,6 +136,9 @@ public class ManHinhChinhQuanLyActivity extends AppCompatActivity {
                                 sharePreferences.dangXuat(ManHinhChinhQuanLyActivity.this);
                                 ManHinhChinhQuanLyActivity.this.finish();
                                 break;
+                            case R.id.menuMHCQL_itemQuanLyNhanVien:
+                                Intent intentQLNV = new Intent(ManHinhChinhQuanLyActivity.this,ManHinhQuanLyNhanVienActivity.class);
+                                ManHinhChinhQuanLyActivity.this.startActivity(intentQLNV);
                         }
                         return false;
                     }

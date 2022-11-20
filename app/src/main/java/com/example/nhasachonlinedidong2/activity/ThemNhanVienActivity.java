@@ -29,6 +29,8 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ThemNhanVienActivity extends AppCompatActivity {
     private FireBaseNhaSachOnline fireBase = new FireBaseNhaSachOnline();
@@ -37,36 +39,36 @@ public class ThemNhanVienActivity extends AppCompatActivity {
 
     EditText MHTNV_edtMaNhanVien, MHTNV_edtTenNhanVien, MHTNV_edtChucVu, MHTNV_edtTaiKhoan, MHTNV_edtMatKhau, MHTNV_edtEmail, MHTNV_edtDiaChi, MHTNV_edtSoDienThoai, MHTNV_edtCMND, MHTNV_edtLuongCoBan;
     ImageView MHTNV_imgHinhNhanVien;
-    Button MHTNV_btnLamMoi, MHTNV_btnThemNhanVien;
+    Button MHTNV_btnNhapMoi, MHTNV_btnThemNhanVien;
 
     private Uri uri;
     private final int PICK_IMAGE_REQUEST = 71;
     private final int CAMERA_PIC_REQUEST = 1337;
     private String chonAnh = "Thư viện";
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        fireBase.getNhanVien(nhanViens, this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.manhinh_themnhanvien_layout);
         FirebaseStorage storage;
         StorageReference storageReference;
         storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();
+        setControl();
+        setEvent();
+        MHTNV_edtMaNhanVien.setEnabled(false);
+        MHTNV_edtChucVu.setEnabled(false);
 
-        MHTNV_edtMaNhanVien = findViewById(R.id.MHTNV_edtMaNhanVien);
-        MHTNV_edtTenNhanVien = findViewById(R.id.MHTNV_edtTenNhanVien);
-        MHTNV_edtChucVu = findViewById(R.id.MHTNV_edtChucVu);
-        MHTNV_edtTaiKhoan = findViewById(R.id.MHTNV_edtTaiKhoanNhanVien);
-        MHTNV_edtMatKhau = findViewById(R.id.MHTNV_edtMatKhauNhanVien);
-        MHTNV_edtEmail = findViewById(R.id.MHTNV_edtEmailNhanVien);
-        MHTNV_edtDiaChi = findViewById(R.id.MHTNV_edtDiaChiNhanVien);
-        MHTNV_edtSoDienThoai = findViewById(R.id.MHTNV_edtSoDienThoaiNhanVien);
-        MHTNV_edtCMND = findViewById(R.id.MHTNV_edtCMNDNhanVien);
-        MHTNV_edtLuongCoBan = findViewById(R.id.MHTNV_edtLuongNhanVien);
-        MHTNV_imgHinhNhanVien = findViewById(R.id.MHTNV_imgAnhNhanVien);
-        MHTNV_btnLamMoi = findViewById(R.id.MHTNV_btnNhapMoi);
-        MHTNV_btnThemNhanVien = findViewById(R.id.MHTNV_btnThemNhanVien);
+        MHTNV_edtChucVu.setText("Nhân viên");
 
+
+
+    }
+
+    private void setEvent() {
+        //Add nhan vien
         MHTNV_btnThemNhanVien.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,22 +78,24 @@ public class ThemNhanVienActivity extends AppCompatActivity {
                 b.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        fireBase.themNhanVien(
-                               "nv" + MHTNV_edtMaNhanVien.getText().toString(),
-                                "nhanvien" + MHTNV_edtMaNhanVien.getText() + ".png",
-                                MHTNV_edtTenNhanVien.getText().toString(),
-                                MHTNV_edtCMND.getText().toString(),
-                                MHTNV_edtDiaChi.getText().toString(),
-                                MHTNV_edtEmail.getText().toString(),
-                                MHTNV_edtLuongCoBan.getText().toString(),
-                                MHTNV_edtMatKhau.getText().toString(),
-                                MHTNV_edtChucVu.getText().toString(),
-                                MHTNV_edtSoDienThoai.getText().toString(),
-                                MHTNV_edtTaiKhoan.getText().toString()
-                        );
-                        // Tai anh len storage
-                        ghiAnh(uri, MHTNV_edtMaNhanVien.getText().toString());
-                    };
+                        if(ValidateNhanVien()){
+                            fireBase.themNhanVien(
+                                     MHTNV_edtMaNhanVien.getText().toString(),
+                                    "nhanvien" + (nhanViens.size()+1) + ".png",
+                                    MHTNV_edtTenNhanVien.getText().toString(),
+                                    MHTNV_edtCMND.getText().toString(),
+                                    MHTNV_edtDiaChi.getText().toString(),
+                                    MHTNV_edtEmail.getText().toString(),
+                                    MHTNV_edtLuongCoBan.getText().toString(),
+                                    MHTNV_edtMatKhau.getText().toString(),
+                                    "nhanvien",
+                                    MHTNV_edtSoDienThoai.getText().toString(),
+                                    MHTNV_edtTaiKhoan.getText().toString()
+                            );
+                            // Tai anh len storage
+                            ghiAnh(uri, "nhanvien" + (nhanViens.size()+1));
+                        }
+                    }
                 });
 
                 b.setNegativeButton("Không đồng ý", new DialogInterface.OnClickListener() {
@@ -105,14 +109,23 @@ public class ThemNhanVienActivity extends AppCompatActivity {
             }
         });
 
-        MHTNV_btnLamMoi.setOnClickListener(new View.OnClickListener() {
+        //reset
+        MHTNV_btnNhapMoi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                nhanViens.clear();
+                MHTNV_edtTenNhanVien.setText("");
+                MHTNV_edtTaiKhoan.setText("");
+                MHTNV_edtMatKhau.setText("");
+                MHTNV_edtEmail.setText("");
+                MHTNV_edtDiaChi.setText("");
+                MHTNV_edtSoDienThoai.setText("");
+                MHTNV_edtCMND.setText("");
+                MHTNV_edtLuongCoBan.setText("");
+                MHTNV_btnNhapMoi.setText("");
             }
         });
 
+        //Doi hinh
         MHTNV_imgHinhNhanVien.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -155,6 +168,22 @@ public class ThemNhanVienActivity extends AppCompatActivity {
                 al.show();
             }
         });
+    }
+
+    private void setControl() {
+        MHTNV_edtMaNhanVien = findViewById(R.id.MHTNV_edtMaNhanVien);
+        MHTNV_edtTenNhanVien = findViewById(R.id.MHTNV_edtTenNhanVien); //validated
+        MHTNV_edtChucVu = findViewById(R.id.MHTNV_edtChucVu);
+        MHTNV_edtTaiKhoan = findViewById(R.id.MHTNV_edtTaiKhoanNhanVien); //validated
+        MHTNV_edtMatKhau = findViewById(R.id.MHTNV_edtMatKhauNhanVien); //validated
+        MHTNV_edtEmail = findViewById(R.id.MHTNV_edtEmailNhanVien); //validated
+        MHTNV_edtDiaChi = findViewById(R.id.MHTNV_edtDiaChiNhanVien); //validated
+        MHTNV_edtSoDienThoai = findViewById(R.id.MHTNV_edtSoDienThoaiNhanVien); //validated
+        MHTNV_edtCMND = findViewById(R.id.MHTNV_edtCMNDNhanVien); //validated
+        MHTNV_edtLuongCoBan = findViewById(R.id.MHTNV_edtLuongNhanVien); //validated
+        MHTNV_imgHinhNhanVien = findViewById(R.id.MHTNV_imgAnhNhanVien);
+        MHTNV_btnNhapMoi = findViewById(R.id.MHTNV_btnNhapMoi);
+        MHTNV_btnThemNhanVien = findViewById(R.id.MHTNV_btnThemNhanVien);
     }
 
     @Override
@@ -205,6 +234,77 @@ public class ThemNhanVienActivity extends AppCompatActivity {
         }
     }
 
-    //Kiem tra ma nhan vien
+    //Lay ma nhan vien
+    public void createMaNhanvien(){
+        MHTNV_edtMaNhanVien.setText("nv" + (nhanViens.size()+1));
+    }
+
+    //Kiem tra nhan vien
+    public boolean ValidateNhanVien(){
+        //Tu 6 den 20 ky tu khong khoang trang va ky tu dac biet
+        Pattern patternAccount = Pattern.compile("^[A-Za-z][A-Za-z0-9]{5,20}$");
+        Matcher matcherAccount = patternAccount.matcher(MHTNV_edtTaiKhoan.getText().toString());
+
+        //email regex
+        Pattern patternEmail = Pattern.compile("^[\\w-.]+@([\\w-]+\\.)+[\\w-]{2,4}$");
+        Matcher matcherEmail = patternEmail.matcher(MHTNV_edtEmail.getText().toString());
+
+        //More than 8 char, required at least: 1 char, 1 number, 1 special char.
+        Pattern patternPassword = Pattern.compile("^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,}$");
+        Matcher matcherPassword = patternPassword.matcher(MHTNV_edtMatKhau.getText().toString());
+
+        //Ten tieng viet hoac tieng anh, yeu cau viet hoa dau tu
+        Pattern patternName = Pattern.compile("^[A-ZÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸĐ][a-zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]*(?:[ ][A-ZÀÁẠẢÃÂẦẤẬẨẪĂẰẮẶẲẴÈÉẸẺẼÊỀẾỆỂỄÌÍỊỈĨÒÓỌỎÕÔỒỐỘỔỖƠỜỚỢỞỠÙÚỤỦŨƯỪỨỰỬỮỲÝỴỶỸĐ][a-zàáạảãâầấậẩẫăằắặẳẵèéẹẻẽêềếệểễìíịỉĩòóọỏõôồốộổỗơờớợởỡùúụủũưừứựửữỳýỵỷỹđ]*)*$");
+        Matcher matcherName = patternName.matcher(MHTNV_edtTenNhanVien.getText().toString());
+
+        //So dien thoai Viet Nam
+        Pattern patternPhone = Pattern.compile("(84|0[3|5|7|8|9])+([0-9]{8})\\b");
+        Matcher matcherPhone = patternPhone.matcher(MHTNV_edtSoDienThoai.getText().toString());
+
+        //So can cuong - CMND
+        Pattern patternCitizenNum = Pattern.compile("/^[0-9]{8,13}$");
+        Matcher matcherCitizenNum  = patternCitizenNum.matcher(MHTNV_edtCMND.getText().toString());
+
+        //Luong
+        Pattern patternSalary = Pattern.compile("/^[0-9]{6,}$");
+        Matcher matcherSalary  = patternSalary.matcher(MHTNV_edtLuongCoBan.getText().toString());
+
+
+        boolean boolAccount = matcherAccount.find();
+        boolean boolEmail = matcherEmail.find();
+        boolean boolPassword = matcherPassword.find();
+        boolean boolName = matcherName.find();
+        boolean boolPhone = matcherPhone.find();
+        boolean boolAddress = !MHTNV_edtDiaChi.getText().toString().isEmpty();
+        boolean boolCitizenNum = !MHTNV_edtCMND.getText().toString().isEmpty();
+        boolean boolSalary = true;
+
+        if (!boolAccount) {
+            MHTNV_edtTaiKhoan.setError("Tên đăng nhập từ 6 đến 20 ký tự, không khoảng trắng và ký tự đặc biệt");
+        }
+        if (!boolEmail) {
+            MHTNV_edtEmail.setError("Vui lòng nhập email hợp lệ");
+        }
+        if (!boolPassword) {
+            MHTNV_edtMatKhau.setError("Mật khẩu cần ít nhất 8 ký tự, một chữ cái, một chữ số và một ký tự đặc biệt");
+        }
+        if (!boolName) {
+            MHTNV_edtTenNhanVien.setError("Tên Tiếng Việt hoặc Tiếng Anh, viết hoa đầu từ");
+        }
+        if (!boolPhone) {
+            MHTNV_edtSoDienThoai.setError("Số điện thoại bạn nhập không hợp lệ");
+        }
+        if (!boolAddress) {
+            MHTNV_edtDiaChi.setError("Không được bỏ trống ");
+        }
+        if(!boolSalary){
+            MHTNV_edtLuongCoBan.setError("lương phải lớn hơn 1 triệu");
+        }
+        if(!boolCitizenNum){
+            MHTNV_edtCMND.setError("Căn cước hoặc chứng minh nhân dân chỉ có từ 9-12 ký tự ");
+        }
+        return boolAccount && boolEmail && boolPassword && boolName && boolPhone && boolAddress && boolSalary && boolCitizenNum;
+    }
+
 
 }

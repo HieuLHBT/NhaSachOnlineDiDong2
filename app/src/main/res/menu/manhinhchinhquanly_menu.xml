@@ -5,6 +5,10 @@
         android:icon="@drawable/ic_baseline_home_24"
         android:title="Quản lý sản phẩm" />
     <item
+        android:id="@+id/menuMHCQL_itemQuanLyNhanVien"
+        android:icon="@drawable/ic_baseline_home_24"
+        android:title="Quản lý Nhân viên" />
+    <item
         android:id="@+id/menuMHCQL_itemDangXuat"
         android:icon="@drawable/ic_baseline_home_24"
         android:title="Đăng xuất" />

@@ -1,6 +1,6 @@
 package com.example.nhasachonlinedidong2.data_model;
 
-public class NhanVien {
+public class    NhanVien {
     private String nguoiDung;
     private String maNhanVien;
     private String cmnd;
