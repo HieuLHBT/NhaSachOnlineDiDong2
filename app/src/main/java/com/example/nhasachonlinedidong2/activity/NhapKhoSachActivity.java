@@ -72,7 +72,6 @@ public class NhapKhoSachActivity extends AppCompatActivity {
         layoutNhapKhoSach_imgHinhSach = findViewById(R.id.layoutNhapKhoSach_imgHinhSach);
 
         fireBase.hienThiTTSachNhapKho(maSanPham, sach, this);
-        fireBase.hienThiTTNhapKhoSach(maNhapKho, nhapKho, this);
         SimpleDateFormat sdfDay = new SimpleDateFormat("dd.MM.yyyy");
 
         ngay = sdfDay.format(new Date());
@@ -87,11 +86,6 @@ public class NhapKhoSachActivity extends AppCompatActivity {
         });
     }
 
-    public void thongTinNhapKho(){
-        layoutNhapKhoSach_edtMaNhapKho.setText(nhapKho.getMaNhapKho());
-        layoutNhapKhoSach_edtMaNhanVien.setText(nhapKho.getMaNhanVien());
-
-    }
     public void thongTinSach(){
         layoutNhapKhoSach_edtMaSanPham.setText(sach.getMaSach());
         layoutNhapKhoSach_edtTenSanPham.setText(sach.getTenSach());

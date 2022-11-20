@@ -82,6 +82,7 @@ public class ThemSachActivity extends AppCompatActivity {
                 AlertDialog.Builder b = new AlertDialog.Builder(ThemSachActivity.this);
                 b.setTitle("Thông báo");
                 b.setMessage("Bạn có muốn thêm sách vào kho sản phẩm không?");
+/*
                 b.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -108,6 +109,7 @@ public class ThemSachActivity extends AppCompatActivity {
                         Toast.makeText(ThemSachActivity.this, "Thêm sách thành công", Toast.LENGTH_SHORT).show();
                     }
                 });
+*/
 
                 b.setNegativeButton("Huỷ", new DialogInterface.OnClickListener() {
                     @Override

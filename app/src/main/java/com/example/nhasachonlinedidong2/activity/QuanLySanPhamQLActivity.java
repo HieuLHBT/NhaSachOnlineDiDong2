@@ -17,10 +17,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.example.nhasachonlinedidong2.R;
-import com.example.nhasachonlinedidong2.adapters.QuanLySanPhamNVRecyclerViewAdapter;
 import com.example.nhasachonlinedidong2.adapters.QuanLySanPhamQLRecyclerViewAdapter;
 import com.example.nhasachonlinedidong2.firebase.FireBaseNhaSachOnline;
-import com.example.nhasachonlinedidong2.item.ItemQuanLySanPhamNV;
 import com.example.nhasachonlinedidong2.item.ItemQuanLySanPhamQL;
 
 import java.text.SimpleDateFormat;

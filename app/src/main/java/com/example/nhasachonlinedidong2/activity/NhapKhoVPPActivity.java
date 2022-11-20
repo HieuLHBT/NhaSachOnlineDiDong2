@@ -71,7 +71,6 @@ public class NhapKhoVPPActivity extends AppCompatActivity {
         layoutNhapKhoVPP_btnTroVe = findViewById(R.id.layoutNhapKhoVPP_btnTroVe);
         layoutNhapKhoVPP_imgHinhVPP = findViewById(R.id.layoutNhapKhoVPP_imgHinhVPP);
 
-        fireBase.hienThiTTNhapKhoVPP(maNhapKho, nhapKho, this);
         fireBase.hienThiTTVPPNhapKho(maSanPham, vanPhongPham, this);
 
         SimpleDateFormat sdfDay = new SimpleDateFormat("dd.MM.yyyy");

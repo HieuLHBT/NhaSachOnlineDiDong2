@@ -82,6 +82,7 @@ public class ThemVanPhongPhamActivity extends AppCompatActivity {
                 AlertDialog.Builder b = new AlertDialog.Builder(ThemVanPhongPhamActivity.this);
                 b.setTitle("Thông báo");
                 b.setMessage("Bạn có muốn thêm văn phòng phẩm vào kho sản phẩm không?");
+/*
                 b.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -107,6 +108,7 @@ public class ThemVanPhongPhamActivity extends AppCompatActivity {
                         Toast.makeText(ThemVanPhongPhamActivity.this, "Thêm văn phòng phẩm thành công", Toast.LENGTH_SHORT).show();
                     }
                 });
+*/
 
                 b.setNegativeButton("Huỷ", new DialogInterface.OnClickListener() {
                     @Override

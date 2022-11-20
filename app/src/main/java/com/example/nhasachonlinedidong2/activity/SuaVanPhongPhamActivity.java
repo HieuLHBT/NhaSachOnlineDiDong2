@@ -98,6 +98,7 @@ public class SuaVanPhongPhamActivity extends AppCompatActivity {
                 b.setTitle("Thông báo");
                 b.setMessage("Bạn có muốn sửa thông tin của văn phòng phẩm không?");
 
+/*
                 b.setPositiveButton("Xác nhận", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
@@ -123,6 +124,7 @@ public class SuaVanPhongPhamActivity extends AppCompatActivity {
                         Toast.makeText(SuaVanPhongPhamActivity.this, "Sửa văn phòng phẩm thành công", Toast.LENGTH_SHORT).show();
                     }
                 });
+*/
 
 
                 b.setNegativeButton("Huỷ", new DialogInterface.OnClickListener() {

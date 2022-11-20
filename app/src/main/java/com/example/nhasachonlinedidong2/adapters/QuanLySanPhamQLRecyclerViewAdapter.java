@@ -14,7 +14,6 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.nhasachonlinedidong2.R;
-import com.example.nhasachonlinedidong2.item.ItemQuanLySanPhamNV;
 import com.example.nhasachonlinedidong2.item.ItemQuanLySanPhamQL;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
