@@ -64,7 +64,7 @@ public class ManHinhQuanLySanPhamActivity extends AppCompatActivity {
                 b.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        fireBase.xoaSanPham(sanPhams.get(position).getMaSanPham(), adapter);
+                        //fireBase.xoaSanPham(sanPhams.get(position).getMaSanPham(), adapter);
                     }
                 });
                 b.setNegativeButton("Không đồng ý", new DialogInterface.OnClickListener() {
