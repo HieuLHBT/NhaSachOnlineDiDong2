@@ -45,6 +45,7 @@ public class ThemNhanVienActivity extends AppCompatActivity {
     private final int PICK_IMAGE_REQUEST = 71;
     private final int CAMERA_PIC_REQUEST = 1337;
     private String chonAnh = "Thư viện";
+    private String maNhanVien = "";
 
 
     @Override
@@ -81,7 +82,7 @@ public class ThemNhanVienActivity extends AppCompatActivity {
                         if(ValidateNhanVien()){
                             fireBase.themNhanVien(
                                      MHTNV_edtMaNhanVien.getText().toString(),
-                                    "nhanvien" + (nhanViens.size()+1) + ".png",
+                                    "nhanvien" + maNhanVien + ".png",
                                     MHTNV_edtTenNhanVien.getText().toString(),
                                     MHTNV_edtCMND.getText().toString(),
                                     MHTNV_edtDiaChi.getText().toString(),
@@ -93,7 +94,7 @@ public class ThemNhanVienActivity extends AppCompatActivity {
                                     MHTNV_edtTaiKhoan.getText().toString()
                             );
                             // Tai anh len storage
-                            ghiAnh(uri, "nhanvien" + (nhanViens.size()+1));
+                            ghiAnh(uri, "nhanvien" + maNhanVien);
                         }
                     }
                 });
@@ -236,7 +237,10 @@ public class ThemNhanVienActivity extends AppCompatActivity {
 
     //Lay ma nhan vien
     public void createMaNhanvien(){
-        MHTNV_edtMaNhanVien.setText("nv" + (nhanViens.size()+1));
+        int location = nhanViens.size()-1;
+        String[] strings = nhanViens.get(location).getMaNhanVien().split("nv");
+        maNhanVien = ""+ (Integer.parseInt(strings[1]) + 1);
+        MHTNV_edtMaNhanVien.setText("nv" + maNhanVien);
     }
 
     //Kiem tra nhan vien
