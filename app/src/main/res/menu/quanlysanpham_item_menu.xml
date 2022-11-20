@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/menuMHCQL_itemQuanLySanPham"
+        android:id="@+id/menuQLSP_itemSuaSanPham"
         android:icon="@drawable/ic_baseline_home_24"
-        android:title="Quản lý sản phẩm" />
+        android:title="Sửa sản phẩm" />
     <item
-        android:id="@+id/menuMHCQL_itemQuanLyNhanVien"
+        android:id="@+id/menuQLSP_itemNhapKhoSanPham"
         android:icon="@drawable/ic_baseline_home_24"
-        android:title="Quản lý Nhân viên" />
+        android:title="Nhập kho sản phẩm" />
     <item
-        android:id="@+id/menuMHCQL_itemDangXuat"
+        android:id="@+id/menuQLSP_itemXoaSanPham"
         android:icon="@drawable/ic_baseline_home_24"
-        android:title="Đăng xuất" />
+        android:title="Xóa sản phẩm" />
 </menu>

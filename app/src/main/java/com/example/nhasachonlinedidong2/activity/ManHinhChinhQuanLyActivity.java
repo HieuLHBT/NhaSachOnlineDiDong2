@@ -129,8 +129,12 @@ public class ManHinhChinhQuanLyActivity extends AppCompatActivity {
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()) {
                             case R.id.menuMHCQL_itemQuanLySanPham:
-                                Intent intentQLSP = new Intent(ManHinhChinhQuanLyActivity.this, QuanLySanPhamQLActivity.class);
+                                Intent intentQLSP = new Intent(ManHinhChinhQuanLyActivity.this, QuanLySanPhamActivity.class);
                                 ManHinhChinhQuanLyActivity.this.startActivity(intentQLSP);
+                                break;
+                            case R.id.menuMHCQL_itemQuanLyNhanVien:
+                                Intent intentQLNV = new Intent(ManHinhChinhQuanLyActivity.this, QuanLyNhanVienActivity.class);
+                                ManHinhChinhQuanLyActivity.this.startActivity(intentQLNV);
                                 break;
                             case R.id.menuMHCQL_itemDangXuat:
                                 sharePreferences.dangXuat(ManHinhChinhQuanLyActivity.this);

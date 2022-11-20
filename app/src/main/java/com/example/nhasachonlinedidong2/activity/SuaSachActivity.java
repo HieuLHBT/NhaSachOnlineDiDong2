@@ -8,12 +8,14 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,7 +25,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.nhasachonlinedidong2.R;
 import com.example.nhasachonlinedidong2.data_model.Sach;
 import com.example.nhasachonlinedidong2.firebase.FireBaseNhaSachOnline;
-import com.example.nhasachonlinedidong2.item.ItemSanPham;
+import com.example.nhasachonlinedidong2.item.QuanLySanPham_SanPham;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FileDownloadTask;
@@ -35,100 +37,219 @@ import com.google.firebase.storage.UploadTask;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class SuaSachActivity extends AppCompatActivity {
-    private FireBaseNhaSachOnline fireBase = new FireBaseNhaSachOnline();
+    private TextView layoutSS_btnTroVe, layoutSS_tvMaSach, layoutSS_tvSoLuongKho;
+    private EditText layoutSS_tvTenSach,
+            layoutSS_tvTheLoai,
+            layoutSS_tvTacGia,
+            layoutSS_tvNhaXuatBan,
+            layoutSS_tvNgayXuatBan,
+            layoutSS_tvGiaTien,
+            layoutSS_tvKhuyenMai;
+    private ImageView layoutSS_imgHinhSach;
+    private Button layoutSS_btnSua, layoutSS_btnNhapMoi;
 
-    ArrayList<ItemSanPham> sanPhams = new ArrayList<>();
-    private String maSach;
-    private String maSanPham;
+    private FireBaseNhaSachOnline fireBaseNhaSachOnline = new FireBaseNhaSachOnline();
 
+    private QuanLySanPham_SanPham sanPham = new QuanLySanPham_SanPham();
     private Sach sach = new Sach();
-
-    private EditText layoutSuaSach_edtMaSach;
-    private EditText layoutSuaSach_edtTenSach;
-    private EditText layoutSuaSach_edtTheLoai;
-    private EditText layoutSuaSach_edtTacGia;
-    private EditText layoutSuaSach_edtNhaXuatBan;
-    private EditText layoutSuaSach_edtNgayXuatBan;
-    private EditText layoutSuaSach_edtDonGia;
-    private EditText layoutSuaSach_edtSoLuongTonKho;
-    private ImageView layoutSuaSach_imgHinhSach;
-    private Button layoutSuaSach_btnNhapMoi;
-    private Button layoutSuaSach_btnSua;
-    private Button layoutSuaSach_btnTroVe;
-
     private Uri uri;
     private final int PICK_IMAGE_REQUEST = 71;
     private final int CAMERA_PIC_REQUEST = 1337;
     private String chonAnh = "Thư viện";
+    private Boolean check = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.suasanpham_sach_layout);
+        setContentView(R.layout.suasach_layout);
 
-        maSanPham = getIntent().getStringExtra("maSanPham");
+        sanPham = (QuanLySanPham_SanPham) getIntent().getSerializableExtra("sanPham");
+        sach.setHinhSach(sanPham.getHinhSanPham());
+        sach.setMaSach(sanPham.getMaSanPham());
+        sach.setTenSach(sanPham.getTenSanPham());
+        sach.setTheLoai(sanPham.getTheLoai());
+        sach.setTacGia(sanPham.getTacGia());
+        sach.setNhaXuatBan(sanPham.getNhaXuatBan());
+        sach.setNgayXuatBan(sanPham.getNgayXuatBan());
+        sach.setGiaTien(String.valueOf(sanPham.getGiaSanPham()));
+        sach.setKhuyenMai(String.valueOf(sanPham.getKhuyenMai()));
+        sach.setSoLuongKho(String.valueOf(sanPham.getSoLuongKho()));
 
+        layoutSS_btnTroVe = findViewById(R.id.layoutSS_btnTroVe);
+        layoutSS_imgHinhSach = findViewById(R.id.layoutSS_imgHinhSach);
+        layoutSS_tvMaSach = findViewById(R.id.layoutSS_tvMaSach);
+        layoutSS_tvTenSach = findViewById(R.id.layoutSS_tvTenSach);
+        layoutSS_tvTheLoai = findViewById(R.id.layoutSS_tvTheLoai);
+        layoutSS_tvTacGia = findViewById(R.id.layoutSS_tvTacGia);
+        layoutSS_tvNhaXuatBan = findViewById(R.id.layoutSS_tvNhaXuatBan);
+        layoutSS_tvNgayXuatBan = findViewById(R.id.layoutSS_tvNgayXuatBan);
+        layoutSS_tvGiaTien = findViewById(R.id.layoutSS_tvGiaTien);
+        layoutSS_tvKhuyenMai = findViewById(R.id.layoutSS_tvKhuyenMai);
+        layoutSS_tvSoLuongKho = findViewById(R.id.layoutSS_tvSoLuongKho);
+        layoutSS_btnSua = findViewById(R.id.layoutSS_btnSua);
+        layoutSS_btnNhapMoi = findViewById(R.id.layoutSS_btnNhapMoi);
 
-        FirebaseStorage storage;
-        StorageReference storageReference;
-        storage = FirebaseStorage.getInstance();
-        storageReference = storage.getReference();
+        hienThiThongTinSach();
 
-        layoutSuaSach_edtMaSach = findViewById(R.id.layoutSuaSach_edtMaSach);
-        layoutSuaSach_edtTenSach = findViewById(R.id.layoutSuaSach_edtTenSach);
-        layoutSuaSach_edtTheLoai = findViewById(R.id.layoutSuaSach_edtTheLoai);
-        layoutSuaSach_edtTacGia = findViewById(R.id.layoutSuaSach_edtTacGia);
-        layoutSuaSach_edtNhaXuatBan = findViewById(R.id.layoutSuaSach_edtNhaXuatBan);
-        layoutSuaSach_edtNgayXuatBan = findViewById(R.id.layoutSuaSach_edtNgayXuatBan);
-        layoutSuaSach_edtDonGia = findViewById(R.id.layoutSuaSach_edtDonGia);
-        layoutSuaSach_edtSoLuongTonKho = findViewById(R.id.layoutSuaSach_edtSoLuongTonKho);
-        layoutSuaSach_imgHinhSach = findViewById(R.id.layoutSuaSach_imgHinhSach);
-        layoutSuaSach_btnNhapMoi = findViewById(R.id.layoutSuaSach_btnNhapMoi);
-        layoutSuaSach_btnSua = findViewById(R.id.layoutSuaSach_btnSua);
-        layoutSuaSach_btnTroVe = findViewById(R.id.layoutSuaSach_btnTroVe);
+        layoutSS_tvTenSach.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-        fireBase.hienThiSach(maSanPham, sach, this);
+            }
 
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-        layoutSuaSach_btnSua.setOnClickListener(new View.OnClickListener() {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                sach.setTenSach(String.valueOf(s));
+                check = true;
+            }
+        });
+
+        layoutSS_tvTheLoai.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                sach.setTheLoai(String.valueOf(s));
+                check = true;
+            }
+        });
+
+        layoutSS_tvTacGia.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                sach.setTacGia(String.valueOf(s));
+                check = true;
+            }
+        });
+
+        layoutSS_tvNhaXuatBan.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                sach.setNhaXuatBan(String.valueOf(s));
+                check = true;
+            }
+        });
+
+        layoutSS_tvNgayXuatBan.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                sach.setNgayXuatBan(String.valueOf(s));
+                check = true;
+            }
+        });
+
+        layoutSS_tvGiaTien.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                sach.setGiaTien(String.valueOf(s));
+                check = true;
+            }
+        });
+
+        layoutSS_tvKhuyenMai.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                sach.setKhuyenMai(String.valueOf(s));
+                check = true;
+            }
+        });
+
+        layoutSS_btnSua.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder b = new AlertDialog.Builder(SuaSachActivity.this);
-                b.setTitle("Thông báo");
-                b.setMessage("Bạn có muốn sửa thông tin của sách không?");
-
-                b.setPositiveButton("Xác nhận", new DialogInterface.OnClickListener() {
+                b.setTitle("THÔNG BÁO");
+                b.setMessage("Bạn đồng ý xác nhận sửa sản phẩm không?");
+                b.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        fireBase.suaSanPhamSach(SuaSachActivity.this,
-                                maSach,
-                                layoutSuaSach_imgHinhSach.getResources().toString(),
-                                layoutSuaSach_edtTenSach.getText().toString(),
-                                layoutSuaSach_edtTheLoai.getText().toString(),
-                                layoutSuaSach_edtTacGia.getText().toString(),
-                                layoutSuaSach_edtNhaXuatBan.getText().toString(),
-                                layoutSuaSach_edtNgayXuatBan.getText().toString(),
-                                layoutSuaSach_edtDonGia.getText().toString(),
-                                layoutSuaSach_edtSoLuongTonKho.getText().toString()
-                        );
-
-                        //Kiểm tra các trường bỏ trống
-                        if (layoutSuaSach_edtMaSach.getTouchables().isEmpty() || layoutSuaSach_edtTenSach.getTouchables().isEmpty() || layoutSuaSach_edtTheLoai.getTouchables().isEmpty() ||
-                                layoutSuaSach_edtTacGia.getTouchables().isEmpty() || layoutSuaSach_edtNhaXuatBan.getTouchables().isEmpty() || layoutSuaSach_edtNgayXuatBan.getTouchables().isEmpty() ||
-                                layoutSuaSach_edtDonGia.getTouchables().isEmpty() || layoutSuaSach_edtSoLuongTonKho.getTouchables().isEmpty()) {
-                            Toast.makeText(SuaSachActivity.this, "Vui lòng điền đầy đủ thông tin!", Toast.LENGTH_SHORT).show();
+                        if (kiemTra()) {
+                            if (check) {
+                                fireBaseNhaSachOnline.suaSach(sach, SuaSachActivity.this);
+                                // Tai anh len storage
+                                ghiAnh(uri, sach.getHinhSach());
+                            } else {
+                                AlertDialog.Builder b = new AlertDialog.Builder(SuaSachActivity.this);
+                                b.setTitle("CẢNH BÁO");
+                                b.setMessage("Sản phẩm không có sự thay đổi! Sửa không thành công!");
+                                b.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        dialogInterface.cancel();
+                                    }
+                                });
+                                AlertDialog al = b.create();
+                                al.show();
+                            }
                         }
-                        // Tai anh len storage
-                        ghiAnh(uri, layoutSuaSach_edtMaSach.getText().toString());
-                        Toast.makeText(SuaSachActivity.this, "Sửa sách thành công", Toast.LENGTH_SHORT).show();
                     }
                 });
-
-
-                b.setNegativeButton("Huỷ", new DialogInterface.OnClickListener() {
+                b.setNegativeButton("Không đồng ý", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.cancel();
@@ -139,31 +260,12 @@ public class SuaSachActivity extends AppCompatActivity {
             }
         });
 
-        layoutSuaSach_btnNhapMoi.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                layoutSuaSach_edtTenSach.setText("");
-                layoutSuaSach_edtTheLoai.setText("");
-                layoutSuaSach_edtTacGia.setText("");
-                layoutSuaSach_edtNhaXuatBan.setText("");
-                layoutSuaSach_edtNgayXuatBan.setText("");
-                layoutSuaSach_edtDonGia.setText("");
-            }
-        });
-
-        layoutSuaSach_btnTroVe.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-
-        layoutSuaSach_imgHinhSach.setOnClickListener(new View.OnClickListener() {
+        layoutSS_imgHinhSach.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder b = new AlertDialog.Builder(SuaSachActivity.this);
-                b.setTitle("SỬA HÌNH SÁCH");
-                String[] ca = {"Chọn từ thư viện", "Chụp ảnh"};
+                b.setTitle("THÊM HÌNH SÁCH");
+                String[] ca = {"Chọn từ thư viên", "Chụp ảnh"};
                 b.setSingleChoiceItems(ca, 0, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -177,9 +279,10 @@ public class SuaSachActivity extends AppCompatActivity {
                         }
                     }
                 });
-                b.setPositiveButton("Xác nhận", new DialogInterface.OnClickListener() {
+                b.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        check = true;
                         if (chonAnh.equalsIgnoreCase("Thư viện")) {
                             Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                             startActivityForResult(intent, PICK_IMAGE_REQUEST);
@@ -190,7 +293,7 @@ public class SuaSachActivity extends AppCompatActivity {
                         chonAnh = "Thư viện";
                     }
                 });
-                b.setNegativeButton("Huỷ", new DialogInterface.OnClickListener() {
+                b.setNegativeButton("Không đồng ý", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         dialogInterface.cancel();
@@ -200,6 +303,61 @@ public class SuaSachActivity extends AppCompatActivity {
                 al.show();
             }
         });
+
+        layoutSS_btnNhapMoi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hienThiThongTinSach();
+                check = false;
+            }
+        });
+
+        layoutSS_btnTroVe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    public void hienThiThongTinSach() {
+        layoutSS_tvMaSach.setText(sanPham.getMaSanPham());
+        layoutSS_tvTenSach.setText(sanPham.getTenSanPham());
+        layoutSS_tvTheLoai.setText(sanPham.getTheLoai());
+        layoutSS_tvTacGia.setText(sanPham.getTacGia());
+        layoutSS_tvNhaXuatBan.setText(sanPham.getNhaXuatBan());
+        layoutSS_tvNgayXuatBan.setText(sanPham.getNgayXuatBan());
+        layoutSS_tvGiaTien.setText(String.valueOf(sanPham.getGiaSanPham()));
+        layoutSS_tvKhuyenMai.setText(String.valueOf(sanPham.getKhuyenMai()));
+        layoutSS_tvSoLuongKho.setText(String.valueOf(sanPham.getSoLuongKho()));
+        StorageReference storageReference = FirebaseStorage.getInstance().getReference(sanPham.getHinhSanPham());
+        try {
+            File file = null;
+            if (sanPham.getHinhSanPham().contains("png")) {
+                file = File.createTempFile(sanPham.getHinhSanPham().substring(0, sanPham.getHinhSanPham().length() - 4), "png");
+            } else if (sanPham.getHinhSanPham().contains("jpg")) {
+                file = File.createTempFile(sanPham.getHinhSanPham().substring(0, sanPham.getHinhSanPham().length() - 4), "jpg");
+            }
+            final File fileHinh = file;
+            storageReference.getFile(fileHinh).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                    layoutSS_imgHinhSach.setImageBitmap(BitmapFactory.decodeFile(fileHinh.getAbsolutePath()));
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Log.d("onCancelled", "Lỗi!" + e.getMessage());
+                }
+            });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -207,7 +365,7 @@ public class SuaSachActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK) {
             uri = data.getData();
-            layoutSuaSach_imgHinhSach.setImageURI(uri);
+            layoutSS_imgHinhSach.setImageURI(uri);
         }
         if (requestCode == CAMERA_PIC_REQUEST && resultCode == RESULT_OK) {
             Bitmap photo = (Bitmap) data.getExtras().get("data");
@@ -215,16 +373,16 @@ public class SuaSachActivity extends AppCompatActivity {
             photo.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
             String path = MediaStore.Images.Media.insertImage(SuaSachActivity.this.getContentResolver(), photo, "Title", null);
             uri = Uri.parse(path);
-            layoutSuaSach_imgHinhSach.setImageURI(uri);
+            layoutSS_imgHinhSach.setImageURI(uri);
         }
     }
 
-    private void ghiAnh(Uri filePath, String maNhanVien) {
+    private void ghiAnh(Uri filePath, String hinhSach) {
         if (filePath != null) {
             final ProgressDialog progressDialog = new ProgressDialog(this);
             progressDialog.setTitle("Uploading...");
             progressDialog.show();
-            StorageReference ref = FirebaseStorage.getInstance().getReference().child(maNhanVien + ".png");
+            StorageReference ref = FirebaseStorage.getInstance().getReference().child(hinhSach);
             ref.putFile(filePath)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
@@ -249,39 +407,50 @@ public class SuaSachActivity extends AppCompatActivity {
         }
     }
 
-    public void thongTinSach(){
+    protected boolean kiemTra() {
+        boolean boolTenSach = !layoutSS_tvTenSach.getText().toString().isEmpty();
+        boolean boolTheLoai = !layoutSS_tvTheLoai.getText().toString().isEmpty();
+        boolean boolTacGia = !layoutSS_tvTacGia.getText().toString().isEmpty();
+        boolean boolNhaXuatBan = !layoutSS_tvNhaXuatBan.getText().toString().isEmpty();
+        boolean boolNgayXuatBan = !layoutSS_tvNgayXuatBan.getText().toString().isEmpty();
+        boolean boolGiaTien = !layoutSS_tvGiaTien.getText().toString().isEmpty();
+        boolean boolKhuyenMai = !layoutSS_tvKhuyenMai.getText().toString().isEmpty();
+        boolean boolHinhSach = layoutSS_imgHinhSach.getDrawable() != null;
 
-        layoutSuaSach_edtMaSach.setText(sach.getMaSach());
-        layoutSuaSach_edtTenSach.setText(sach.getTenSach());
-        layoutSuaSach_edtTheLoai.setText(sach.getTheLoai());
-        layoutSuaSach_edtTacGia.setText(sach.getTacGia());
-        layoutSuaSach_edtNhaXuatBan.setText(sach.getNhaXuatBan());
-        layoutSuaSach_edtNgayXuatBan.setText(sach.getNgayXuatBan());
-        layoutSuaSach_edtDonGia.setText(sach.getGiaTien());
-        layoutSuaSach_edtSoLuongTonKho.setText(sach.getSoLuongKho());
-
-        StorageReference storageReference = FirebaseStorage.getInstance().getReference(sach.getHinhSach());
-        try {
-            File file = null;
-            if (sach.getHinhSach().contains("png")) {
-                file = File.createTempFile(sach.getHinhSach().substring(0,sach.getHinhSach().length()), "png");
-            } else if (sach.getHinhSach().contains("jpg")) {
-                file = File.createTempFile(sach.getHinhSach().substring(0,sach.getHinhSach().length()), "jpg");
-            }
-            final File fileHinh = file;
-            ((StorageReference) storageReference).getFile(fileHinh).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+        if (!boolTenSach) {
+            layoutSS_tvTenSach.setError("Không được bỏ trống");
+        }
+        if (!boolTheLoai) {
+            layoutSS_tvTheLoai.setError("Không được bỏ trống");
+        }
+        if (!boolTacGia) {
+            layoutSS_tvTacGia.setError("Không được bỏ trống");
+        }
+        if (!boolNhaXuatBan) {
+            layoutSS_tvNhaXuatBan.setError("Không được bỏ trống");
+        }
+        if (!boolNgayXuatBan) {
+            layoutSS_tvNgayXuatBan.setError("Không được bỏ trống");
+        }
+        if (!boolGiaTien) {
+            layoutSS_tvGiaTien.setError("Không được bỏ trống");
+        }
+        if (!boolKhuyenMai) {
+            layoutSS_tvKhuyenMai.setError("Không được bỏ trống ");
+        }
+        if (!boolHinhSach) {
+            AlertDialog.Builder b = new AlertDialog.Builder(SuaSachActivity.this);
+            b.setTitle("CẢNH BÁO");
+            b.setMessage("Bạn cần phải chọn hình ảnh cho sản phẩm!");
+            b.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
                 @Override
-                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                    layoutSuaSach_imgHinhSach.setImageBitmap(BitmapFactory.decodeFile(fileHinh.getAbsolutePath()));
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception e) {
-                    Log.d("onCancelled", "Lỗi!" + e.getMessage());
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.cancel();
                 }
             });
-        } catch (IOException e) {
-            e.printStackTrace();
+            AlertDialog al = b.create();
+            al.show();
         }
+        return boolTenSach && boolTheLoai && boolTacGia && boolNhaXuatBan && boolNgayXuatBan && boolGiaTien && boolKhuyenMai && boolHinhSach;
     }
 }

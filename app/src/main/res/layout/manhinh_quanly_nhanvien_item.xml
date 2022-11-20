@@ -15,8 +15,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="8"
+            android:layout_height="match_parent"
             android:background="@drawable/border"
             android:orientation="horizontal">
 
@@ -44,7 +43,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="2"
-                        android:paddingLeft="20dp"
+                        android:layout_marginLeft="@dimen/marginleft"
                         android:text="Chức vụ:"
                         android:textStyle="bold" />
 
@@ -98,7 +97,7 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="2"
+                        android:layout_weight="1"
                         android:text="Tên nhân viên:"
                         android:textStyle="bold" />
 
@@ -106,7 +105,7 @@
                         android:id="@+id/itemMHQLNV_tvTenNhanVien"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="1.9"
+                        android:layout_weight="1"
                         android:text="Irene"
                         android:textColor="#978C8C" />
                 </LinearLayout>
@@ -151,7 +150,7 @@
                         android:id="@+id/itemMHQLNV_tvDiaChiNhanVien"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="2.5"
+                        android:layout_weight="1"
                         android:text="Bình Thạnh"
                         android:textColor="#978C8C" />
 
@@ -175,7 +174,7 @@
                         android:id="@+id/itemMHQLNV_tvCMNDNhanVien"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="2.5"
+                        android:layout_weight="1"
                         android:text="0102000888"
                         android:textColor="#978C8C" />
                 </LinearLayout>
@@ -197,7 +196,7 @@
                         android:id="@+id/itemMHQLNV_tvLuongNhanVien"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="1.6"
+                        android:layout_weight="1"
                         android:text="7.000.000 đồng"
                         android:textColor="#978C8C" />
                 </LinearLayout>
@@ -219,7 +218,7 @@
                         android:id="@+id/itemMHQLNV_tvEmailNhanVien"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="3.2"
+                        android:layout_weight="1"
                         android:text="irene@gmail.com"
                         android:textColor="#978C8C" />
                 </LinearLayout>
@@ -233,7 +232,7 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="1.5"
+                        android:layout_weight="1"
                         android:text="Tài khoản:"
                         android:textStyle="bold" />
 
@@ -241,7 +240,7 @@
                         android:id="@+id/itemMHQLNV_tvTaiKhoanNhanVien"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="2.5"
+                        android:layout_weight="1"
                         android:text="ireneid"
                         android:textColor="#978C8C" />
                 </LinearLayout>
@@ -255,7 +254,7 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="1.3"
+                        android:layout_weight="1"
                         android:text="Mật khẩu:"
                         android:textStyle="bold" />
 
@@ -263,7 +262,7 @@
                         android:id="@+id/itemMHQLNV_tvMatKhauNhanVien"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="2.2"
+                        android:layout_weight="1"
                         android:text="irene123"
                         android:textColor="#978C8C" />
                 </LinearLayout>

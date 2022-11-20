@@ -8,11 +8,9 @@ public class Sach {
     private String ngayXuatBan;
     private String nhaXuatBan;
     private String soLuongKho;
-    private String soLuongDanhGia;
     private String tacGia;
     private String tenSach;
     private String theLoai;
-    private String anhDanhGia;
 
     public String getMaSach() {
         return maSach;
@@ -42,10 +40,6 @@ public class Sach {
         return soLuongKho;
     }
 
-    public String getSoLuongDanhGia() {
-        return soLuongDanhGia;
-    }
-
     public String getTacGia() {
         return tacGia;
     }
@@ -56,10 +50,6 @@ public class Sach {
 
     public String getTheLoai() {
         return theLoai;
-    }
-
-    public String getAnhDanhGia() {
-        return anhDanhGia;
     }
 
     public void setMaSach(String maSach) {
@@ -90,10 +80,6 @@ public class Sach {
         this.soLuongKho = soLuongKho;
     }
 
-    public void setSoLuongDanhGia(String soLuongDanhGia) {
-        this.soLuongDanhGia = soLuongDanhGia;
-    }
-
     public void setTacGia(String tacGia) {
         this.tacGia = tacGia;
     }
@@ -106,14 +92,10 @@ public class Sach {
         this.theLoai = theLoai;
     }
 
-    public void setAnhDanhGia(String anhDanhGia) {
-        this.anhDanhGia = anhDanhGia;
-    }
-
     public Sach() {
     }
 
-    public Sach(String maSach, String giaTien, String hinhSach, String khuyenMai, String ngayXuatBan, String nhaXuatBan, String soLuongKho, String soLuongDanhGia, String tacGia, String tenSach, String theLoai, String anhDanhGia) {
+    public Sach(String maSach, String giaTien, String hinhSach, String khuyenMai, String ngayXuatBan, String nhaXuatBan, String soLuongKho, String tacGia, String tenSach, String theLoai) {
         this.maSach = maSach;
         this.giaTien = giaTien;
         this.hinhSach = hinhSach;
@@ -121,10 +103,8 @@ public class Sach {
         this.ngayXuatBan = ngayXuatBan;
         this.nhaXuatBan = nhaXuatBan;
         this.soLuongKho = soLuongKho;
-        this.soLuongDanhGia = soLuongDanhGia;
         this.tacGia = tacGia;
         this.tenSach = tenSach;
         this.theLoai = theLoai;
-        this.anhDanhGia = anhDanhGia;
     }
 }

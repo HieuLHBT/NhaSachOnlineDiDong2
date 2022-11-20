@@ -23,5 +23,7 @@
     <dimen name="minh_text_title">40sp</dimen>
     <dimen name="marginbottom">50dp</dimen>
     <dimen name="tvsoluong">25sp</dimen>
-
+    <dimen name="margin_button">15dp</dimen>
+    <dimen name="text_them_nhan_vien">18sp</dimen>
+    <dimen name="padding_them_nhan_vien_left">20dp</dimen>
 </resources>
