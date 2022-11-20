@@ -38,12 +38,15 @@ public class ManHinhQuanLyNhanVienActivity extends AppCompatActivity {
     private TextView item_tvTroVe;
     private TextView item_tvThemNhanVien;
     private CardView itemMHQLNV_SuaNhanVien;
+    ItemTouchHelper itemTouchHelper;
+    ItemTouchHelper itemTouchHelper2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.manhinh_quanly_nhanvien_layout);
-
+        setControl();
+        setEvent();
         //search
         timkiemNV = findViewById(R.id.layoutMHQLNV_swTimKiem);
         timKiem();
@@ -55,11 +58,11 @@ public class ManHinhQuanLyNhanVienActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
 
-        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT) {
+        itemTouchHelper = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                itemTouchHelper.startDrag(viewHolder);
                 return true;
-                //itemTouchHelper.startDrag(viewHolder);
             }
 
             @Override
@@ -72,6 +75,7 @@ public class ManHinhQuanLyNhanVienActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         fireBase.xoaNhanVien(nhanViens.get(position).getMaNhanVien(), adapter);
+
                     }
                 });
                 b.setNegativeButton("Không đồng ý", new DialogInterface.OnClickListener() {
@@ -82,62 +86,101 @@ public class ManHinhQuanLyNhanVienActivity extends AppCompatActivity {
                     }
                 });
                 AlertDialog al = b.create();
+                al.setCancelable(false);
+                al.show();
+            }
+        });
+        itemTouchHelper2 = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+                itemTouchHelper.startDrag(viewHolder);
+                return true;
+            }
+
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                int position = viewHolder.getAdapterPosition();
+                AlertDialog.Builder b = new AlertDialog.Builder(ManHinhQuanLyNhanVienActivity.this);
+                b.setTitle("CẢNH BÁO");
+                b.setMessage("Bạn có muốn đi đến sửa nhân viên này không?");
+                b.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Intent intent = new Intent(ManHinhQuanLyNhanVienActivity.this, SuaNhanVienActivity.class);
+                        intent.putExtra("maNhanVien", nhanViens.get(position).getMaNhanVien());
+                        ManHinhQuanLyNhanVienActivity.this.startActivity(intent);
+
+                    }
+                });
+                b.setNegativeButton("Không đồng ý", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        adapter.notifyDataSetChanged();
+                        dialogInterface.cancel();
+                    }
+                });
+                AlertDialog al = b.create();
+                al.setCancelable(false);
                 al.show();
             }
         });
         itemTouchHelper.attachToRecyclerView(recyclerView);
+        itemTouchHelper2.attachToRecyclerView(recyclerView);
 
-        fireBase.hienThiManHinhChinhQuanLyNhanVien(nhanViens,adapter,this);
+        fireBase.hienThiManHinhChinhQuanLyNhanVien(nhanViens, adapter, this);
 
         adapter.setOnItemClickListener(new QuanLyNhanVienRecyclerViewAdapter.OnItemClickListener() {
             @Override
             public void onItemClickListener(int position, View view) {
-                item_tvTroVe = view.findViewById(R.id.MHQLNV_tvTroVe);
-                item_tvTroVe.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        finish();
-                    }
-                });
-
-                item_tvThemNhanVien = view.findViewById(R.id.layoutMHQLNV_tvThemNhanVien);
-                item_tvThemNhanVien.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(ManHinhQuanLyNhanVienActivity.this, ThemNhanVienActivity.class);
-                        ManHinhQuanLyNhanVienActivity.this.startActivity(intent);
-                    }
-                });
-
-                itemMHQLNV_SuaNhanVien = view.findViewById(R.id.itemMHQLNV);
-                itemMHQLNV_SuaNhanVien.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(ManHinhQuanLyNhanVienActivity.this, SuaNhanVienActivity.class);
-                        intent.putExtra(maNhanVien, nhanViens.get(position).getMaNhanVien());
-                        ManHinhQuanLyNhanVienActivity.this.startActivity(intent);
-                    }
-                });
+                Intent intent = new Intent(ManHinhQuanLyNhanVienActivity.this, SuaNhanVienActivity.class);
+                intent.putExtra(maNhanVien, nhanViens.get(position).getMaNhanVien());
+                ManHinhQuanLyNhanVienActivity.this.startActivity(intent);
             }
         });
     }
 
+    private void setEvent() {
+        //BACK
+        item_tvTroVe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        //ADD
+        item_tvThemNhanVien.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ManHinhQuanLyNhanVienActivity.this, ThemNhanVienActivity.class);
+                ManHinhQuanLyNhanVienActivity.this.startActivity(intent);
+            }
+        });
+
+    }
+
+    private void setControl() {
+        item_tvTroVe = findViewById(R.id.MHQLNV_tvTroVe);
+        item_tvThemNhanVien = findViewById(R.id.layoutMHQLNV_tvThemNhanVien);
+
+    }
+
     public void filterList(String newText) {
         ArrayList<ItemNhanVien> fiIteredList = new ArrayList<>();
-        for(ItemNhanVien nhanVien : nhanViens){
-            if(nhanVien.getTenNhanVien().toLowerCase().contains(newText.toLowerCase()) || nhanVien.getMaNhanVien().toLowerCase().contains(newText.toLowerCase())){
+        for (ItemNhanVien nhanVien : nhanViens) {
+            if (nhanVien.getTenNhanVien().toLowerCase().contains(newText.toLowerCase()) || nhanVien.getMaNhanVien().toLowerCase().contains(newText.toLowerCase())) {
                 fiIteredList.add(nhanVien);
             }
         }
 
-        if(fiIteredList.isEmpty()){
-            Toast.makeText(this,"Không có dữ liệu",Toast.LENGTH_SHORT).show();
-        }else {
+        if (fiIteredList.isEmpty()) {
+            Toast.makeText(this, "Không có dữ liệu", Toast.LENGTH_SHORT).show();
+        } else {
             adapter.setFilteredList1(fiIteredList);
         }
     }
 
-    public void timKiem(){
+    public void timKiem() {
         timkiemNV.clearFocus();
         timkiemNV.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -151,5 +194,11 @@ public class ManHinhQuanLyNhanVienActivity extends AppCompatActivity {
                 return true;
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        adapter.notifyDataSetChanged();
     }
 }
