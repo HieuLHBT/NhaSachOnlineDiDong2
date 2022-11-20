@@ -129,7 +129,7 @@ public class ManHinhChinhQuanLyActivity extends AppCompatActivity {
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()) {
                             case R.id.menuMHCQL_itemQuanLySanPham:
-                                Intent intentQLSP = new Intent(ManHinhChinhQuanLyActivity.this, TraLoiBinhLuanActivity.class);
+                                Intent intentQLSP = new Intent(ManHinhChinhQuanLyActivity.this, QuanLySanPhamQLActivity.class);
                                 ManHinhChinhQuanLyActivity.this.startActivity(intentQLSP);
                                 break;
                             case R.id.menuMHCQL_itemDangXuat:

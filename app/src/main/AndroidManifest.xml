@@ -110,6 +110,9 @@
         <activity
             android:name=".activity.ManHinhChinhQuanLyActivity"
             android:exported="true"></activity>
+        <activity
+            android:name=".activity.QuanLySanPhamQLActivity"
+            android:exported="true"></activity>
     </application>
 
 </manifest>

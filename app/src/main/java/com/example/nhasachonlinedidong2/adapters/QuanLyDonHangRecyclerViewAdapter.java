@@ -162,6 +162,7 @@ public class QuanLyDonHangRecyclerViewAdapter extends RecyclerView.Adapter<QuanL
 
             // Set event processing
             itemQLDH_btnDuyetDon.setOnClickListener(this);
+            itemQLDH_btnGiaoHang.setOnClickListener(this);
             itemQLDH_btnHuyDon.setOnClickListener(this);
         }
 
