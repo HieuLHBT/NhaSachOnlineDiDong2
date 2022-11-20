@@ -185,24 +185,6 @@
                 android:layout_weight="1">
 
                 <Button
-                    android:id="@+id/layoutMHCNV_btnXacNhanGiaoHang"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:backgroundTint="@color/darker_gray"
-                    android:text="Xác nhận giao hàng"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/textsize"
-                    android:textStyle="bold" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_margin="@dimen/marginleft"
-                android:layout_weight="1">
-
-                <Button
                     android:id="@+id/layoutMHCNV_btnPhanHoiBinhLuan"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"

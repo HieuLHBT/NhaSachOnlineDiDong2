@@ -14,27 +14,19 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.nhasachonlinedidong2.R;
 import com.example.nhasachonlinedidong2.firebase.FireBaseNhaSachOnline;
+import com.example.nhasachonlinedidong2.item.NhoDangNhap;
+import com.example.nhasachonlinedidong2.tools.SharePreferences;
 
 public class DangNhapActivity extends AppCompatActivity {
-    private Button
-            layoutDN_btnDangNhap,
-            layoutDN_btnDangKy,
-            layoutDN_btnQuenMatKhau;
-    private RadioButton
-            layoutDN_rdbNhanVien,
-            layoutDN_rdbQuanly,
-            layoutDN_rdbKhachHang;
-    private EditText
-            layoutDN_edtTaiKhoan,
-            layoutDN_edtNhapMatKhau;
-    private CheckBox
-            layoutDN_cbNhoMatKHau;
-    private String
-            type;
-    private Boolean
-            rememberMe;
-    private FireBaseNhaSachOnline
-            fireBaseNhaSachOnline = new FireBaseNhaSachOnline();
+    private Button layoutDN_btnDangNhap, layoutDN_btnDangKy, layoutDN_btnQuenMatKhau;
+    private RadioButton layoutDN_rdbNhanVien, layoutDN_rdbQuanly, layoutDN_rdbKhachHang;
+    private EditText layoutDN_edtTaiKhoan, layoutDN_edtNhapMatKhau;
+    private CheckBox layoutDN_cbNhoMatKHau;
+
+    private FireBaseNhaSachOnline fireBaseNhaSachOnline = new FireBaseNhaSachOnline();
+    private SharePreferences sharePreferences = new SharePreferences();
+
+    private NhoDangNhap nhoDangNhap = new NhoDangNhap();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,14 +34,6 @@ public class DangNhapActivity extends AppCompatActivity {
         setContentView(R.layout.dangnhap_layout);
         setControl();
         setEvent();
-
-        rememberMe = layoutDN_cbNhoMatKHau.isChecked();
-        //load saved info
-        SharedPreferences sharedPreferences = this.getSharedPreferences("loginInfo", this.MODE_PRIVATE);
-        layoutDN_edtTaiKhoan.setText(sharedPreferences.getString("account", ""));
-        layoutDN_edtNhapMatKhau.setText(sharedPreferences.getString("matkhau", ""));
-        layoutDN_cbNhoMatKHau.setChecked(sharedPreferences.getBoolean("checkbox", false));
-
 
     }
 
@@ -98,10 +82,33 @@ public class DangNhapActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        nhoDangNhap = sharePreferences.layDangNhap(this);
+        if (nhoDangNhap.getCheckBox()) {
+            layoutDN_edtTaiKhoan.setText(nhoDangNhap.getTaiKhoan());
+            layoutDN_edtNhapMatKhau.setText(nhoDangNhap.getMatKhau());
+            layoutDN_cbNhoMatKHau.setChecked(true);
+            switch (nhoDangNhap.getNguoiDung()) {
+                case "khachhang":
+                    layoutDN_rdbKhachHang.setChecked(true);
+                    break;
+                case "nhanvien":
+                    layoutDN_rdbNhanVien.setChecked(true);
+                    break;
+                case "quanly":
+                    layoutDN_rdbQuanly.setChecked(true);
+                    break;
+            }
+        } else {
+            layoutDN_edtTaiKhoan.getText().clear();
+            layoutDN_edtNhapMatKhau.getText().clear();
+            layoutDN_cbNhoMatKHau.setChecked(false);
+        }
+    }
+
     //Đăng nhập
-    //Tu 6 den 20 ky tu khong khoang trang va ky tu dac biet
-//    Pattern pattern = Pattern.compile("^[A-Za-z][A-Za-z0-9]{5,19}$");
-//    Matcher matcher = pattern.matcher(layoutDN_edtTaiKhoan.getText().toString());
     public boolean validateLogin() {
         boolean valAccount = !layoutDN_edtTaiKhoan.getText().toString().isEmpty();
         boolean valPass = !layoutDN_edtNhapMatKhau.getText().toString().isEmpty();
@@ -121,8 +128,6 @@ public class DangNhapActivity extends AppCompatActivity {
             return "nhanvien";
         }
         return "khachhang";
-
     }
-
 }
 

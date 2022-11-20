@@ -3,6 +3,7 @@ package com.example.nhasachonlinedidong2.activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -22,6 +23,7 @@ import com.example.nhasachonlinedidong2.firebase.FireBaseNhaSachOnline;
 import com.example.nhasachonlinedidong2.item.LichSuMuaHang_DonHang;
 import com.example.nhasachonlinedidong2.item.QuanLyDonHang;
 import com.example.nhasachonlinedidong2.item.QuanLyDonHang_DonHang;
+import com.example.nhasachonlinedidong2.item.QuanLyDonHang_SanPham;
 import com.example.nhasachonlinedidong2.tools.SharePreferences;
 
 import java.util.ArrayList;
@@ -77,18 +79,37 @@ public class QuanLyDonHangActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         AlertDialog.Builder b = new AlertDialog.Builder(QuanLyDonHangActivity.this);
-                        b.setTitle("CẢNH BÁO");
+                        b.setTitle("THÔNG BÁO");
                         b.setMessage("Bạn xác nhận duyệt đơn hàng không?");
                         b.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-
+                                String danhSach = "";
+                                for (QuanLyDonHang_SanPham sanPham : quanLyDonHang_donHangs.get(position).getQuanLyDonHang_sanPhams()) {
+                                    if (sanPham.getSoLuongBan() > sanPham.getSoLuongKho()) {
+                                        danhSach += "\nMã sản phẩm: " + sanPham.getMaSanPham() + " (sl kho: " + sanPham.getSoLuongKho() + ", sl bán: " + sanPham.getSoLuongBan() + ")";
+                                    }
+                                }
+                                if (!danhSach.equalsIgnoreCase("")) {
+                                    AlertDialog.Builder b = new AlertDialog.Builder(QuanLyDonHangActivity.this);
+                                    b.setTitle("CẢNH BÁO");
+                                    b.setMessage("Đơn hàng không đủ số lượng! Vui lòng kiểm tra danh sách và liên hệ với quản lý:" + danhSach);
+                                    b.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            dialogInterface.cancel();
+                                        }
+                                    });
+                                    AlertDialog al = b.create();
+                                    al.show();
+                                } else {
+                                    fireBaseNhaSachOnline.duyetDonHang(maNhanVien, quanLyDonHang_donHangs.get(position).getMaDonHang(), quanLyDonHang_donHangs.get(position).getQuanLyDonHang_sanPhams(), QuanLyDonHangActivity.this);
+                                }
                             }
                         });
                         b.setNegativeButton("Không đồng ý", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                adapter.notifyDataSetChanged();
                                 dialogInterface.cancel();
                             }
                         });
@@ -100,7 +121,23 @@ public class QuanLyDonHangActivity extends AppCompatActivity {
                 itemQLDH_btnGiaoHang.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
+                        AlertDialog.Builder b = new AlertDialog.Builder(QuanLyDonHangActivity.this);
+                        b.setTitle("THÔNG BÁO");
+                        b.setMessage("Bạn xác nhận đã giao đơn hàng cho khách hàng?");
+                        b.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                fireBaseNhaSachOnline.giaoHang(quanLyDonHang_donHangs.get(position).getMaDonHang(), QuanLyDonHangActivity.this);
+                            }
+                        });
+                        b.setNegativeButton("Không đồng ý", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.cancel();
+                            }
+                        });
+                        AlertDialog al = b.create();
+                        al.show();
                     }
                 });
 
@@ -145,6 +182,11 @@ public class QuanLyDonHangActivity extends AppCompatActivity {
             layoutQLDH_spnSanPham.setSelection(1);
             quanLyDonHang_donHangs.clear();
             quanLyDonHang_donHangs.addAll(donCanDuyet);
+            adapter.notifyDataSetChanged();
+        } else if (donCanGiao.size() != 0) {
+            layoutQLDH_spnSanPham.setSelection(2);
+            quanLyDonHang_donHangs.clear();
+            quanLyDonHang_donHangs.addAll(donCanGiao);
             adapter.notifyDataSetChanged();
         } else {
             layoutQLDH_spnSanPham.setSelection(0);
