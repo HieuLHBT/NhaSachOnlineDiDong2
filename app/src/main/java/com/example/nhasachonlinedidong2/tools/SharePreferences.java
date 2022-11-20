@@ -3,6 +3,8 @@ package com.example.nhasachonlinedidong2.tools;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.example.nhasachonlinedidong2.item.NhoDangNhap;
+
 public class SharePreferences {
 
     // Hieu SharePreferences
@@ -46,21 +48,33 @@ public class SharePreferences {
         editor.commit();
     }
 
-    public void saveLoginInfo(Context context, String taikhoan, String matKhau, boolean checkBox) {
+    public void luuDangNhap(String nguoiDung, String taikhoan, String matKhau, boolean checkBox, Context context) {
         SharedPreferences sharedPreferences = context.getSharedPreferences("dulieu", context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("nguoiDung", nguoiDung);
         editor.putString("taiKhoan", taikhoan);
         editor.putString("matKhau", matKhau);
-        editor.putBoolean("checkbox", checkBox);
+        editor.putBoolean("checkBox", checkBox);
         editor.commit();
     }
 
-    public void deleteLoginInfo(Context context) {
+    public NhoDangNhap layDangNhap(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("dulieu", context.MODE_PRIVATE);
+        NhoDangNhap nhoDangNhap = new NhoDangNhap();
+        nhoDangNhap.setNguoiDung(sharedPreferences.getString("nguoiDung", null));
+        nhoDangNhap.setTaiKhoan(sharedPreferences.getString("taiKhoan", null));
+        nhoDangNhap.setMatKhau(sharedPreferences.getString("matKhau", null));
+        nhoDangNhap.setCheckBox(sharedPreferences.getBoolean("checkBox", false));
+        return nhoDangNhap;
+    }
+
+    public void xoaDangNhap(Context context) {
         SharedPreferences sharedPreferences = context.getSharedPreferences("dulieu", context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.remove("nguoiDung");
         editor.remove("taiKhoan");
         editor.remove("matKhau");
-        editor.remove("checkbox");
+        editor.remove("checkBox");
         editor.commit();
     }
 }

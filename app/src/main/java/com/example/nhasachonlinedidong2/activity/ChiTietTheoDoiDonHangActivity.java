@@ -21,6 +21,8 @@ import com.example.nhasachonlinedidong2.item.ChiTietTheoDoiDonHang_ThongTin;
 import com.example.nhasachonlinedidong2.tools.SharePreferences;
 
 import java.text.DecimalFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class ChiTietTheoDoiDonHangActivity extends AppCompatActivity {
@@ -84,13 +86,15 @@ public class ChiTietTheoDoiDonHangActivity extends AppCompatActivity {
         layoutCTTDDH_btnXacNhanNhanHang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                String ngayHienTai = LocalDate.now().format(formatter);
                 AlertDialog.Builder b = new AlertDialog.Builder(ChiTietTheoDoiDonHangActivity.this);
                 b.setTitle("THÔNG BÁO");
                 b.setMessage("Bạn có xác nhận đã nhận hàng không!");
                 b.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        fireBaseNhaSachOnline.xacNhanNhanHang(maDonHang, ChiTietTheoDoiDonHangActivity.this);
+                        fireBaseNhaSachOnline.xacNhanNhanHang(maDonHang, ngayHienTai, ChiTietTheoDoiDonHangActivity.this);
                     }
                 });
                 b.setNegativeButton("Không đồng ý", new DialogInterface.OnClickListener() {

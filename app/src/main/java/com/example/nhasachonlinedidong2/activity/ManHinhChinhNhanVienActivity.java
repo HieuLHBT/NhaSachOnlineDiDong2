@@ -59,7 +59,6 @@ public class ManHinhChinhNhanVienActivity extends AppCompatActivity {
         layoutMHCNV_tvNgay = findViewById(R.id.layoutMHCNV_tvNgay);
         layoutMHCNV_btnDanhMucSanPham = findViewById(R.id.layoutMHCNV_btnDanhMucSanPham);
         layoutMHCNV_btnQuanLyDonHang = findViewById(R.id.layoutMHCNV_btnQuanLyDonHang);
-        layoutMHCNV_btnXacNhanGiaoHang = findViewById(R.id.layoutMHCNV_btnXacNhanGiaoHang);
         layoutMHCNV_btnPhanHoiBinhLuan = findViewById(R.id.layoutMHCNV_btnPhanHoiBinhLuan);
 
         layoutMHCNV_btnLogout.setOnClickListener(new View.OnClickListener() {
