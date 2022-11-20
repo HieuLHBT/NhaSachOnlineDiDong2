@@ -20,7 +20,7 @@
             android:layout_weight="0.2"
             android:paddingLeft="15dp"
             android:text="@string/tvtrove"
-            android:textSize="50dp"
+            android:textSize="@dimen/minh_text_title"
             android:textStyle="bold" />
 
         <TextView
@@ -30,7 +30,7 @@
             android:gravity="center"
             android:layout_marginTop="20dp"
             android:text="NHÂN VIÊN"
-            android:textSize="25dp"
+            android:textSize="@dimen/textsize"
             android:textStyle="bold" />
 
         <TextView
@@ -38,9 +38,9 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.2"
-            android:paddingLeft="15dp"
+            android:layout_marginLeft="@dimen/marginleft"
             android:text="+"
-            android:textSize="50dp"
+            android:textSize="@dimen/minh_text_title"
             android:textStyle="bold" />
 
     </LinearLayout>
@@ -58,7 +58,7 @@
             android:layout_margin="8dp"
             android:background="@drawable/search_view_bg"
             app:iconifiedByDefault="false"
-            app:queryHint="Nhập tu khoa tim kiem " />
+            app:queryHint="Nhập từ khoá tìm kiếm " />
 
 
     </LinearLayout>
