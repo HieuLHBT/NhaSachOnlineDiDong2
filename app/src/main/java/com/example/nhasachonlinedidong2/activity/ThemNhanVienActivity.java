@@ -160,7 +160,7 @@ public class ThemNhanVienActivity extends AppCompatActivity {
                             Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                             startActivityForResult(intent, PICK_IMAGE_REQUEST);
                         } else if (chonAnh.equalsIgnoreCase("Camera")) {
-                            Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                            Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                             startActivityForResult(cameraIntent, CAMERA_PIC_REQUEST);
                         }
                         chonAnh = "Thư viện";

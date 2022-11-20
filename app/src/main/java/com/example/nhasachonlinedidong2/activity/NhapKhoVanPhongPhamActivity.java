@@ -16,6 +16,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.nhasachonlinedidong2.R;
+import com.example.nhasachonlinedidong2.data_model.VanPhongPham;
 import com.example.nhasachonlinedidong2.firebase.FireBaseNhaSachOnline;
 import com.example.nhasachonlinedidong2.item.QuanLySanPham_SanPham;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -30,68 +31,65 @@ import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class NhapKhoSachActivity extends AppCompatActivity {
-    private EditText layoutNKS_tvNhaCungCap, layoutNKS_tvSoLuongNhap;
-    private TextView layoutNKS_btnTroVe,
-            layoutNKS_tvMaSach,
-            layoutNKS_tvTenSach,
-            layoutNKS_tvTheLoai,
-            layoutNKS_tvTacGia,
-            layoutNKS_tvNhaXuatBan,
-            layoutNKS_tvNgayXuatBan,
-            layoutNKS_tvGiaTien,
-            layoutNKS_tvKhuyenMai,
-            layoutNKS_tvSoLuongKho,
-            layoutNKS_tvNgayNhapKho;
-    private ImageView layoutNKS_imgHinhSach;
-    private Button layoutNKS_btnNhapKho, layoutNKS_btnNhapMoi;
+public class NhapKhoVanPhongPhamActivity extends AppCompatActivity {
+    private TextView layoutNKVPP_btnTroVe,
+            layoutNKVPP_tvMaVanPhongPham,
+            layoutNKVPP_tvTenVanPhongPham,
+            layoutNKVPP_tvXuatXu,
+            layoutNKVPP_tvNhaPhanPhoi,
+            layoutNKVPP_tvDonVi,
+            layoutNKVPP_tvGiaTien,
+            layoutNKVPP_tvKhuyenMai,
+            layoutNKVPP_tvSoLuongKho,
+            layoutNKVPP_tvNgayNhapKho;
+    private ImageView layoutNKVPP_imgHinhVanPhongPham;
+    private Button layoutNKVPP_btnNhapKho, layoutNKVPP_btnNhapMoi;
+    private EditText layoutNKVPP_tvNhaCungCap, layoutNKVPP_tvSoLuongNhap;
 
     private FireBaseNhaSachOnline fireBaseNhaSachOnline = new FireBaseNhaSachOnline();
-
     private QuanLySanPham_SanPham sanPham = new QuanLySanPham_SanPham();
     private LocalDate ngay = LocalDate.now();
     private String ngayHienTai;
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.nhapkhosach_layout);
+        setContentView(R.layout.nhapkhovanphongpham_layout);
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         ngayHienTai = ngay.format(formatter);
+
         sanPham = (QuanLySanPham_SanPham) getIntent().getSerializableExtra("sanPham");
 
-        layoutNKS_btnTroVe = findViewById(R.id.layoutNKS_btnTroVe);
-        layoutNKS_imgHinhSach = findViewById(R.id.layoutNKS_imgHinhSach);
-        layoutNKS_tvMaSach = findViewById(R.id.layoutNKS_tvMaSach);
-        layoutNKS_tvTenSach = findViewById(R.id.layoutNKS_tvTenSach);
-        layoutNKS_tvTheLoai = findViewById(R.id.layoutNKS_tvTheLoai);
-        layoutNKS_tvTacGia = findViewById(R.id.layoutNKS_tvTacGia);
-        layoutNKS_tvNhaXuatBan = findViewById(R.id.layoutNKS_tvNhaXuatBan);
-        layoutNKS_tvNgayXuatBan = findViewById(R.id.layoutNKS_tvNgayXuatBan);
-        layoutNKS_tvGiaTien = findViewById(R.id.layoutNKS_tvGiaTien);
-        layoutNKS_tvKhuyenMai = findViewById(R.id.layoutNKS_tvKhuyenMai);
-        layoutNKS_tvSoLuongKho = findViewById(R.id.layoutNKS_tvSoLuongKho);
-        layoutNKS_btnNhapKho = findViewById(R.id.layoutNKS_btnNhapKho);
-        layoutNKS_btnNhapMoi = findViewById(R.id.layoutNKS_btnNhapMoi);
-        layoutNKS_tvNgayNhapKho = findViewById(R.id.layoutNKS_tvNgayNhapKho);
-        layoutNKS_tvNhaCungCap = findViewById(R.id.layoutNKS_tvNhaCungCap);
-        layoutNKS_tvSoLuongNhap = findViewById(R.id.layoutNKS_tvSoLuongNhap);
+        layoutNKVPP_btnTroVe = findViewById(R.id.layoutNKVPP_btnTroVe);
+        layoutNKVPP_imgHinhVanPhongPham = findViewById(R.id.layoutNKVPP_imgHinhVanPhongPham);
+        layoutNKVPP_tvMaVanPhongPham = findViewById(R.id.layoutNKVPP_tvMaVanPhongPham);
+        layoutNKVPP_tvTenVanPhongPham = findViewById(R.id.layoutNKVPP_tvTenVanPhongPham);
+        layoutNKVPP_tvXuatXu = findViewById(R.id.layoutNKVPP_tvXuatXu);
+        layoutNKVPP_tvNhaPhanPhoi = findViewById(R.id.layoutNKVPP_tvNhaPhanPhoi);
+        layoutNKVPP_tvDonVi = findViewById(R.id.layoutNKVPP_tvDonVi);
+        layoutNKVPP_tvGiaTien = findViewById(R.id.layoutNKVPP_tvGiaTien);
+        layoutNKVPP_tvKhuyenMai = findViewById(R.id.layoutNKVPP_tvKhuyenMai);
+        layoutNKVPP_tvSoLuongKho = findViewById(R.id.layoutNKVPP_tvSoLuongKho);
+        layoutNKVPP_btnNhapKho = findViewById(R.id.layoutNKVPP_btnNhapKho);
+        layoutNKVPP_btnNhapMoi = findViewById(R.id.layoutNKVPP_btnNhapMoi);
+        layoutNKVPP_tvNgayNhapKho = findViewById(R.id.layoutNKVPP_tvNgayNhapKho);
+        layoutNKVPP_tvNhaCungCap = findViewById(R.id.layoutNKVPP_tvNhaCungCap);
+        layoutNKVPP_tvSoLuongNhap = findViewById(R.id.layoutNKVPP_tvSoLuongNhap);
 
-        hienThiThongTinSach();
+        hienThiThongTinVanPhongPham();
 
-        layoutNKS_btnNhapKho.setOnClickListener(new View.OnClickListener() {
+        layoutNKVPP_btnNhapKho.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder b = new AlertDialog.Builder(NhapKhoSachActivity.this);
+                AlertDialog.Builder b = new AlertDialog.Builder(NhapKhoVanPhongPhamActivity.this);
                 b.setTitle("THÔNG BÁO");
                 b.setMessage("Bạn đồng ý xác nhận sửa sản phẩm không?");
                 b.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         if (kiemTra()) {
-                            fireBaseNhaSachOnline.nhapKhoSach(sanPham, ngayHienTai, layoutNKS_tvNhaCungCap.getText().toString(), layoutNKS_tvSoLuongNhap.getText().toString(), NhapKhoSachActivity.this);
+                            fireBaseNhaSachOnline.nhapKhoVanPhongPham(sanPham, ngayHienTai, layoutNKVPP_tvNhaCungCap.getText().toString(), layoutNKVPP_tvSoLuongNhap.getText().toString(), NhapKhoVanPhongPhamActivity.this);
                         }
                     }
                 });
@@ -106,16 +104,15 @@ public class NhapKhoSachActivity extends AppCompatActivity {
             }
         });
 
-
-        layoutNKS_btnNhapMoi.setOnClickListener(new View.OnClickListener() {
+        layoutNKVPP_btnNhapMoi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                layoutNKS_tvNhaCungCap.getText().clear();
-                layoutNKS_tvSoLuongNhap.getText().clear();
+                layoutNKVPP_tvNhaCungCap.getText().clear();
+                layoutNKVPP_tvSoLuongNhap.getText().clear();
             }
         });
 
-        layoutNKS_btnTroVe.setOnClickListener(new View.OnClickListener() {
+        layoutNKVPP_btnTroVe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
@@ -128,18 +125,17 @@ public class NhapKhoSachActivity extends AppCompatActivity {
         super.onResume();
     }
 
-    public void hienThiThongTinSach() {
+    public void hienThiThongTinVanPhongPham() {
         DecimalFormat formatter = new DecimalFormat("#,###,###");
-        layoutNKS_tvNgayNhapKho.setText(ngayHienTai);
-        layoutNKS_tvMaSach.setText(sanPham.getMaSanPham());
-        layoutNKS_tvTenSach.setText(sanPham.getTenSanPham());
-        layoutNKS_tvTheLoai.setText(sanPham.getTheLoai());
-        layoutNKS_tvTacGia.setText(sanPham.getTacGia());
-        layoutNKS_tvNhaXuatBan.setText(sanPham.getNhaXuatBan());
-        layoutNKS_tvNgayXuatBan.setText(sanPham.getNgayXuatBan());
-        layoutNKS_tvGiaTien.setText(formatter.format(sanPham.getGiaSanPham()) + " VNĐ");
-        layoutNKS_tvKhuyenMai.setText(sanPham.getKhuyenMai() + "%");
-        layoutNKS_tvSoLuongKho.setText(String.valueOf(sanPham.getSoLuongKho()));
+        layoutNKVPP_tvNgayNhapKho.setText(ngayHienTai);
+        layoutNKVPP_tvMaVanPhongPham.setText(sanPham.getMaSanPham());
+        layoutNKVPP_tvTenVanPhongPham.setText(sanPham.getTenSanPham());
+        layoutNKVPP_tvXuatXu.setText(sanPham.getXuatXu());
+        layoutNKVPP_tvNhaPhanPhoi.setText(sanPham.getNhaPhanPhoi());
+        layoutNKVPP_tvDonVi.setText(sanPham.getDonVi());
+        layoutNKVPP_tvGiaTien.setText(formatter.format(sanPham.getGiaSanPham()) + " VNĐ");
+        layoutNKVPP_tvKhuyenMai.setText(sanPham.getKhuyenMai() + "%");
+        layoutNKVPP_tvSoLuongKho.setText(String.valueOf(sanPham.getSoLuongKho()));
         StorageReference storageReference = FirebaseStorage.getInstance().getReference(sanPham.getHinhSanPham());
         try {
             File file = null;
@@ -152,7 +148,7 @@ public class NhapKhoSachActivity extends AppCompatActivity {
             storageReference.getFile(fileHinh).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                    layoutNKS_imgHinhSach.setImageBitmap(BitmapFactory.decodeFile(fileHinh.getAbsolutePath()));
+                    layoutNKVPP_imgHinhVanPhongPham.setImageBitmap(BitmapFactory.decodeFile(fileHinh.getAbsolutePath()));
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
@@ -166,14 +162,14 @@ public class NhapKhoSachActivity extends AppCompatActivity {
     }
 
     protected boolean kiemTra() {
-        boolean boolNhaCungCap = !layoutNKS_tvNhaCungCap.getText().toString().isEmpty();
-        boolean boolSoLuongNhap = !layoutNKS_tvSoLuongNhap.getText().toString().isEmpty() && !layoutNKS_tvSoLuongNhap.getText().toString().equalsIgnoreCase("0");
+        boolean boolNhaCungCap = !layoutNKVPP_tvNhaCungCap.getText().toString().isEmpty();
+        boolean boolSoLuongNhap = !layoutNKVPP_tvSoLuongNhap.getText().toString().isEmpty() && !layoutNKVPP_tvSoLuongNhap.getText().toString().equalsIgnoreCase("0");
 
         if (!boolNhaCungCap) {
-            layoutNKS_tvNhaCungCap.setError("Không được bỏ trống");
+            layoutNKVPP_tvNhaCungCap.setError("Không được bỏ trống");
         }
         if (!boolSoLuongNhap) {
-            layoutNKS_tvSoLuongNhap.setError("Không được bỏ trống");
+            layoutNKVPP_tvSoLuongNhap.setError("Không được bỏ trống");
         }
         return boolNhaCungCap && boolSoLuongNhap;
     }

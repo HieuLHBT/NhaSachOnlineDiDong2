@@ -50,7 +50,7 @@ public class QuanLyNhanVienRecyclerViewAdapter extends RecyclerView.Adapter<Quan
     }
 
     @Override
-    public void onBindViewHolder(@NonNull QuanLyNhanVienRecyclerViewAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
         DecimalFormat formatter = new DecimalFormat("#,###,###");
         final int pos = position;

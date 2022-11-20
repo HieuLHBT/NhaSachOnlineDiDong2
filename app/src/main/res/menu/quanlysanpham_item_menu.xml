@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menuQLSP_itemSuaSanPham"
+        android:icon="@drawable/ic_baseline_home_24"
+        android:title="Sửa sản phẩm" />
+    <item
+        android:id="@+id/menuQLSP_itemNhapKhoSanPham"
+        android:icon="@drawable/ic_baseline_home_24"
+        android:title="Nhập kho sản phẩm" />
+    <item
+        android:id="@+id/menuQLSP_itemXoaSanPham"
+        android:icon="@drawable/ic_baseline_home_24"
+        android:title="Xóa sản phẩm" />
+</menu>

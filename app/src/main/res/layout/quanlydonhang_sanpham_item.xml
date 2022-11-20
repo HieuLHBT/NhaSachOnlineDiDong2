@@ -35,7 +35,8 @@
                 android:layout_weight="2"
                 android:gravity="center|left"
                 android:textColor="@color/black"
-                android:textSize="@dimen/textsize" />
+                android:textSize="@dimen/textsize"
+                android:textStyle="bold"/>
 
             <LinearLayout
                 android:layout_width="match_parent"

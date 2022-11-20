@@ -87,15 +87,6 @@
             android:name=".activity.ManHinhChinhNhanVienActivity"
             android:exported="true"></activity>
         <activity
-            android:name=".activity.ThemNhanVienActivity"
-            android:exported="true"></activity>
-        <activity
-            android:name=".activity.SuaNhanVienActivity"
-            android:exported="true"></activity>
-        <activity
-            android:name=".activity.ManHinhQuanLyNhanVienActivity"
-            android:exported="true"></activity>
-        <activity
             android:name=".activity.DanhMucSanPhamActivity"
             android:exported="true"></activity>
         <activity
@@ -116,26 +107,36 @@
             android:name=".activity.ManHinhChinhQuanLyActivity"
             android:exported="true"></activity>
         <activity
-            android:name=".activity.QuanLySanPhamQLActivity"
-            android:exported="true"></activity>
-        <activity
-            android:name=".activity.ThemSachActivity"
-            android:exported="true"></activity>
-        <activity
-            android:name=".activity.ThemVanPhongPhamActivity"
+            android:name=".activity.QuanLySanPhamActivity"
             android:exported="true"></activity>
         <activity
             android:name=".activity.SuaSachActivity"
             android:exported="true"></activity>
         <activity
-            android:name=".activity.SuaVanPhongPhamActivity"
+            android:name=".activity.ThemSachActivity"
             android:exported="true"></activity>
         <activity
             android:name=".activity.NhapKhoSachActivity"
             android:exported="true"></activity>
         <activity
-            android:name=".activity.NhapKhoVPPActivity"
+            android:name=".activity.SuaVanPhongPhamActivity"
             android:exported="true"></activity>
+        <activity
+            android:name=".activity.ThemVanPhongPhamActivity"
+            android:exported="true"></activity>
+        <activity
+            android:name=".activity.NhapKhoVanPhongPhamActivity"
+            android:exported="true"></activity>
+        <activity
+            android:name=".activity.ThemNhanVienActivity"
+            android:exported="true"></activity>
+        <activity
+            android:name=".activity.SuaNhanVienActivity"
+            android:exported="true"></activity>
+        <activity
+            android:name=".activity.QuanLyNhanVienActivity"
+            android:exported="true"></activity>
+
     </application>
 
 </manifest>

@@ -1,39 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".activity.SuaVanPhongPhamActivity">
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="2"
+        android:layout_weight="0.8"
         android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/layoutSuaVanPhongPham_btnTroVe"
+        <TextView
+            android:id="@+id/layoutTS_btnTroVe"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
             android:text="@string/tvtrove"
             android:textSize="@dimen/tieudesize"
-            android:textStyle="bold"
-            android:backgroundTint="@color/white"
-            android:textColor="@color/black"/>
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="7.5"
+            android:layout_weight="6"
             android:gravity="center"
             android:paddingRight="@dimen/tieude"
-            android:text=" Sửa văn phòng phẩm"
+            android:text="Thêm Sách"
             android:textColor="@color/design_default_color_error"
-            android:textSize="33dp"
+            android:textSize="@dimen/tieudesize"
             android:textStyle="bold" />
 
     </LinearLayout>
@@ -41,25 +37,25 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="4"
+        android:layout_margin="@dimen/marginleft"
+        android:layout_weight="3.5"
         android:orientation="horizontal">
 
         <ImageView
-            android:id="@+id/layoutSuaVanPhongPham_imgHinhVanPhongPham"
-            android:layout_width="0dp"
+            android:id="@+id/layoutTS_imgHinhSach"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textStyle="bold" />
+            android:src="@drawable/chonanh"/>
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="8"
-        android:orientation="vertical"
-        android:paddingLeft="@dimen/le">
+        android:layout_marginLeft="@dimen/marginleft"
+        android:layout_marginRight="@dimen/marginleft"
+        android:layout_weight="6"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -70,71 +66,20 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="2"
+                android:layout_weight="1"
                 android:gravity="center|left"
-                android:text=" Mã VPP"
-                android:textColor="@color/black"
-                android:textSize="@dimen/textsize" />
-
-            <EditText
-                android:id="@+id/layoutSuaVanPhongPham_edtMaVPP"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="4"
+                android:text="Mã sách:"
                 android:textColor="@color/black"
                 android:textSize="@dimen/textsize"
-                android:background="#D6D5CC"
-                android:focusable="false"
-                android:layout_margin="5dp"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="horizontal">
+                android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/layoutTS_tvMaSach"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="2"
-                android:text=" Tên VPP"
+                android:layout_weight="3"
+                android:background="@color/xam"
                 android:gravity="center|left"
-                android:textColor="@color/black"
-                android:textSize="@dimen/textsize" />
-
-            <EditText
-                android:id="@+id/layoutSuaVanPhongPham_edtTenVPP"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="4"
-                android:textColor="@color/black"
-                android:textSize="@dimen/textsize"
-                android:maxLines="1" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="2"
-                android:text=" Nhà phân phối"
-                android:gravity="center|left"
-                android:textColor="@color/black"
-                android:textSize="@dimen/textsize" />
-
-            <EditText
-                android:id="@+id/layoutSuaVanPhongPham_edtNhaPhanPhoi"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="4"
                 android:textColor="@color/black"
                 android:textSize="@dimen/textsize" />
 
@@ -143,133 +88,245 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="2"
-                android:text=" Xuất xứ"
-                android:gravity="center|left"
-                android:textColor="@color/black"
-                android:textSize="@dimen/textsize" />
-
-            <EditText
-                android:id="@+id/layoutSuaVanPhongPham_edtXuatXu"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="4"
-                android:textColor="@color/black"
-                android:textSize="@dimen/textsize" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="2"
-                android:text=" Đơn vị"
-                android:gravity="center|left"
-                android:textColor="@color/black"
-                android:textSize="@dimen/textsize" />
-
-            <EditText
-                android:id="@+id/layoutSuaVanPhongPham_edtDonVi"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="4"
-                android:textColor="@color/black"
-                android:textSize="@dimen/textsize" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="2"
-                android:text=" Đơn giá"
-                android:gravity="center|left"
-                android:textColor="@color/black"
-                android:textSize="@dimen/textsize" />
-
-            <EditText
-                android:id="@+id/layoutSuaVanPhongPham_edtDonGia"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="4"
-                android:textColor="@color/black"
-                android:textSize="@dimen/textsize" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="2"
-                android:text=" Số lượng tồn"
-                android:gravity="center|left"
-                android:textColor="@color/black"
-                android:textSize="@dimen/textsize" />
-
-            <EditText
-                android:id="@+id/layoutSuaVanPhongPham_edtSoLuongTonKho"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="4"
-                android:textColor="@color/black"
-                android:textSize="@dimen/textsize"
-                android:background="#D6D5CC"
-
-                android:layout_margin="5dp"
-                android:focusable="false"/>
-
-        </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1.5"
-        android:paddingLeft="@dimen/le"
-        android:paddingRight="@dimen/le">
-
-        <Button
-            android:id="@+id/layoutSuaVanPhongPham_btnNhapMoi"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:text="Nhập mới"
-            android:textSize="@dimen/textsize"
-            android:textStyle="bold"
-            android:layout_marginRight="@dimen/le"/>
-
-        <Button
-            android:id="@+id/layoutSuaVanPhongPham_btnSua"
-            android:layout_width="0dp"
             android:layout_weight="1.5"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center|left"
+                android:text="Tên sách:"
+                android:textColor="@color/black"
+                android:textSize="@dimen/textsize"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/layoutTS_tvTenSach"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:gravity="center|left"
+                android:textColor="@color/black"
+                android:textSize="@dimen/textsize" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center|left"
+                android:text="Thể loại:"
+                android:textColor="@color/black"
+                android:textSize="@dimen/textsize"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/layoutTS_tvTheLoai"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:gravity="center|left"
+                android:textColor="@color/black"
+                android:textSize="@dimen/textsize" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center|left"
+                android:text="Tác giả:"
+                android:textColor="@color/black"
+                android:textSize="@dimen/textsize"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/layoutTS_tvTacGia"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:gravity="center|left"
+                android:textColor="@color/black"
+                android:textSize="@dimen/textsize" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center|left"
+                android:text="Nhà xuất bản:"
+                android:textColor="@color/black"
+                android:textSize="@dimen/textsize"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/layoutTS_tvNhaXuatBan"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:gravity="center|left"
+                android:textColor="@color/black"
+                android:textSize="@dimen/textsize" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center|left"
+                android:text="Ngày xuất bản:"
+                android:textColor="@color/black"
+                android:textSize="@dimen/textsize"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/layoutTS_tvNgayXuatBan"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.8"
+                android:gravity="center|left"
+                android:textColor="@color/black"
+                android:textSize="@dimen/textsize" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center|left"
+                android:text="Giá tiền:"
+                android:textColor="@color/black"
+                android:textSize="@dimen/textsize"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/layoutTS_tvGiaTien"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3.5"
+                android:gravity="center|left"
+                android:inputType="number"
+                android:textColor="@color/black"
+                android:textSize="@dimen/textsize" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center|left"
+                android:text="Khuyến mãi:"
+                android:textColor="@color/black"
+                android:textSize="@dimen/textsize"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/layoutTS_tvKhuyenMai"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2.2"
+                android:gravity="center|left"
+                android:inputType="number"
+                android:textColor="@color/black"
+                android:textSize="@dimen/textsize" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center|left"
+                android:text="Số lượng nhập kho:"
+                android:textColor="@color/black"
+                android:textSize="@dimen/textsize"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/layoutTS_tvSoLuongKho"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.1"
+                android:gravity="center|left"
+                android:inputType="number"
+                android:textColor="@color/black"
+                android:textSize="@dimen/textsize" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.3"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/layoutTS_btnNhapMoi"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:text="Sửa thông tin"
-            android:textSize="@dimen/textsize"
-            android:textStyle="bold" />
+            android:layout_margin="@dimen/marginleft"
+            android:layout_weight="1"
+            android:text="Nhập mới" />
+
+        <Button
+            android:id="@+id/layoutTS_btnThem"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/marginleft"
+            android:layout_weight="1"
+            android:text="Thêm" />
 
     </LinearLayout>
 

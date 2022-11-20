@@ -26,7 +26,7 @@ import com.example.nhasachonlinedidong2.tools.SharePreferences;
 
 import java.util.ArrayList;
 
-public class ManHinhQuanLyNhanVienActivity extends AppCompatActivity {
+public class QuanLyNhanVienActivity extends AppCompatActivity {
     private SharePreferences sharePreferences = new SharePreferences();
     private FireBaseNhaSachOnline fireBase = new FireBaseNhaSachOnline();
     private String maNhanVien;
@@ -68,7 +68,7 @@ public class ManHinhQuanLyNhanVienActivity extends AppCompatActivity {
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 int position = viewHolder.getAdapterPosition();
-                AlertDialog.Builder b = new AlertDialog.Builder(ManHinhQuanLyNhanVienActivity.this);
+                AlertDialog.Builder b = new AlertDialog.Builder(QuanLyNhanVienActivity.this);
                 b.setTitle("CẢNH BÁO");
                 b.setMessage("Bạn có muốn xóa nhân viên ra khỏi cty không?");
                 b.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
@@ -100,15 +100,15 @@ public class ManHinhQuanLyNhanVienActivity extends AppCompatActivity {
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
                 int position = viewHolder.getAdapterPosition();
-                AlertDialog.Builder b = new AlertDialog.Builder(ManHinhQuanLyNhanVienActivity.this);
+                AlertDialog.Builder b = new AlertDialog.Builder(QuanLyNhanVienActivity.this);
                 b.setTitle("CẢNH BÁO");
                 b.setMessage("Bạn có muốn đi đến sửa nhân viên này không?");
                 b.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        Intent intent = new Intent(ManHinhQuanLyNhanVienActivity.this, SuaNhanVienActivity.class);
+                        Intent intent = new Intent(QuanLyNhanVienActivity.this, SuaNhanVienActivity.class);
                         intent.putExtra("maNhanVien", nhanViens.get(position).getMaNhanVien());
-                        ManHinhQuanLyNhanVienActivity.this.startActivity(intent);
+                        QuanLyNhanVienActivity.this.startActivity(intent);
 
                     }
                 });
@@ -132,9 +132,9 @@ public class ManHinhQuanLyNhanVienActivity extends AppCompatActivity {
         adapter.setOnItemClickListener(new QuanLyNhanVienRecyclerViewAdapter.OnItemClickListener() {
             @Override
             public void onItemClickListener(int position, View view) {
-                Intent intent = new Intent(ManHinhQuanLyNhanVienActivity.this, SuaNhanVienActivity.class);
+                Intent intent = new Intent(QuanLyNhanVienActivity.this, SuaNhanVienActivity.class);
                 intent.putExtra(maNhanVien, nhanViens.get(position).getMaNhanVien());
-                ManHinhQuanLyNhanVienActivity.this.startActivity(intent);
+                QuanLyNhanVienActivity.this.startActivity(intent);
             }
         });
     }
@@ -152,8 +152,8 @@ public class ManHinhQuanLyNhanVienActivity extends AppCompatActivity {
         item_tvThemNhanVien.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ManHinhQuanLyNhanVienActivity.this, ThemNhanVienActivity.class);
-                ManHinhQuanLyNhanVienActivity.this.startActivity(intent);
+                Intent intent = new Intent(QuanLyNhanVienActivity.this, ThemNhanVienActivity.class);
+                QuanLyNhanVienActivity.this.startActivity(intent);
             }
         });
 
