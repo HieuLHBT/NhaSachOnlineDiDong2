@@ -32,8 +32,8 @@ public class NhapKhoSachActivity extends AppCompatActivity {
     private FireBaseNhaSachOnline fireBase = new FireBaseNhaSachOnline();
 
     private String maSanPham;
-    //private String maNhanVien;
-    private String maNhapKho = "nk1";
+    private String maNhanVien;
+    private String maNhapKho;
 
     private Sach sach = new Sach();
     private NhapKho nhapKho = new NhapKho();
@@ -52,14 +52,15 @@ public class NhapKhoSachActivity extends AppCompatActivity {
 
     private DecimalFormat formatter = new DecimalFormat("#,###,###");
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.nhapkhosach_layout);
 
         maSanPham = getIntent().getStringExtra("maSanPham");
-        //maNhanVien = getIntent().getStringExtra("maNhanVien");
+        maNhanVien = getIntent().getStringExtra("maNhanVien");
+        maNhapKho = getIntent().getStringExtra("maNhapKho");
+
         layoutNhapKhoSach_edtMaNhapKho = findViewById(R.id.layoutNhapKhoSach_edtMaNhapKho);
         layoutNhapKhoSach_edtMaNhanVien = findViewById(R.id.layoutNhapKhoSach_edtMaNhanVien);
         layoutNhapKhoSach_edtMaSanPham = findViewById(R.id.layoutNhapKhoSach_edtMaSanPham);
@@ -72,11 +73,13 @@ public class NhapKhoSachActivity extends AppCompatActivity {
         layoutNhapKhoSach_imgHinhSach = findViewById(R.id.layoutNhapKhoSach_imgHinhSach);
 
         fireBase.hienThiTTSachNhapKho(maSanPham, sach, this);
-        SimpleDateFormat sdfDay = new SimpleDateFormat("dd.MM.yyyy");
+        SimpleDateFormat sdfDay = new SimpleDateFormat("dd/MM/yyyy");
 
         ngay = sdfDay.format(new Date());
+        layoutNhapKhoSach_edtMaNhapKho.setText(maNhapKho);
         layoutNhapKhoSach_edtNgayNhapKho.setText(ngay);
-
+        layoutNhapKhoSach_edtMaNhanVien.setText(maNhanVien);
+        layoutNhapKhoSach_edtMaSanPham.setText(maSanPham);
 
         layoutNhapKhoSach_btnTroVe.setOnClickListener(new View.OnClickListener() {
             @Override
