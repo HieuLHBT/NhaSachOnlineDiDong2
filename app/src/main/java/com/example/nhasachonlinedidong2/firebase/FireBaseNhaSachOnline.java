@@ -1257,12 +1257,11 @@ public class FireBaseNhaSachOnline {
         nguoiDungDatabase.child("nhanvien").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot dataSnapshot : snapshot.getChildren())
-                {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     ItemNhanVien nhanVien = dataSnapshot.getValue(ItemNhanVien.class);
                     nhanViens.add(nhanVien);
 
-                    ((ThemNhanVienActivity)activity).createMaNhanvien();
+                    ((ThemNhanVienActivity) activity).createMaNhanvien();
                 }
             }
 
@@ -1273,8 +1272,30 @@ public class FireBaseNhaSachOnline {
         });
     }
 
+    public void getSingleNhanVien(ArrayList<ItemNhanVien> nhanViens,String maNhanVien, Activity activity) {
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference nguoiDungDatabase = firebaseDatabase.getReference("NGUOIDUNG");
+        nguoiDungDatabase.child("nhanvien").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    ItemNhanVien nhanVien = dataSnapshot.getValue(ItemNhanVien.class);
+                    if(nhanVien.getMaNhanVien().equalsIgnoreCase(maNhanVien)) {
+                        nhanViens.add(nhanVien);
+                        ((SuaNhanVienActivity) activity).returnAndSetSingleNhanvien();
+                        return;
+                    }
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
     // Sửa Nhân Viên
-    public void suaNhanVien(Context context, String maNhanVien, String hinhNhanVien, String tenNhanVien, String cmnd, String diaChi, String email, String luongCoBan, String matKhau, String nguoiDung, String soDienThoai, String taiKhoan) {
+    public void suaNhanVien(Context context, String maNhanVien, String hinhNhanVien, String tenNhanVien, String cmnd, String diaChi, String email, String luongCoBan, String matKhau, String soDienThoai, String taiKhoan) {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference nguoiDungDatabase = firebaseDatabase.getReference("NGUOIDUNG");
         nguoiDungDatabase.child("nhanvien").child(maNhanVien).addValueEventListener(new ValueEventListener() {
@@ -1287,6 +1308,14 @@ public class FireBaseNhaSachOnline {
                         ((SuaNhanVienActivity) context).thongTinNhanVien(nhanVien);
                         nguoiDungDatabase.child("nhanvien").child(maNhanVien).child("hinhNhanVien").setValue(hinhNhanVien);
                         nguoiDungDatabase.child("nhanvien").child(maNhanVien).child("tenNhanVien").setValue(tenNhanVien);
+                        nguoiDungDatabase.child("nhanvien").child(maNhanVien).child("cmnd").setValue(cmnd);
+                        nguoiDungDatabase.child("nhanvien").child(maNhanVien).child("diaChi").setValue(diaChi);
+                        nguoiDungDatabase.child("nhanvien").child(maNhanVien).child("email").setValue(email);
+                        nguoiDungDatabase.child("nhanvien").child(maNhanVien).child("luong").setValue(luongCoBan);
+                        nguoiDungDatabase.child("nhanvien").child(maNhanVien).child("matKhau").setValue(matKhau);
+                        nguoiDungDatabase.child("nhanvien").child(maNhanVien).child("soDienThoai").setValue(soDienThoai);
+                        nguoiDungDatabase.child("nhanvien").child(maNhanVien).child("taiKhoan").setValue(taiKhoan);
+
                     }
 
                     @Override

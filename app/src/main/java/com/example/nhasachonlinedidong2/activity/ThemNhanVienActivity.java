@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -40,7 +41,7 @@ public class ThemNhanVienActivity extends AppCompatActivity {
     EditText MHTNV_edtMaNhanVien, MHTNV_edtTenNhanVien, MHTNV_edtChucVu, MHTNV_edtTaiKhoan, MHTNV_edtMatKhau, MHTNV_edtEmail, MHTNV_edtDiaChi, MHTNV_edtSoDienThoai, MHTNV_edtCMND, MHTNV_edtLuongCoBan;
     ImageView MHTNV_imgHinhNhanVien;
     Button MHTNV_btnNhapMoi, MHTNV_btnThemNhanVien;
-
+    TextView MHTNV_txtQuayLai;
     private Uri uri;
     private final int PICK_IMAGE_REQUEST = 71;
     private final int CAMERA_PIC_REQUEST = 1337;
@@ -122,7 +123,13 @@ public class ThemNhanVienActivity extends AppCompatActivity {
                 MHTNV_edtSoDienThoai.setText("");
                 MHTNV_edtCMND.setText("");
                 MHTNV_edtLuongCoBan.setText("");
-                MHTNV_btnNhapMoi.setText("");
+            }
+        });
+        //Quay lai
+        MHTNV_txtQuayLai.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
 
@@ -172,6 +179,7 @@ public class ThemNhanVienActivity extends AppCompatActivity {
     }
 
     private void setControl() {
+        MHTNV_txtQuayLai=findViewById(R.id.MHTNV_txtQuayLai);
         MHTNV_edtMaNhanVien = findViewById(R.id.MHTNV_edtMaNhanVien);
         MHTNV_edtTenNhanVien = findViewById(R.id.MHTNV_edtTenNhanVien); //validated
         MHTNV_edtChucVu = findViewById(R.id.MHTNV_edtChucVu);
