@@ -1,5 +1,6 @@
 package com.example.nhasachonlinedidong2.activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,20 +11,18 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 
 import com.example.nhasachonlinedidong2.R;
 import com.example.nhasachonlinedidong2.adapters.QuanLySanPhamQLRecyclerViewAdapter;
 import com.example.nhasachonlinedidong2.firebase.FireBaseNhaSachOnline;
 import com.example.nhasachonlinedidong2.item.ItemQuanLySanPhamQL;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class QuanLySanPhamQLActivity extends AppCompatActivity {
     private FireBaseNhaSachOnline fireBase = new FireBaseNhaSachOnline();
@@ -46,6 +45,8 @@ public class QuanLySanPhamQLActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.quanlysanpham_ql_layout);
 
+        maNhanVien = getIntent().getStringExtra("maQuanLy");
+
         // Search
         timKiemSP = findViewById(R.id.layoutQLSP_QL_swTimKiem);
         timKiem();
@@ -56,8 +57,6 @@ public class QuanLySanPhamQLActivity extends AppCompatActivity {
         dataSanPham.add("Văn phòng phẩm");
         ArrayAdapter arrayAdapter = new ArrayAdapter(this, R.layout.spinner_item, dataSanPham);
         layoutQLSP_QL_spnSanPham.setAdapter(arrayAdapter);
-
-
 
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.layoutQLSP_QL_rvQuanLySanPhamQuanLy);
         adapter = new QuanLySanPhamQLRecyclerViewAdapter(this, R.layout.quanlysanpham_ql_item, itemQuanLySanPhamQLS);
@@ -98,22 +97,21 @@ public class QuanLySanPhamQLActivity extends AppCompatActivity {
                 Button itemQLSP_QL_btnXoa = view.findViewById(R.id.itemQLSP_QL_btnXoa);
                 Button itemQLSP_QL_btnSua = view.findViewById(R.id.itemQLSP_QL_btnSua);
                 Button itemQLSP_QL_btnNhapKho = view.findViewById(R.id.itemQLSP_QL_btnNhapKho);
+
                 if (itemQuanLySanPhamQLS.get(position).getMaSanPham().contains("s")) {
                     itemQLSP_QL_btnNhapKho.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Intent intent = new Intent(QuanLySanPhamQLActivity.this, NhapKhoSachActivity.class);
-                            intent.putExtra("maSanPham", itemQuanLySanPhamQLS.get(position).getMaSanPham());
-                            QuanLySanPhamQLActivity.this.startActivity(intent);
+                           String maSanPham = itemQuanLySanPhamQLS.get(position).getMaSanPham();
+                            fireBase.taoMaNhapKhoSach(QuanLySanPhamQLActivity.this, maNhanVien, maSanPham);
                         }
                     });
                 }else if (itemQuanLySanPhamQLS.get(position).getMaSanPham().contains("vpp")) {
                     itemQLSP_QL_btnNhapKho.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Intent intent = new Intent(QuanLySanPhamQLActivity.this, NhapKhoVPPActivity.class);
-                            intent.putExtra("maSanPham", itemQuanLySanPhamQLS.get(position).getMaSanPham());
-                            QuanLySanPhamQLActivity.this.startActivity(intent);
+                            String maSanPham = itemQuanLySanPhamQLS.get(position).getMaSanPham();
+                            fireBase.taoMaNhapKhoVPP(QuanLySanPhamQLActivity.this, maNhanVien, maSanPham);
                         }
                     });
                 }
@@ -121,7 +119,24 @@ public class QuanLySanPhamQLActivity extends AppCompatActivity {
                 itemQLSP_QL_btnXoa.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        fireBase.xoaSanPham(itemQuanLySanPhamQLS.get(position).getMaSanPham(), adapter);
+                        AlertDialog.Builder b = new AlertDialog.Builder(QuanLySanPhamQLActivity.this);
+                        b.setTitle("Thông báo");
+                        b.setMessage("Bạn có muốn xoá sản phẩm không?");
+                        b.setPositiveButton("Xác nhận", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                fireBase.xoaSanPham(itemQuanLySanPhamQLS.get(position).getMaSanPham(), adapter);
+                            }
+                        });
+                        b.setNegativeButton("Huỷ", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.cancel();
+                            }
+                        });
+                        AlertDialog al = b.create();
+                        al.show();
+
                     }
                 });
                 if (itemQuanLySanPhamQLS.get(position).getMaSanPham().contains("s")) {

@@ -23,7 +23,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.nhasachonlinedidong2.R;
 import com.example.nhasachonlinedidong2.data_model.Sach;
 import com.example.nhasachonlinedidong2.firebase.FireBaseNhaSachOnline;
-import com.example.nhasachonlinedidong2.item.ItemSanPham;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FileDownloadTask;
@@ -35,13 +34,10 @@ import com.google.firebase.storage.UploadTask;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class SuaSachActivity extends AppCompatActivity {
     private FireBaseNhaSachOnline fireBase = new FireBaseNhaSachOnline();
 
-    ArrayList<ItemSanPham> sanPhams = new ArrayList<>();
-    private String maSach;
     private String maSanPham;
 
     private Sach sach = new Sach();
@@ -103,18 +99,6 @@ public class SuaSachActivity extends AppCompatActivity {
                 b.setPositiveButton("Xác nhận", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        fireBase.suaSanPhamSach(SuaSachActivity.this,
-                                maSach,
-                                layoutSuaSach_imgHinhSach.getResources().toString(),
-                                layoutSuaSach_edtTenSach.getText().toString(),
-                                layoutSuaSach_edtTheLoai.getText().toString(),
-                                layoutSuaSach_edtTacGia.getText().toString(),
-                                layoutSuaSach_edtNhaXuatBan.getText().toString(),
-                                layoutSuaSach_edtNgayXuatBan.getText().toString(),
-                                layoutSuaSach_edtDonGia.getText().toString(),
-                                layoutSuaSach_edtSoLuongTonKho.getText().toString()
-                        );
-
                         //Kiểm tra các trường bỏ trống
                         if (layoutSuaSach_edtMaSach.getTouchables().isEmpty() || layoutSuaSach_edtTenSach.getTouchables().isEmpty() || layoutSuaSach_edtTheLoai.getTouchables().isEmpty() ||
                                 layoutSuaSach_edtTacGia.getTouchables().isEmpty() || layoutSuaSach_edtNhaXuatBan.getTouchables().isEmpty() || layoutSuaSach_edtNgayXuatBan.getTouchables().isEmpty() ||

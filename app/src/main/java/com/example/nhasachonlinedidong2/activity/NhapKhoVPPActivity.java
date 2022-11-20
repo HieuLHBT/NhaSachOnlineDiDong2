@@ -13,8 +13,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.nhasachonlinedidong2.R;
-import com.example.nhasachonlinedidong2.data_model.NhapKho;
-import com.example.nhasachonlinedidong2.data_model.Sach;
 import com.example.nhasachonlinedidong2.data_model.VanPhongPham;
 import com.example.nhasachonlinedidong2.firebase.FireBaseNhaSachOnline;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -25,7 +23,6 @@ import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -33,10 +30,9 @@ public class NhapKhoVPPActivity extends AppCompatActivity {
     private FireBaseNhaSachOnline fireBase = new FireBaseNhaSachOnline();
 
     private String maSanPham;
-    //private String maNhanVien;
-    private String maNhapKho = "nk1";
+    private String maNhanVien;
+    private String maNhapKho;
     private VanPhongPham vanPhongPham = new VanPhongPham();
-    private NhapKho nhapKho = new NhapKho();
     private String ngay;
 
     private EditText layoutNhapKhoVPP_edtMaNhapKho;
@@ -50,16 +46,15 @@ public class NhapKhoVPPActivity extends AppCompatActivity {
     private Button layoutNhapKhoVPP_btnNhapKho;
     private Button layoutNhapKhoVPP_btnTroVe;
 
-    private DecimalFormat formatter = new DecimalFormat("#,###,###");
-
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.nhapkhovanphongpham_layout);
 
         maSanPham = getIntent().getStringExtra("maSanPham");
-        //maNhanVien = getIntent().getStringExtra("maNhanVien");
+        maNhanVien = getIntent().getStringExtra("maNhanVien");
+        maNhapKho = getIntent().getStringExtra("maNhapKho");
+
         layoutNhapKhoVPP_edtMaNhapKho = findViewById(R.id.layoutNhapKhoVPP_edtMaNhapKho);
         layoutNhapKhoVPP_edtMaNhanVien = findViewById(R.id.layoutNhapKhoVPP_edtMaNhanVien);
         layoutNhapKhoVPP_edtMaSanPham = findViewById(R.id.layoutNhapKhoVPP_edtMaSanPham);
@@ -73,10 +68,12 @@ public class NhapKhoVPPActivity extends AppCompatActivity {
 
         fireBase.hienThiTTVPPNhapKho(maSanPham, vanPhongPham, this);
 
-        SimpleDateFormat sdfDay = new SimpleDateFormat("dd.MM.yyyy");
+        SimpleDateFormat sdfDay = new SimpleDateFormat("dd/MM/yyyy");
         ngay = sdfDay.format(new Date());
+        layoutNhapKhoVPP_edtMaNhapKho.setText(maNhapKho);
         layoutNhapKhoVPP_edtNgayNhapKho.setText(ngay);
-
+        layoutNhapKhoVPP_edtMaNhanVien.setText(maNhanVien);
+        layoutNhapKhoVPP_edtMaSanPham.setText(maSanPham);
 
         layoutNhapKhoVPP_btnTroVe.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,11 +83,6 @@ public class NhapKhoVPPActivity extends AppCompatActivity {
         });
     }
 
-    public void thongTinNhapKho(){
-        layoutNhapKhoVPP_edtMaNhapKho.setText(nhapKho.getMaNhapKho());
-        layoutNhapKhoVPP_edtMaNhanVien.setText(nhapKho.getMaNhanVien());
-
-    }
     public void thongTinVPP(){
         layoutNhapKhoVPP_edtMaSanPham.setText(vanPhongPham.getMaVanPhongPham());
         layoutNhapKhoVPP_edtTenSanPham.setText(vanPhongPham.getTenVanPhongPham());

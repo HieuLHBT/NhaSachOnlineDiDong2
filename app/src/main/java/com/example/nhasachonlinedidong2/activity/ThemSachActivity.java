@@ -82,34 +82,13 @@ public class ThemSachActivity extends AppCompatActivity {
                 AlertDialog.Builder b = new AlertDialog.Builder(ThemSachActivity.this);
                 b.setTitle("Thông báo");
                 b.setMessage("Bạn có muốn thêm sách vào kho sản phẩm không?");
-/*
+
                 b.setPositiveButton("Đồng ý", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                            fireBase.themSanPhamSach(
-                                    "s" + layoutThemSach_edtMaSach.getText().toString(),
-                                    "sach" + layoutThemSach_edtMaSach.getText() + ".png",
-                                    layoutThemSach_edtTenSach.getText().toString(),
-                                    layoutThemSach_edtTheLoai.getText().toString(),
-                                    layoutThemSach_edtTacGia.getText().toString(),
-                                    layoutThemSach_edtNhaXuatBan.getText().toString(),
-                                    layoutThemSach_edtNgayXuatBan.getText().toString(),
-                                    layoutThemSach_edtDonGia.getText().toString(),
-                                    layoutThemSach_edtSoLuongTonKho.getText().toString()
-                            );
 
-                        //Kiểm tra các trường bỏ trống
-                        if (layoutThemSach_edtMaSach.getTouchables().isEmpty() || layoutThemSach_edtTenSach.getTouchables().isEmpty() || layoutThemSach_edtTheLoai.getTouchables().isEmpty() ||
-                                layoutThemSach_edtTacGia.getTouchables().isEmpty() || layoutThemSach_edtNhaXuatBan.getTouchables().isEmpty() || layoutThemSach_edtNgayXuatBan.getTouchables().isEmpty() ||
-                                layoutThemSach_edtDonGia.getTouchables().isEmpty() || layoutThemSach_edtSoLuongTonKho.getTouchables().isEmpty()) {
-                            Toast.makeText(ThemSachActivity.this, "Vui lòng điền đầy đủ thông tin!", Toast.LENGTH_SHORT).show();
-                        }
-                        // Tai anh len storage
-                        ghiAnh(uri, layoutThemSach_edtMaSach.getText().toString());
-                        Toast.makeText(ThemSachActivity.this, "Thêm sách thành công", Toast.LENGTH_SHORT).show();
-                    }
+                      }
                 });
-*/
 
                 b.setNegativeButton("Huỷ", new DialogInterface.OnClickListener() {
                     @Override
