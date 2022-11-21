@@ -2,6 +2,7 @@ package com.example.nhasachonlinedidong2.adapters;
 
 import android.app.Activity;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -20,6 +21,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.nhasachonlinedidong2.R;
+import com.example.nhasachonlinedidong2.activity.ThongTinBinhLuanActivity;
 import com.example.nhasachonlinedidong2.item.ItemSanPham;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -68,6 +70,15 @@ public class ManHinhChinhKhachHangAdapter extends RecyclerView.Adapter<ManHinhCh
         holder.itemMHCKH_tvGia.setText(formatter.format(sanpham.getGiaSanPham()) + " VNĐ");
         holder.itemMHCKH_edtSoLuong.setText(sanpham.getSoLuong() + "");
         holder.itemMHCKH_tvSoLuongBinhLuan.setText(sanpham.getSoLuongBinhLuan() + "");
+
+        holder.itemMHCKH_llBinhLuan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, ThongTinBinhLuanActivity.class);
+                intent.putExtra("sanPham", sanpham);
+                context.startActivity(intent);
+            }
+        });
 
         holder.itemMHCKH_edtSoLuong.addTextChangedListener(new TextWatcher() {
             @Override
@@ -220,6 +231,7 @@ public class ManHinhChinhKhachHangAdapter extends RecyclerView.Adapter<ManHinhCh
         ImageButton itemMHCKH_btnLogout;
         View.OnClickListener onClickListener;
         LinearLayout itemMHCKH_llCardView;
+        LinearLayout itemMHCKH_llBinhLuan;
         CardView itemMHCKH;
 
         public MyViewHolder(@NonNull View itemView) {
@@ -241,6 +253,7 @@ public class ManHinhChinhKhachHangAdapter extends RecyclerView.Adapter<ManHinhCh
             itemMHCKH_llCardView = itemView.findViewById(R.id.itemMHCKH_llCardView);
             itemMHCKH = itemView.findViewById(R.id.itemManHinhChinhKH);
             itemMHCKH_btnLogout = itemView.findViewById(R.id.layoutMHCKH_btnLogout);
+            itemMHCKH_llBinhLuan = itemView.findViewById(R.id.itemMHCKH_llBinhLuan);
 
             // Set event processing
             itemMHCKH_btnThemVaoGioHang.setOnClickListener(this);

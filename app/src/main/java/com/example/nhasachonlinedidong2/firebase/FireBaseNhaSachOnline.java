@@ -50,6 +50,7 @@ import com.example.nhasachonlinedidong2.adapters.QuanLyNhanVienRecyclerViewAdapt
 import com.example.nhasachonlinedidong2.adapters.QuanLySanPhamRecyclerViewAdapter;
 import com.example.nhasachonlinedidong2.adapters.ThanhToanRecyclerViewAdapter;
 import com.example.nhasachonlinedidong2.adapters.TheoDoiDonHangRecyclerViewAdapter;
+import com.example.nhasachonlinedidong2.adapters.ThongTinBinhLuanRecycleViewAdapter;
 import com.example.nhasachonlinedidong2.data_model.GiamGia;
 import com.example.nhasachonlinedidong2.data_model.DonHang;
 import com.example.nhasachonlinedidong2.data_model.GioHang;
@@ -83,6 +84,7 @@ import com.example.nhasachonlinedidong2.item.QuanLySanPham_SanPham;
 import com.example.nhasachonlinedidong2.item.SanPham;
 import com.example.nhasachonlinedidong2.item.ThanhToan;
 import com.example.nhasachonlinedidong2.item.TheoDoiDonHang;
+import com.example.nhasachonlinedidong2.item.ThongTinBinhLuan;
 import com.example.nhasachonlinedidong2.tools.SharePreferences;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -2705,5 +2707,66 @@ public class FireBaseNhaSachOnline {
         nguoiDungDatabase.child("nhanvien").child(maNhanVien).child("soDienThoai").setValue(soDienThoai);
         nguoiDungDatabase.child("nhanvien").child(maNhanVien).child("taiKhoan").setValue(taiKhoan);
     }
+
+    // Thông tin bình luận
+    public void hienThiThongTinBinhLuan(String maSanpham, ArrayList<ThongTinBinhLuan> thongTinBinhLuans, ThongTinBinhLuanRecycleViewAdapter adapter) {
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference phanHoiDatabase = firebaseDatabase.getReference("PHANHOI");
+        DatabaseReference nguoiDungDatabase = firebaseDatabase.getReference("NGUOIDUNG");
+        phanHoiDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                thongTinBinhLuans.clear();
+                for (DataSnapshot dataSnapshot: snapshot.getChildren()) {
+                    PhanHoi phanHoi = dataSnapshot.child(maSanpham).getValue(PhanHoi.class);
+                    if (phanHoi != null) {
+                        thongTinBinhLuans.add(new ThongTinBinhLuan(
+                                Integer.valueOf(phanHoi.getDanhGia()),
+                                phanHoi.getMaKhachHang(),
+                                "",
+                                phanHoi.getBinhLuan(),
+                                phanHoi.getNgayBinhLuan(),
+                                phanHoi.getMaNhanVien(),
+                                "",
+                                phanHoi.getTraLoi()));
+                    }
+                }
+
+                nguoiDungDatabase.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for (ThongTinBinhLuan thongTinBinhLuan: thongTinBinhLuans) {
+                            for (DataSnapshot dataSnapshot: snapshot.child("khachhang").getChildren()) {
+                                KhachHang khachHang = dataSnapshot.getValue(KhachHang.class);
+                                if (khachHang.getMaKhachHang().equalsIgnoreCase(thongTinBinhLuan.getMaKhachHang())) {
+                                    thongTinBinhLuan.setTenKhachHang(khachHang.getTenKhachHang());
+                                    break;
+                                }
+                            }
+                            for (DataSnapshot dataSnapshot: snapshot.child("nhanvien").getChildren()) {
+                                NhanVien nhanVien = dataSnapshot.getValue(NhanVien.class);
+                                if (nhanVien.getMaNhanVien().equalsIgnoreCase(thongTinBinhLuan.getMaNhanVien())) {
+                                    thongTinBinhLuan.setTenNhanVien(nhanVien.getTenNhanVien());
+                                    break;
+                                }
+                            }
+                        }
+                        adapter.notifyDataSetChanged();
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
 
 }
