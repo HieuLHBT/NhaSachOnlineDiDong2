@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -11,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.nhasachonlinedidong2.R;
 import com.example.nhasachonlinedidong2.item.TheoDoiDonHang;
 
@@ -46,13 +48,24 @@ public class TheoDoiDonHangRecyclerViewAdapter extends RecyclerView.Adapter<Theo
         holder.itemTDDH_tvThoiGianGiao.setText(theoDoiDonHang.getNgayGiao());
         holder.itemTDDH_tvThoiGianDatHang.setText(theoDoiDonHang.getNgayLap());
         holder.itemTDDH_tvTongTienThanhToan.setText(formatter.format(theoDoiDonHang.getTongTien()) + " VNĐ");
-        holder.itemTDDH_tvTrangThaiDon.setText(theoDoiDonHang.getTrangThaiDon());
         holder.itemTDDH_tvHinhThucThanhToan.setText(theoDoiDonHang.getHinhThucThanhToan());
 
         if (theoDoiDonHang.getTrangThaiGiaoHangNV().equalsIgnoreCase("Đã xác nhận")) {
             holder.itemTDDH_tvTrangThaiDon.setVisibility(View.GONE);
         } else {
             holder.itemTDDH_tvTrangThaiDon.setVisibility(View.VISIBLE);
+        }
+        if (theoDoiDonHang.getTrangThaiDuyetNV().equalsIgnoreCase("Đang xử lý")) {
+            holder.itemTDDH_tvTrangThaiDon.setText("Đang kiểm duyệt");
+            Glide.with(context).load(R.drawable.duyetdon).into(holder.itemTDDH_imgTrangThaiDon);
+        }
+        else if (theoDoiDonHang.getTrangThaiDuyetNV().equalsIgnoreCase("Đã xác nhận") && theoDoiDonHang.getTrangThaiGiaoHangNV().equalsIgnoreCase("Đang xử lý")) {
+            holder.itemTDDH_tvTrangThaiDon.setText("Đang giao hàng");
+            Glide.with(context).load(R.drawable.giaohang).into(holder.itemTDDH_imgTrangThaiDon);
+        }
+        else {
+            holder.itemTDDH_tvTrangThaiDon.setText(theoDoiDonHang.getTrangThaiDon());
+            Glide.with(context).load(R.drawable.huy).into(holder.itemTDDH_imgTrangThaiDon);
         }
 
         // Event processing
@@ -76,7 +89,7 @@ public class TheoDoiDonHangRecyclerViewAdapter extends RecyclerView.Adapter<Theo
         return resource;
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder implements  View.OnClickListener{
+    public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView itemTDDH_txtMaDonHang;
         TextView itemTDDH_tvNhanVienGiaoHang;
         TextView itemTDDH_tvThoiGianGiao;
@@ -88,8 +101,9 @@ public class TheoDoiDonHangRecyclerViewAdapter extends RecyclerView.Adapter<Theo
         View.OnClickListener onClickListener;
         LinearLayout itemTDDH_llDuKienGiao;
         LinearLayout itemTDDH_llHinhThuc;
+        ImageView itemTDDH_imgTrangThaiDon;
 
-        public MyViewHolder(@NonNull View itemView){
+        public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             itemTDDH_txtMaDonHang = itemView.findViewById(R.id.itemTDDH_tvMaDonHang);
             itemTDDH_tvNhanVienGiaoHang = itemView.findViewById(R.id.itemTDDH_tvNhanVienGiaoHang);
@@ -101,10 +115,12 @@ public class TheoDoiDonHangRecyclerViewAdapter extends RecyclerView.Adapter<Theo
             itemTDDH_btnChiTiet = itemView.findViewById(R.id.itemTDDH_btnChiTiet);
             itemTDDH_llDuKienGiao = itemView.findViewById(R.id.itemTDDH_llDuKienGiao);
             itemTDDH_llHinhThuc = itemView.findViewById(R.id.itemTDDH_llHinhThuc);
+            itemTDDH_imgTrangThaiDon = itemView.findViewById(R.id.itemTDDH_imgTrangThaiDon);
 
             // Set event processing
             itemTDDH_btnChiTiet.setOnClickListener(this);
         }
+
         @Override
         public void onClick(View view) {
             if (onClickListener != null) {
