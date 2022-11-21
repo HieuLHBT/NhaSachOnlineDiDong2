@@ -36,7 +36,12 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
     private SharePreferences sharePreferences = new SharePreferences();
     private String maKhachHang;
 
-    private ImageView layoutCTSP_imgHinhSanPham, layoutCTSP_img1Sao, layoutCTSP_img2Sao, layoutCTSP_img3Sao, layoutCTSP_img4Sao, layoutCTSP_img5Sao;
+    private ImageView layoutCTSP_imgHinhSanPham,
+            layoutCTSP_img1Sao,
+            layoutCTSP_img2Sao,
+            layoutCTSP_img3Sao,
+            layoutCTSP_img4Sao,
+            layoutCTSP_img5Sao;
     private TextView layoutCTSP_btnTroVe,
             layoutCTSP_tvTenSanPham,
             layoutCTSP_tvTenTacGia,
@@ -59,7 +64,8 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
             layoutCTSP_llNhaXuatBan,
             layoutCTSP_llXuatXu,
             layoutCTSP_llNhaPhanPhoi,
-            layoutCTSP_llDonVi;
+            layoutCTSP_llDonVi,
+            layoutCTSP_llBinhLuan;
     private int soLuongMua = 1;
 
     private ItemSanPham sanPham = new ItemSanPham();
@@ -101,6 +107,7 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         layoutCTSP_llXuatXu = findViewById(R.id.layoutCTSP_llXuatXu);
         layoutCTSP_llNhaPhanPhoi = findViewById(R.id.layoutCTSP_llNhaPhanPhoi);
         layoutCTSP_llDonVi = findViewById(R.id.layoutCTSP_llDonVi);
+        layoutCTSP_llBinhLuan = findViewById(R.id.layoutCTSP_llBinhLuan);
 
         thongTinSanPham();
 
@@ -114,7 +121,9 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
         layoutCTSP_imgbtnTru.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                layoutCTSP_tvSoLuong.setText(String.valueOf(--soLuongMua));
+                if (soLuongMua > 1) {
+                    layoutCTSP_tvSoLuong.setText(String.valueOf(--soLuongMua));
+                }
             }
         });
 
@@ -124,6 +133,15 @@ public class ChiTietSanPhamActivity extends AppCompatActivity {
                 fireBase.themVaoGioHang(maKhachHang, sanPham.getMaSanPham(), String.valueOf(soLuongMua));
                 Intent intent1 = new Intent(ChiTietSanPhamActivity.this, GioHangActivity.class);
                 startActivity(intent1);
+            }
+        });
+
+        layoutCTSP_llBinhLuan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ChiTietSanPhamActivity.this, ThongTinBinhLuanActivity.class);
+                intent.putExtra("sanPham", sanPham);
+                startActivity(intent);
             }
         });
 
